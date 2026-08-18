@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Camera Said "Match." Police Drew Their Guns. — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --help:#3f5d45; --help-bg:#e9efe7;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --dead:#4a4438; --dead-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:56px 0 44px;
+  }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(1.9rem, 4.4vw, 2.9rem); line-height:1.12; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.06rem; color:#c9c3ae; max-width:700px; margin:0 0 30px; }
+  .hero-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(214,184,105,0.25); border:1px solid rgba(214,184,105,0.25); border-radius:10px; overflow:hidden; }
+  .hero-stat{ background:rgba(20,26,36,0.65); padding:16px 14px; }
+  .hero-stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.3rem; color:var(--brass-bright); }
+  .hero-stat .lbl{ font-size:11.5px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:700px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+
+  .finding-block{ border-left:4px solid var(--brass); background:var(--paper-card); padding:20px 24px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:32px 0; }
+  .finding-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.15rem; margin:0 0 8px; }
+  .finding-block p{ margin:0; font-size:14.5px; color:var(--muted); }
+  .finding-block.quote{ border-left-color:var(--harm); }
+  .finding-block blockquote{ font-family:"Fraunces",serif; font-style:italic; font-size:1.1rem; color:var(--ink); margin:0 0 8px; line-height:1.5; }
+  .finding-block cite{ font-family:"IBM Plex Mono",monospace; font-style:normal; font-size:12px; color:var(--muted); }
+
+  .rubric-row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:8px; margin-top:10px; }
+  .rubric-item{ font-size:12.5px; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:8px 10px; }
+  .rubric-item .dim{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:3px; }
+
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:36px 30px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.2rem,2.8vw,1.55rem); max-width:720px; margin:0 auto; line-height:1.45; }
+
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+  /* --- Failure type filter grid --- */
+  .filter-row{ display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
+  .filter-btn{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:700; padding:8px 14px; border-radius:999px; border:1px solid var(--brass); background:var(--paper-card); color:var(--brass-dark); cursor:pointer; }
+  .filter-btn.active{ background:var(--brass); color:var(--ink); }
+  .fail-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:14px; }
+  .fail-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:16px; transition:opacity .15s ease; }
+  .fail-card.hidden-by-filter{ display:none; }
+  .fail-card .fail-type{ font-family:"Fraunces",serif; font-weight:600; font-size:1.0rem; margin-bottom:6px; }
+  .fail-card .fail-desc{ font-size:13px; color:var(--muted); margin-bottom:8px; }
+  .fail-card .fail-tag{ display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:700; padding:2px 8px; border-radius:999px; background:var(--mixed-bg); color:var(--mixed); }
+  .fail-card .fail-tag.camera{ background:var(--help-bg); color:var(--help); }
+  .fail-card .fail-tag.human{ background:var(--harm-bg); color:var(--harm); }
+  .fail-card .fail-tag.access{ background:var(--dead-bg); color:var(--dead); }
+
+  /* --- Case explorer / pipeline --- */
+  .case-header{ display:flex; align-items:center; gap:14px; margin-bottom:18px; flex-wrap:wrap; }
+  .case-photo-placeholder{ width:56px; height:56px; border-radius:50%; background:var(--ink); color:var(--brass-bright); display:flex; align-items:center; justify-content:center; font-family:"Fraunces",serif; font-weight:700; font-size:1.3rem; flex-shrink:0; }
+  .case-name{ font-family:"Fraunces",serif; font-weight:700; font-size:1.3rem; margin:0; }
+  .case-loc{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--muted); }
+
+  .pipeline{ display:flex; gap:4px; margin-bottom:20px; flex-wrap:wrap; }
+  .pipe-node{ font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:700; padding:9px 12px; border-radius:8px; border:2px solid var(--line); background:var(--paper); color:var(--muted); cursor:pointer; text-align:center; flex:1; min-width:90px; }
+  .pipe-node.correct{ border-color:var(--help); }
+  .pipe-node.correct.active{ background:var(--help); color:#fff; }
+  .pipe-node.failed{ border-color:var(--harm); }
+  .pipe-node.failed.active{ background:var(--harm); color:#fff; }
+  .pipe-node.unknown{ border-color:var(--mixed); }
+  .pipe-node.unknown.active{ background:var(--mixed); color:#fff; }
+  .pipe-detail{ border-left:4px solid var(--brass); background:var(--paper); border-radius:0 10px 10px 0; padding:18px 22px; min-height:100px; }
+  .pipe-detail h4{ font-family:"Fraunces",serif; margin:0 0 8px; font-size:1.05rem; }
+  .pipe-detail p{ margin:0; font-size:14px; color:var(--muted); }
+  .pipe-status{ display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:999px; margin-bottom:10px; }
+  .pipe-status.correct{ background:var(--help-bg); color:var(--help); }
+  .pipe-status.failed{ background:var(--harm-bg); color:var(--harm); }
+  .pipe-status.unknown{ background:var(--mixed-bg); color:var(--mixed); }
+
+  .case-outcome{ margin-top:16px; padding:14px 16px; background:var(--paper); border-radius:8px; border:1px solid var(--line); font-size:13.5px; }
+  .case-outcome b{ color:var(--brass-dark); }
+
+  /* --- Evidence ladder --- */
+  .ladder{ display:flex; flex-direction:column; gap:2px; }
+  .ladder-rung{ display:grid; grid-template-columns:220px 1fr; gap:16px; padding:12px 16px; align-items:center; border-radius:6px; }
+  .ladder-rung:nth-child(odd){ background:rgba(214,184,105,0.08); }
+  .ladder-label{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:700; color:var(--brass-dark); }
+  .ladder-desc{ font-size:13.5px; color:var(--muted); }
+  @media (max-width:600px){ .ladder-rung{ grid-template-columns:1fr; gap:4px; } }
+  .ladder-callout{ margin-top:16px; padding:16px 20px; background:var(--ink); color:var(--brass-bright); border-radius:10px; font-family:"Fraunces",serif; font-style:italic; text-align:center; }
+
+  /* --- Verification checklist toggle --- */
+  .toggle-row{ display:flex; gap:0; margin-bottom:18px; border:1px solid var(--line); border-radius:8px; overflow:hidden; width:fit-content; }
+  .toggle-btn{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:700; letter-spacing:0.03em; padding:10px 20px; background:var(--paper-card); color:var(--muted); border:none; cursor:pointer; }
+  .toggle-btn.active{ background:var(--ink); color:var(--brass-bright); }
+  .toggle-panel{ display:none; }
+  .toggle-panel.active{ display:block; }
+  .check-list{ list-style:none; margin:0; padding:0; }
+  .check-list li{ display:flex; align-items:flex-start; gap:10px; padding:9px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .check-list li:last-child{ border-bottom:none; }
+  .check-icon{ flex-shrink:0; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; margin-top:2px; }
+  .check-icon.yes{ background:var(--help-bg); color:var(--help); }
+  .check-icon.no{ background:var(--harm-bg); color:var(--harm); }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="questions.html">The Weber County Hive</a> &rsaquo; Surveillance Series &rsaquo; Article 3</div>
+    <div class="kicker">Article 3 of 6</div>
+    <h1>The Camera Said "Match." Police Drew Their Guns.</h1>
+    <p class="subhead">Flock alerts and vehicle-location records have helped police solve real crimes. They have also put innocent people at gunpoint. "Flock was wrong" isn't always technically accurate &mdash; sometimes the camera worked exactly as designed, and something else in the chain failed instead.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">2&times;</div><div class="lbl">gunpoint stops of the same innocent woman, one week apart</div></div>
+      <div class="hero-stat"><div class="num">$25</div><div class="lbl">value of the package a Rivian owner was accused of stealing</div></div>
+      <div class="hero-stat"><div class="num">0</div><div class="lbl">times either camera actually misread a plate</div></div>
+      <div class="hero-stat"><div class="num">After</div><div class="lbl">when audits happen relative to the stop</div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <section id="what-alert-proves">
+      <div class="eyebrow">Start Here</div>
+      <h2 class="section-title">What an alert actually establishes &mdash; and what it doesn't</h2>
+      <p class="section-sub">Before the two cases below, it's worth being precise about what a Flock match actually is.</p>
+      <div class="card">
+        <p style="margin-top:0; font-weight:600;">An alert can establish:</p>
+        <ul style="font-size:14.5px; line-height:1.8;">
+          <li>A camera recorded a plate resembling a target plate</li>
+          <li>At a particular time</li>
+          <li>At a particular location</li>
+          <li>Associated with a database entry</li>
+        </ul>
+        <p style="font-weight:600;">It does not, by itself, establish:</p>
+        <ul style="font-size:14.5px; line-height:1.8; margin-bottom:0;">
+          <li>Who was driving</li>
+          <li>Whether the database entry is still valid</li>
+          <li>Whether the plate was cloned</li>
+          <li>Whether the vehicle owner committed a crime</li>
+          <li>Whether the observation supplies reasonable suspicion or probable cause on its own</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="failure-types">
+      <div class="eyebrow">The Taxonomy</div>
+      <h2 class="section-title">Not every failure is the same failure</h2>
+      <p class="section-sub">Filter by category. The two cases below map onto different rows in this table &mdash; which is the point.</p>
+
+      <div class="filter-row" id="fail-filter">
+        <button class="filter-btn active" data-filter="all">All types</button>
+        <button class="filter-btn" data-filter="camera">Camera/Database</button>
+        <button class="filter-btn" data-filter="human">Human judgment</button>
+        <button class="filter-btn" data-filter="access">Access &amp; verification</button>
+      </div>
+
+      <div class="fail-grid" id="fail-grid">
+        <div class="fail-card" data-cat="camera"><div class="fail-type">OCR misread</div><div class="fail-desc">The camera read the plate characters incorrectly.</div><span class="fail-tag camera">Camera/Database</span></div>
+        <div class="fail-card" data-cat="camera"><div class="fail-type">Wrong state</div><div class="fail-desc">Correct characters matched a plate registered in a different state.</div><span class="fail-tag camera">Camera/Database</span></div>
+        <div class="fail-card" data-cat="camera"><div class="fail-type">Stale hotlist</div><div class="fail-desc">A plate stayed flagged after it should have been cleared. <strong>(Newell)</strong></div><span class="fail-tag camera">Camera/Database</span></div>
+        <div class="fail-card" data-cat="camera"><div class="fail-type">Vehicle transfer</div><div class="fail-desc">Plate or vehicle ownership changed since the flag was entered.</div><span class="fail-tag camera">Camera/Database</span></div>
+        <div class="fail-card" data-cat="camera"><div class="fail-type">Database error</div><div class="fail-desc">Incorrect information was entered into a hotlist in the first place.</div><span class="fail-tag camera">Camera/Database</span></div>
+        <div class="fail-card" data-cat="human"><div class="fail-type">Human inference</div><div class="fail-desc">The camera accurately recorded a car; police incorrectly concluded its owner committed the crime. <strong>(Elser)</strong></div><span class="fail-tag human">Human judgment</span></div>
+        <div class="fail-card" data-cat="access"><div class="fail-type">Verification failure</div><div class="fail-desc">Officers acted before independently confirming the alert.</div><span class="fail-tag access">Access &amp; verification</span></div>
+        <div class="fail-card" data-cat="access"><div class="fail-type">Account/access failure</div><div class="fail-desc">An unauthorized user searched accurate data for an improper purpose &mdash; a different problem from either case below.</div><span class="fail-tag access">Access &amp; verification</span></div>
+      </div>
+    </section>
+
+    <section id="case-newell">
+      <div class="eyebrow">Case 1</div>
+      <h2 class="section-title">Amber Newell: stopped at gunpoint twice in one week</h2>
+      <p class="section-sub">Brookfield, Wisconsin &mdash; August 6, 2026. The camera worked. The alert behind it didn't.</p>
+
+      <div class="case-header">
+        <div class="case-photo-placeholder">AN</div>
+        <div>
+          <p class="case-name">Amber Newell</p>
+          <p class="case-loc">I-94, Brookfield, WI &mdash; Aug. 6, 2026, ~4:45 PM</p>
+        </div>
+      </div>
+
+      <div class="pipeline" id="newell-pipeline"></div>
+      <div class="pipe-detail" id="newell-detail"></div>
+
+      <div class="finding-block quote" style="margin-top:24px;">
+        <blockquote>"I haven't been asleep since this has happened. Every time I close my eyes, all I can see is guns."</blockquote>
+        <cite>&mdash; Amber Newell, to FOX6 Milwaukee</cite>
+      </div>
+
+      <div class="case-outcome">
+        <b>What happened:</b> Video from I-94 showed multiple officers with guns drawn and a passenger's hands out the window. Brookfield officers contacted the Milwaukee Police Department to verify the homicide alert &mdash; MPD said the vehicle and its occupants were no longer of interest, and Newell and her passengers were released. This was the <em>second</em> time that week: Newell says she was stopped at gunpoint in Milwaukee days earlier, towed, and released with no explanation. Milwaukee police confirmed staff had failed to remove the wanted-vehicle alert from the system after the investigation no longer needed it &mdash; calling it a personnel issue, "not a Flock issue." Brookfield Police Chief Christopher Garcia defended the stop, saying his officers "clearly had sufficient information and objective facts to support taking the actions they did." Milwaukee Police Chief Jeffrey Norman has separately defended the technology generally. Flock told FOX6 its readers capture images in public view, don't use facial recognition, require documented search reasons, and create permanent audit records &mdash; all true statements that don't address why a cleared alert stayed live.
+      </div>
+    </section>
+
+    <section id="case-elser">
+      <div class="eyebrow">Case 2</div>
+      <h2 class="section-title">Chrisanna Elser: "it is a lock, there is zero doubt"</h2>
+      <p class="section-sub">Bow Mar / Fort Logan, Colorado &mdash; September 27, 2025. The camera worked here too. What failed was the conclusion an officer drew from it.</p>
+
+      <div class="case-header">
+        <div class="case-photo-placeholder">CE</div>
+        <div>
+          <p class="case-name">Chrisanna Elser</p>
+          <p class="case-loc">Fort Logan, Denver, CO &mdash; Sept. 27, 2025</p>
+        </div>
+      </div>
+
+      <div class="pipeline" id="elser-pipeline"></div>
+      <div class="pipe-detail" id="elser-detail"></div>
+
+      <div class="finding-block quote" style="margin-top:24px;">
+        <blockquote>"You know we have cameras in that jurisdiction and you can't get a breath of fresh air, in or out of that place, without us knowing, correct? ... Just as an example, you've driven there about 20 times in the last month."</blockquote>
+        <cite>&mdash; Sgt. Jamie Milliman, Columbine Valley Police Dept., per Elser's doorbell camera (Colorado Sun)</cite>
+      </div>
+
+      <div class="case-outcome">
+        <b>What happened:</b> Flock cameras in the town of Bow Mar had captured Elser's forest-green Rivian passing through between 11:52 a.m. and 12:09 p.m. on the day a $25 package was stolen from a porch. Sgt. Jamie Milliman told her, "It is locked in. There is zero doubt. I wouldn't have come here unless I was 100% sure," and handed her a court summons &mdash; without showing her the Flock footage or the doorbell video he claimed showed her stealing the package, and without reviewing the dashcam footage from her own Rivian that showed her exact route. She had, in fact, driven through Bow Mar that day &mdash; to a tailor appointment, more than a quarter mile from the theft the entire time. Weeks of her own evidence-gathering (tailor surveillance footage, her truck's onboard cameras, GPS logs) got the summons voided by the police chief, who wrote her: "After reviewing the evidence you have provided (nicely done btw), we have voided the summons." Milliman was later reprimanded for "rude" and "dismissive" behavior and ordered to complete de-escalation, community-relations, and interviewing training within 30 days.
+      </div>
+    </section>
+
+    <section id="verify">
+      <div class="eyebrow">What Officers Are Supposed To Do</div>
+      <h2 class="section-title">The verification step that's supposed to sit between an alert and a stop</h2>
+      <p class="section-sub">Weber County's own current ALPR policy text wasn't found published online in this search &mdash; a direct GRAMA request is the way to confirm its exact language. What follows is the near-identical Lexipol template language used by Utah County Sheriff's Office, Emery County Sheriff's Office, Murray PD, and Nephi PD &mdash; all under the same statute, §41-6a-2003, that governs Weber County.</p>
+
+      <div class="toggle-row" id="verify-toggle">
+        <button class="toggle-btn active" data-panel="verify-baseline">What the statute allows</button>
+        <button class="toggle-btn" data-panel="verify-required">What's actually required before a stop</button>
+      </div>
+
+      <div class="toggle-panel active" id="verify-baseline">
+        <div class="card">
+          <ul class="check-list">
+            <li><span class="check-icon no">&mdash;</span><span>"An ALPR may be used in conjunction with any routine patrol operation or official investigation. <strong>Reasonable suspicion or probable cause is not required before using an ALPR.</strong>" &mdash; standard language across every Utah agency policy found in this research</span></li>
+            <li><span class="check-icon no">&mdash;</span><span>Utah Code §41-6a-2003 limits WHEN an ALPR can be used (active investigation, outstanding warrant, missing person, stolen vehicle) &mdash; it does not require verification before officers act on what the system returns</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="toggle-panel" id="verify-required">
+        <div class="card">
+          <ul class="check-list">
+            <li><span class="check-icon yes">&#10003;</span><span>"If practicable, the deputy should verify an ALPR response through the appropriate law enforcement database before taking enforcement action that is based solely upon an ALPR alert." &mdash; Utah County Sheriff's Office Policy 426(e), identical language in Utah DPS Policy 639</span></li>
+            <li><span class="check-icon no">&mdash;</span><span>"If practicable" is doing real work in that sentence &mdash; it is a should, conditioned on practicality, not a shall</span></li>
+            <li><span class="check-icon no">&mdash;</span><span>No Utah policy found in this research requires dispatch to independently reconfirm an alert's currency before officers are dispatched to a stop</span></li>
+            <li><span class="check-icon no">&mdash;</span><span>No policy found requires a second high-risk stop on the same person to trigger automatic review &mdash; which is exactly what happened to Newell</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="why-audits-dont-help">
+      <div class="eyebrow">The Timing Problem</div>
+      <h2 class="section-title">Why audits don't prevent the encounter</h2>
+      <p class="section-sub">Utah requires a 5-year audit record of every search &mdash; crime type and incident number included, per §41-6a-2005. That record answers "who searched, and why" after the fact. It does the driver at gunpoint no good in the moment.</p>
+      <div class="card">
+        <div class="rubric-row" style="grid-template-columns:repeat(6,1fr);">
+          <div class="rubric-item"><span class="dim">1</span>Alert issued</div>
+          <div class="rubric-item"><span class="dim">2</span>Officer receives it</div>
+          <div class="rubric-item"><span class="dim">3</span>Stop occurs</div>
+          <div class="rubric-item"><span class="dim">4</span>Person detained</div>
+          <div class="rubric-item"><span class="dim">5</span>Report completed</div>
+          <div class="rubric-item"><span class="dim">6</span>Audit, maybe, later</div>
+        </div>
+        <p style="margin:16px 0 0; font-size:13.5px; color:var(--muted);">The audit trail can establish responsibility after the fact. It is not built to stop officers from acting on bad information in step 2.</p>
+      </div>
+    </section>
+
+    <section id="evidence-ladder">
+      <div class="eyebrow">What Each Fact Actually Proves</div>
+      <h2 class="section-title">The evidence-strength ladder</h2>
+      <p class="section-sub">Both cases show the same gap: a fact low on this ladder was treated as if it belonged near the top.</p>
+      <div class="card">
+        <div class="ladder">
+          <div class="ladder-rung"><span class="ladder-label">Plate image</span><span class="ladder-desc">A plate-like image was captured</span></div>
+          <div class="ladder-rung"><span class="ladder-label">OCR result</span><span class="ladder-desc">Software interpreted the characters</span></div>
+          <div class="ladder-rung"><span class="ladder-label">State match</span><span class="ladder-desc">System associated an issuing jurisdiction</span></div>
+          <div class="ladder-rung"><span class="ladder-label">Hotlist hit</span><span class="ladder-desc">Characters matched an entry &mdash; Newell's alert was accurate at match time, stale in substance</span></div>
+          <div class="ladder-rung"><span class="ladder-label">Vehicle description</span><span class="ladder-desc">Vehicle may correspond with the entry</span></div>
+          <div class="ladder-rung"><span class="ladder-label">Registered owner</span><span class="ladder-desc">Identifies legal registration &mdash; not necessarily the driver</span></div>
+          <div class="ladder-rung"><span class="ladder-label">Location history</span><span class="ladder-desc">Vehicle appeared at recorded locations &mdash; this is all Elser's case ever had</span></div>
+          <div class="ladder-rung"><span class="ladder-label">Independent evidence</span><span class="ladder-desc">May connect a specific person to criminal conduct &mdash; never obtained in Elser's case</span></div>
+          <div class="ladder-rung"><span class="ladder-label">Probable cause</span><span class="ladder-desc">Legal basis for arrest or search</span></div>
+        </div>
+        <div class="ladder-callout">A plate match is the beginning of an investigation &mdash; not the conclusion.</div>
+      </div>
+    </section>
+
+    <div class="takeaway">
+      <div class="eyebrow">The Throughline</div>
+      <p class="big">Neither camera misread a plate. In Newell's case, an accurate camera fed a stale alert into a network with no automatic check on whether a cleared vehicle was still live. In Elser's case, an accurate location observation became a human conclusion nobody verified before a summons was issued. Different failures, same lesson: the technology can work exactly as designed and someone can still end up at gunpoint, or in court, over nothing.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-top:0;"><strong>Sources</strong></p>
+    <ul class="sources-list">
+      <li>FOX6 Milwaukee, Local 12, and CBS 58 reporting on Amber Newell, August 2026</li>
+      <li>Milwaukee Journal Sentinel / Brookfield Police Chief Christopher Garcia statement, August 2026</li>
+      <li>Denverite, "Police used 'Flock' cameras to implicate this Denver woman in a theft," Oct. 27, 2025</li>
+      <li>The Colorado Sun, "Officer faces discipline after using Flock cameras to falsely accuse Denver woman of package theft," Oct. 28 &amp; Nov. 11&ndash;13, 2025 (includes letter of reprimand obtained via public records request)</li>
+      <li>CBS News Colorado, "Flock cameras lead Colorado police to wrong suspect," Nov. 2025</li>
+      <li>Utah County Sheriff's Office ALPR Policy 426 (Lexipol), effective 2024; Utah Dept. of Public Safety Policy 639; Utah Code §§ 41-6a-2003, 41-6a-2005</li>
+    </ul>
+    <p style="margin-bottom:0; margin-top:16px;">Part of a six-part series on ALPR and privacy oversight in Weber County. &larr; <a href="weber-hive-nobody-approves-each-search.html">Article 2: Nobody Approves Each Search</a> &nbsp;|&nbsp; <a href="weber-hive-grama-gap.html">Article 4: The GRAMA Gap &rarr;</a></p>
+  </div>
+</footer>
+
+<script>
+// Failure type filter
+document.querySelectorAll('#fail-filter .filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#fail-filter .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('#fail-grid .fail-card').forEach(card => {
+      card.classList.toggle('hidden-by-filter', filter !== 'all' && card.dataset.cat !== filter);
+    });
+  });
+});
+
+// Case pipeline builder
+function buildPipeline(containerId, detailId, stages, startIndex){
+  let idx = startIndex || 0;
+  const track = document.getElementById(containerId);
+  const detail = document.getElementById(detailId);
+  function render(){
+    track.innerHTML = '';
+    stages.forEach((s, i) => {
+      const node = document.createElement('div');
+      node.className = 'pipe-node ' + s.status + (i === idx ? ' active' : '');
+      node.textContent = s.label;
+      node.addEventListener('click', () => { idx = i; render(); });
+      track.appendChild(node);
+    });
+    const s = stages[idx];
+    detail.innerHTML = '<span class="pipe-status ' + s.status + '">' + s.statusLabel + '</span>' +
+      '<h4>' + s.title + '</h4><p>' + s.text + '</p>';
+  }
+  render();
+}
+
+buildPipeline('newell-pipeline', 'newell-detail', [
+  { label: "CAMERA", status: "correct", statusLabel: "Working as designed",
+    title: "The camera read the plate correctly",
+    text: "This was not an OCR error. The camera correctly identified the plate attached to an existing alert in the system." },
+  { label: "DATABASE", status: "failed", statusLabel: "Stale entry",
+    title: "The underlying alert should have been cleared",
+    text: "Milwaukee police confirmed staff failed to remove the wanted-vehicle alert after the investigation no longer needed it. The alert was accurate when created and inaccurate by the time it fired." },
+  { label: "NETWORK", status: "failed", statusLabel: "Redistributed the error",
+    title: "The stale alert propagated to Brookfield",
+    text: "A neighboring department's system flagged Newell's vehicle based on Milwaukee's uncleared entry — the failure crossed jurisdictional lines automatically." },
+  { label: "OFFICER", status: "unknown", statusLabel: "Central unanswered question",
+    title: "What verification happened before guns were drawn?",
+    text: "Brookfield's chief says officers 'had sufficient information and objective facts.' Whether that included independent verification beyond the alert itself, or how quickly Brookfield contacted Milwaukee relative to drawing weapons, isn't detailed in reporting so far." },
+  { label: "CORRECTION", status: "failed", statusLabel: "Failed after the first encounter",
+    title: "The same alert fired again a week later",
+    text: "Newell says she was stopped at gunpoint in Milwaukee earlier that same week. Whatever correction should have followed that first stop did not happen before the second one." }
+]);
+
+buildPipeline('elser-pipeline', 'elser-detail', [
+  { label: "CAMERA", status: "correct", statusLabel: "Working as designed",
+    title: "The camera accurately recorded her vehicle",
+    text: "Flock cameras in Bow Mar correctly captured Elser's forest-green Rivian passing through town between 11:52 a.m. and 12:09 p.m. — an accurate observation of an innocent trip to a tailor appointment." },
+  { label: "DATABASE", status: "correct", statusLabel: "Not defective",
+    title: "There was no hotlist or database error here",
+    text: "Unlike Newell's case, nothing was stale or mis-entered. The location data was simply true — she had, in fact, driven through the town." },
+  { label: "HUMAN INFERENCE", status: "failed", statusLabel: "This is where it broke",
+    title: "Presence nearby became presumed guilt",
+    text: "Sgt. Milliman treated an accurate location observation — a truck passing through town — as sufficient grounds to be '100% sure' Elser committed a specific theft, escalating to a summons without further investigation." },
+  { label: "VERIFICATION", status: "failed", statusLabel: "Never happened before the summons",
+    title: "He wouldn't look at her evidence, or show her his",
+    text: "Milliman refused to let Elser see the footage he said proved her guilt, and declined to review the dashcam evidence from her own truck that would have cleared her on the spot." },
+  { label: "CORRECTION", status: "unknown", statusLabel: "Took weeks, required her own labor",
+    title: "The summons was voided only after Elser did the investigative work herself",
+    text: "She spent weeks gathering tailor surveillance footage, truck camera video, and GPS logs before the police chief reviewed it and voided the summons. Milliman was later reprimanded and ordered into additional training." }
+]);
+
+// Verification toggle
+document.querySelectorAll('#verify-toggle .toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#verify-toggle .toggle-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.toggle-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
