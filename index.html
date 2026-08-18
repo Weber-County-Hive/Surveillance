@@ -104,7 +104,7 @@
 
     <section id="series">
       <div class="eyebrow">The Series</div>
-      <h2 class="section-title">Six articles so far</h2>
+      <h2 class="section-title" id="series-heading">Nine pieces so far</h2>
       <p class="section-sub">Read in order, or jump to whichever piece answers your question. Filter by topic below.</p>
 
       <div class="filter-row" id="topic-filter"></div>
@@ -216,6 +216,12 @@ const articles = [
 // Render hero stats
 // ---------------------------------------------------------------
 const liveCount = articles.filter(a => a.status === "live").length;
+document.getElementById('series-heading').textContent =
+  (liveCount === 1 ? "One piece so far" : numberWord(liveCount) + " pieces so far");
+function numberWord(n){
+  const words = ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve"];
+  return words[n] || n;
+}
 const heroStats = document.getElementById('hero-stats');
 const stats = [
   { num: liveCount, lbl: "articles published so far" },

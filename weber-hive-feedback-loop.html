@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Surveillance Feedback Loop — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --help:#3f5d45; --help-bg:#e9efe7;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --dead:#4a4438; --dead-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:56px 0 44px;
+  }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(1.9rem, 4.4vw, 2.9rem); line-height:1.12; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.06rem; color:#c9c3ae; max-width:700px; margin:0 0 30px; }
+  .hero-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(214,184,105,0.25); border:1px solid rgba(214,184,105,0.25); border-radius:10px; overflow:hidden; }
+  .hero-stat{ background:rgba(20,26,36,0.65); padding:16px 14px; }
+  .hero-stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.3rem; color:var(--brass-bright); }
+  .hero-stat .lbl{ font-size:11.5px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:700px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+
+  .finding-block{ border-left:4px solid var(--brass); background:var(--paper-card); padding:20px 24px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:32px 0; }
+  .finding-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.15rem; margin:0 0 8px; }
+  .finding-block p{ margin:0; font-size:14.5px; color:var(--muted); }
+
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:36px 30px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.2rem,2.8vw,1.55rem); max-width:720px; margin:0 auto; line-height:1.45; }
+
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+  /* Four-level classifier */
+  .level-track{ display:flex; gap:4px; margin-bottom:20px; flex-wrap:wrap; }
+  .level-node{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:700; padding:10px 14px; border-radius:8px; border:2px solid var(--line); background:var(--paper); color:var(--muted); cursor:pointer; text-align:center; flex:1; min-width:110px; }
+  .level-node.active{ border-color:var(--brass); background:var(--ink); color:var(--brass-bright); }
+  .level-detail{ border-left:4px solid var(--brass); background:var(--paper-card); border-radius:0 10px 10px 0; padding:20px 24px; box-shadow:var(--shadow); min-height:120px; }
+  .level-detail h4{ font-family:"Fraunces",serif; margin:0 0 8px; font-size:1.1rem; }
+  .level-detail p{ margin:0; font-size:14.5px; color:var(--muted); }
+  .level-weight{ display:inline-block; margin-top:12px; font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; }
+  .level-weight.low{ background:var(--dead-bg); color:var(--dead); }
+  .level-weight.mid{ background:var(--mixed-bg); color:var(--mixed); }
+  .level-weight.high{ background:var(--help-bg); color:var(--help); }
+
+  /* Evidence establishes/does not */
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:680px){ .split{ grid-template-columns:1fr; } }
+  .split-col{ border-radius:12px; padding:20px; }
+  .split-col.does{ background:var(--help-bg); border:1px solid var(--help); }
+  .split-col.doesnt{ background:var(--harm-bg); border:1px solid var(--harm); }
+  .split-col h3{ font-size:1.0rem; margin:0 0 12px; }
+  .split-col.does h3{ color:var(--help); }
+  .split-col.doesnt h3{ color:var(--harm); }
+  .split-col ul{ margin:0; padding-left:18px; font-size:13.5px; }
+  .split-col li{ margin-bottom:7px; }
+
+  /* Feedback loop diagram */
+  .loop-wrap{ display:flex; flex-direction:column; align-items:center; gap:2px; }
+  .loop-node{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; text-align:center; background:var(--paper-card); border:1px solid var(--line); border-radius:8px; padding:10px 18px; width:100%; max-width:480px; cursor:pointer; }
+  .loop-node.active{ border-color:var(--brass); background:var(--ink); color:var(--brass-bright); }
+  .loop-arrow{ font-family:"IBM Plex Mono",monospace; color:var(--brass); font-size:14px; }
+  .loop-detail{ margin-top:16px; border-left:4px solid var(--brass); background:var(--paper); border-radius:0 10px 10px 0; padding:14px 18px; font-size:13.5px; color:var(--muted); max-width:520px; }
+
+  /* Missing denominator checklist */
+  .denom-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:10px; }
+  .denom-item{ display:flex; align-items:center; gap:10px; background:var(--paper-card); border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-size:13.5px; }
+  .denom-icon{ flex-shrink:0; width:20px; height:20px; border-radius:50%; background:var(--dead-bg); color:var(--dead); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
+
+  /* Filter for denominator categories */
+  .filter-row{ display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .filter-btn{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:700; padding:8px 14px; border-radius:999px; border:1px solid var(--brass); background:var(--paper-card); color:var(--brass-dark); cursor:pointer; }
+  .filter-btn.active{ background:var(--brass); color:var(--ink); }
+  .denom-item.hidden-by-filter{ display:none; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">The Weber County Hive</a> &rsaquo; Surveillance Series &rsaquo; Article 8</div>
+    <div class="kicker">Article 8 of 8</div>
+    <h1>The Surveillance Feedback Loop</h1>
+    <p class="subhead">Automated license plate readers are usually sold on their success stories &mdash; a stolen vehicle recovered, a missing child found. Those stories are real. They also don't answer a harder question: how often was the technology actually necessary, versus one of several tools that happened to be consulted?</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">4</div><div class="lbl">different ways a search can count as "used"</div></div>
+      <div class="hero-stat"><div class="num">~20%</div><div class="lbl">of cleared cases Flock says its tech contributed to, per its own 2025 customer survey</div></div>
+      <div class="hero-stat"><div class="num">14</div><div class="lbl">figures needed to calculate a real cost-per-outcome number &mdash; none of them published</div></div>
+      <div class="hero-stat"><div class="num">~2,950</div><div class="lbl">networks the median outside query reportedly reaches at once</div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <section id="four-levels">
+      <div class="eyebrow">Not All "Used" Is Equal</div>
+      <h2 class="section-title">Four levels of investigative value</h2>
+      <p class="section-sub">A search can play very different roles in an investigation. Click through each one &mdash; a department that counts all four as "cases using Flock" is measuring something very different from effectiveness.</p>
+
+      <div class="level-track" id="level-track"></div>
+      <div class="level-detail" id="level-detail"></div>
+    </section>
+
+    <section id="what-establishes">
+      <div class="eyebrow">The Same Ladder, Restated</div>
+      <h2 class="section-title">What a plate observation actually establishes</h2>
+      <div class="split">
+        <div class="split-col does">
+          <h3>It CAN establish:</h3>
+          <ul>
+            <li>A camera captured an image at a particular place and time</li>
+            <li>Software interpreted the image as a particular plate</li>
+            <li>The plate may correspond to a registered vehicle</li>
+            <li>The observation may match a hotlist or investigative query</li>
+          </ul>
+        </div>
+        <div class="split-col doesnt">
+          <h3>It does NOT independently establish:</h3>
+          <ul>
+            <li>Who was driving</li>
+            <li>Whether the registered owner was present</li>
+            <li>Why the vehicle was at that location</li>
+            <li>Whether the plate was stolen or cloned</li>
+            <li>Whether the hotlist entry was current</li>
+            <li>Whether the vehicle was involved in a crime</li>
+            <li>Reasonable suspicion or probable cause</li>
+            <li>Admissibility or persuasiveness at trial</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin:16px 0 0; font-size:13.5px; color:var(--muted);">None of that makes the observation worthless &mdash; it makes it a lead requiring verification, not a conclusion.</p>
+    </section>
+
+    <section id="accelerator">
+      <div class="eyebrow">The Strongest Argument For It</div>
+      <h2 class="section-title">The investigative accelerator</h2>
+      <p class="section-sub">Before a connected ALPR network, reconstructing a vehicle's route meant interviewing witnesses, contacting nearby businesses, requesting surveillance video, reviewing toll records, contacting neighboring departments, and manually comparing timestamps. A connected network can return possible observations in seconds &mdash; and that speed can be decisive in a kidnapping, an AMBER Alert, or an active violent-crime case.</p>
+      <div class="finding-block">
+        <p class="q">The actual policy question this raises</p>
+        <p>Nobody disputes that traditional detective work remains necessary, or that faster information can matter. The real question is: how much investigative time does the network save, how often does that saved time change an outcome, and does that measurable benefit justify collecting information about every vehicle passing a camera &mdash; including the overwhelming majority that are never involved in anything?</p>
+      </div>
+    </section>
+
+    <section id="loop">
+      <div class="eyebrow">Why Usage Numbers Grow On Their Own</div>
+      <h2 class="section-title">The feedback loop</h2>
+      <p class="section-sub">This doesn't prove the system is ineffective. It shows why usage volume can't substitute for outcome measurement. Click through the cycle.</p>
+      <div class="loop-wrap" id="loop-wrap"></div>
+      <div class="loop-detail" id="loop-detail" style="display:none;"></div>
+    </section>
+
+    <section id="weber-numbers">
+      <div class="eyebrow">Applying This To Weber County</div>
+      <h2 class="section-title">What the records show &mdash; and what they don't</h2>
+      <div class="finding-block">
+        <p class="q">The numerator without the denominator</p>
+        <p>Records reviewed by the Utah Civic Compact identified roughly 5.17 million searches associated with Weber County's connected Flock network between February 2022 and July 2026. About 96.6% originated from accounts outside Utah; only around 13,100 are attributed to Weber County's own deputies. Because a single federated query can reach thousands of participating networks at once &mdash; the median outside query reportedly reaches roughly 2,950 networks &mdash; that 5.17 million figure should not be read as 5.17 million searches specifically and deliberately aimed at Weber County's ten cameras. It's a scale number, not a value number. It says nothing on its own about how often Weber County's cameras actually returned a match, or how often a returned match materially advanced whatever investigation prompted the search.</p>
+      </div>
+    </section>
+
+    <section id="denominator">
+      <div class="eyebrow">What's Missing</div>
+      <h2 class="section-title">Success stories give you a numerator. Nobody's published the denominator.</h2>
+      <p class="section-sub">Filter by category. Every one of these has to be known before a resident could calculate a real cost-per-outcome figure &mdash; and none of them appear in what's been published so far.</p>
+
+      <div class="filter-row" id="denom-filter"></div>
+      <div class="denom-grid" id="denom-grid"></div>
+
+      <div class="card" style="margin-top:20px;">
+        <p style="margin:0 0 10px; font-weight:600;">Without these figures, residents cannot calculate:</p>
+        <ul style="font-size:14px; margin:0; columns:2; column-gap:28px;">
+          <li>Cost per useful result</li>
+          <li>Cost per recovered vehicle</li>
+          <li>Cost per missing person located</li>
+          <li>Cost per materially advanced investigation</li>
+          <li>False-alert rate</li>
+          <li>Wrongful-encounter rate</li>
+          <li>Percentage of searches returning nothing</li>
+        </ul>
+        <p style="margin:14px 0 0; font-size:13.5px; color:var(--muted);">A department may have legitimate reasons to withhold case-specific detail. Publishing aggregated performance statistics &mdash; totals and rates, not individual plates or active investigations &mdash; would not require giving that up.</p>
+      </div>
+    </section>
+
+    <section id="who-pays">
+      <div class="eyebrow">The Other Missing Ledger</div>
+      <h2 class="section-title">Who pays &mdash; and who benefits?</h2>
+      <p class="section-sub">Weber County's original arrangement needs examining contract by contract before local cost can be fairly weighed against local and national benefit.</p>
+      <div class="card">
+        <ul style="font-size:14.5px; line-height:1.9; margin:0;">
+          <li>Which entity paid for each camera &mdash; Flock commonly uses subscription arrangements, and participating cities, retailers, or other entities may pay for particular installations, so it may not be accurate to say local taxpayers fund every camera</li>
+          <li>Initial and recurring contract costs, installation and connectivity costs</li>
+          <li>Whether Washington Terrace or another jurisdiction contributed to Weber County's network</li>
+          <li>Whether Flock owns the physical equipment</li>
+          <li>Which agencies receive searchable access, and whether access to other agencies' networks is bundled into the subscription</li>
+          <li>How many local cases produced a useful result, and how many outside cases got a useful result from a Weber County camera specifically</li>
+        </ul>
+        <p style="margin:14px 0 0; font-size:13.5px; color:var(--muted);">An outside agency benefiting from a locally funded camera isn't automatically improper &mdash; cross-jurisdictional cooperation is routine. The accountability question is whether the camera-owning community knowingly approved that level of sharing, and has enough information to actually evaluate it.</p>
+      </div>
+    </section>
+
+    <div class="takeaway">
+      <div class="eyebrow">The Throughline</div>
+      <p class="big">Five million recorded searches do not mean five million crimes were solved, five million useful results were returned, or five million deliberate attempts were made to search Weber County specifically. The records establish scale. On their own, they don't establish value &mdash; and nobody has published the numbers that would let a resident tell the difference.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-top:0;"><strong>Sources</strong></p>
+    <ul class="sources-list">
+      <li>Flock Safety 2025 customer survey, company-reported figures (over 1 million investigations/incidents supported; ~20% of cleared cases in participating jurisdictions; ~10,000 missing people located) &mdash; company-generated estimates, not an independently audited national count</li>
+      <li>Utah Civic Compact ALPR search-volume analysis, Weber County records, Feb. 2022&ndash;Jul. 2026 (see Article 1 for full dataset detail)</li>
+    </ul>
+    <p style="margin-bottom:0; margin-top:16px;">Part of a nine-part series on ALPR and privacy oversight in Weber County. &larr; <a href="weber-hive-reform-nobody-has-to-take.html">Article 7: The Reform Nobody Has to Take</a> &nbsp;|&nbsp; <a href="index.html">All articles &rarr;</a></p>
+  </div>
+</footer>
+
+<script>
+// Four-level classifier
+const levels = [
+  { label: "CONSULTED", weight: "low", weightLabel: "Lowest weight",
+    title: "An officer searched the system — nothing useful came back",
+    text: "This is the floor of the four categories. A search happened; the system returned no result of value. If a department's usage statistics count this the same as a decisive hit, the resulting number says very little about effectiveness." },
+  { label: "CORROBORATIVE", weight: "mid", weightLabel: "Supporting evidence",
+    title: "A result supported information already obtained elsewhere",
+    text: "The system confirmed something investigators already believed from another source — useful, but not the thing that cracked the case. This is likely the most common category among cases counted as \"Flock helped.\"" },
+  { label: "DIRECTIONAL", weight: "mid", weightLabel: "Changed the investigation",
+    title: "A result changed the investigation's direction or identified a new lead",
+    text: "This is a genuinely meaningful contribution — the search opened a path investigators wouldn't otherwise have taken. Still short of being the reason a case closed." },
+  { label: "DECISIVE", weight: "high", weightLabel: "Highest weight",
+    title: "A result directly enabled a recovery, interception, identification, or arrest that likely would not otherwise have occurred when it did",
+    text: "This is the category the success stories are actually about — a recovered stolen vehicle, a located missing child, a suspect intercepted in time. It's also, almost certainly, the smallest of the four categories by volume." }
+];
+let levelIdx = 0;
+const levelTrack = document.getElementById('level-track');
+const levelDetail = document.getElementById('level-detail');
+function renderLevels(){
+  levelTrack.innerHTML = '';
+  levels.forEach((l, i) => {
+    const node = document.createElement('div');
+    node.className = 'level-node' + (i === levelIdx ? ' active' : '');
+    node.textContent = l.label;
+    node.addEventListener('click', () => { levelIdx = i; renderLevels(); });
+    levelTrack.appendChild(node);
+  });
+  const l = levels[levelIdx];
+  levelDetail.innerHTML = '<h4>' + l.title + '</h4><p>' + l.text + '</p><span class="level-weight ' + l.weight + '">' + l.weightLabel + '</span>';
+}
+renderLevels();
+
+// Feedback loop
+const loopSteps = [
+  "Agency purchases Flock",
+  "Officers are encouraged to search Flock",
+  "Flock is consulted in more investigations",
+  "Every investigation involving a search may be counted as \u201cassisted\u201d",
+  "Higher usage is presented as evidence of effectiveness",
+  "Agency purchases additional cameras",
+  "More observations produce more searches"
+];
+const loopDetails = [
+  "The starting point — a real purchase decision, usually justified by success stories from other jurisdictions.",
+  "Once the tool exists, using it becomes the path of least resistance for any investigation that could plausibly involve a vehicle.",
+  "Volume grows simply because the tool is available, independent of whether it's actually needed for any given case.",
+  "This is the step where the four levels above collapse into one undifferentiated category — a no-result search counts the same as a decisive one.",
+  "Usage volume gets presented publicly as if it were an outcome metric, when it only measures how often the tool was opened.",
+  "Higher reported \"effectiveness\" becomes the case for expanding the network further.",
+  "More cameras mean more observations, which mean more searches — the loop closes and repeats at a larger scale."
+];
+const loopWrap = document.getElementById('loop-wrap');
+const loopDetail = document.getElementById('loop-detail');
+loopSteps.forEach((step, i) => {
+  const node = document.createElement('div');
+  node.className = 'loop-node';
+  node.textContent = step;
+  node.addEventListener('click', () => {
+    document.querySelectorAll('.loop-node').forEach(n => n.classList.remove('active'));
+    node.classList.add('active');
+    loopDetail.style.display = 'block';
+    loopDetail.textContent = loopDetails[i];
+  });
+  loopWrap.appendChild(node);
+  if (i < loopSteps.length - 1) {
+    const arrow = document.createElement('div');
+    arrow.className = 'loop-arrow';
+    arrow.textContent = '\u2193';
+    loopWrap.appendChild(arrow);
+  }
+});
+
+// Missing denominator checklist with filter
+const denomItems = [
+  { text: "Total searches conducted", cat: "Volume" },
+  { text: "Searches returning no result", cat: "Volume" },
+  { text: "Searches returning at least one result", cat: "Volume" },
+  { text: "Correct and incorrect OCR matches", cat: "Accuracy" },
+  { text: "Hotlist alerts later found stale or incorrect", cat: "Accuracy" },
+  { text: "Matches independently verified before enforcement action", cat: "Accuracy" },
+  { text: "Investigations materially advanced", cat: "Outcomes" },
+  { text: "Missing people located primarily because of ALPR information", cat: "Outcomes" },
+  { text: "Stolen vehicles recovered", cat: "Outcomes" },
+  { text: "Arrests resulting from alerts", cat: "Outcomes" },
+  { text: "Charges filed", cat: "Outcomes" },
+  { text: "Charges dismissed", cat: "Outcomes" },
+  { text: "Wrongful or mistaken stops", cat: "Cost" },
+  { text: "Officer hours saved", cat: "Cost" },
+  { text: "Total public cost", cat: "Cost" }
+];
+const denomFilter = document.getElementById('denom-filter');
+const denomGrid = document.getElementById('denom-grid');
+const denomCats = ["All"].concat([...new Set(denomItems.map(d => d.cat))]);
+denomCats.forEach((cat, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn' + (i === 0 ? ' active' : '');
+  btn.textContent = cat;
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#denom-filter .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.denom-item').forEach(item => {
+      item.classList.toggle('hidden-by-filter', cat !== 'All' && item.dataset.cat !== cat);
+    });
+  });
+  denomFilter.appendChild(btn);
+});
+denomItems.forEach(d => {
+  const item = document.createElement('div');
+  item.className = 'denom-item';
+  item.dataset.cat = d.cat;
+  item.innerHTML = '<span class="denom-icon">?</span><span>' + d.text + '</span>';
+  denomGrid.appendChild(item);
+});
+</script>
+</body>
+</html>
