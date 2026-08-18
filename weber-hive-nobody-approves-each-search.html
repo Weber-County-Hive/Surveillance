@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nobody Approves Each Search — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --pass:#3f5d45; --pass-bg:#e9efe7;
+    --fail:#8a3b2e; --fail-bg:#f3e5e0;
+    --warn:#8a6a1f; --warn-bg:#f4ecd6;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:960px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:64px 0 48px;
+  }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(2.1rem, 5vw, 3.4rem); line-height:1.06; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.12rem; color:#c9c3ae; max-width:660px; margin:0; }
+
+  main{ padding:56px 0 40px; }
+  section{ margin-bottom:64px; }
+  h2.section-title{ font-size:clamp(1.5rem,3vw,2.1rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.02rem; max-width:660px; margin:0 0 28px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:26px; }
+
+  .question-block{ border-left:4px solid var(--brass); background:var(--paper-card); padding:20px 24px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:36px 0; }
+  .question-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.25rem; margin:0; }
+
+  /* FLOWCHART */
+  .flow{ display:flex; flex-direction:column; gap:0; }
+  .flow-step{
+    background:var(--paper-card); border:1px solid var(--line); border-radius:10px;
+    padding:16px 20px; cursor:pointer; position:relative;
+  }
+  .flow-step .step-head{ display:flex; align-items:center; gap:14px; }
+  .step-num{
+    font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:13px;
+    width:30px; height:30px; border-radius:50%; background:var(--ink); color:var(--brass-bright);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .step-title{ font-family:"Fraunces",serif; font-weight:600; font-size:1.08rem; flex:1; }
+  .step-who{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; padding:3px 8px; border-radius:12px; background:var(--paper); border:1px solid var(--line); color:var(--muted); white-space:nowrap; }
+  .step-caret{ font-family:"IBM Plex Mono",monospace; color:var(--brass-dark); transition:transform .15s; }
+  .flow-step.open .step-caret{ transform:rotate(90deg); }
+  .step-detail{ max-height:0; overflow:hidden; transition:max-height .2s ease; font-size:14.5px; color:var(--text); }
+  .flow-step.open .step-detail{ max-height:400px; margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); }
+  .step-detail p{ margin:0 0 8px; }
+  .step-detail p:last-child{ margin-bottom:0; }
+  .flow-connector{ display:flex; justify-content:center; padding:6px 0; color:var(--brass-dark); font-family:"IBM Plex Mono",monospace; font-size:16px; }
+  .gap-flag{ display:inline-block; margin-top:8px; font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--fail); background:var(--fail-bg); padding:3px 8px; border-radius:5px; }
+
+  /* SB250 CHECKLIST */
+  .checklist{ display:flex; flex-direction:column; gap:10px; }
+  .check-item{ display:flex; align-items:flex-start; gap:14px; background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; }
+  .status-badge{
+    font-family:"IBM Plex Mono",monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.05em;
+    padding:5px 10px; border-radius:14px; white-space:nowrap; flex-shrink:0; margin-top:2px; font-weight:700;
+  }
+  .status-badge.pass{ background:var(--pass-bg); color:var(--pass); }
+  .status-badge.fail{ background:var(--fail-bg); color:var(--fail); }
+  .status-badge.warn{ background:var(--warn-bg); color:var(--warn); }
+  .check-body strong{ font-family:"Fraunces",serif; font-weight:600; }
+  .check-body p{ margin:4px 0 0; font-size:14px; color:var(--muted); }
+  .check-legend{ display:flex; gap:16px; margin-bottom:16px; flex-wrap:wrap; font-size:12px; }
+  .check-legend span{ display:inline-flex; align-items:center; gap:6px; }
+
+  /* MISUSE DATABASE */
+  .misuse-controls{ display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
+  .filter-btn{ font-family:"IBM Plex Mono",monospace; font-size:12px; padding:8px 14px; border-radius:20px; border:1px solid var(--line); background:#fff; cursor:pointer; color:var(--muted); }
+  .filter-btn.active{ background:var(--ink); color:#faf6ea; border-color:var(--ink); }
+  .case-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(270px,1fr)); gap:14px; }
+  .case-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:18px; }
+  .case-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:8px; }
+  .case-name{ font-family:"Fraunces",serif; font-weight:600; font-size:1.02rem; }
+  .case-state{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; padding:2px 7px; border-radius:4px; background:var(--brass-bright); color:var(--ink); font-weight:700; white-space:nowrap; }
+  .case-dept{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--brass-dark); margin-bottom:8px; }
+  .case-desc{ font-size:13.5px; color:var(--text); margin-bottom:10px; }
+  .case-outcome{ font-size:12.5px; color:var(--muted); border-top:1px dashed var(--line); padding-top:8px; }
+  .case-outcome strong{ color:var(--text); }
+
+  /* FIELD COMPARISON TABLE */
+  .field-table-scroll{ overflow-x:auto; }
+  table.field-table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px; }
+  table.field-table th, table.field-table td{ padding:10px 12px; border:1px solid var(--line); text-align:left; vertical-align:top; }
+  table.field-table th{ font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; background:var(--ink); color:var(--brass-bright); }
+  table.field-table td.field-name{ font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:12.5px; background:#faf6ea; }
+  table.field-table td .yn{ font-weight:700; }
+  table.field-table td .yes{ color:var(--pass); }
+  table.field-table td .no{ color:var(--fail); }
+  table.field-table td .partial{ color:var(--warn); }
+
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:40px 32px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.25rem,3vw,1.7rem); max-width:680px; margin:0 auto; line-height:1.4; }
+
+  footer{ border-top:1px solid var(--line); padding:32px 0 60px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">The Weber County Hive · Surveillance Investigation</div>
+    <h1>Nobody Approves<br>Each Search</h1>
+    <p class="subhead">A Flock search happens the moment an officer types a plate. Nothing stops it, checks it, or confirms it before the results come back. Here is exactly who is supposed to be watching — and when they actually look.</p>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <div class="question-block">
+      <p class="q">Who authorizes, validates, and audits an interstate Flock search?</p>
+    </div>
+
+    <section id="flowchart">
+      <div class="eyebrow">Interactive · 01</div>
+      <h2 class="section-title">Who checks whom?</h2>
+      <p class="section-sub">The process has six steps. Only one of them happens before the officer already has an answer. Tap a step to see what's actually documented at that point.</p>
+      <div class="card">
+        <div class="flow" id="flow-container"></div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <div class="eyebrow">Interactive · 02</div>
+      <h2 class="section-title">S.B. 250 compliance checklist</h2>
+      <p class="section-sub">Utah's 2023 "Public Surveillance Amendments" set specific requirements for any agency running these systems. Checked against Weber County's own released records and written responses &mdash; not assumed, not guessed.</p>
+      <div class="card">
+        <div class="check-legend">
+          <span><span class="status-badge pass" style="padding:3px 8px;">DOCUMENTED</span> confirmed by a record in hand</span>
+          <span><span class="status-badge warn" style="padding:3px 8px;">PARTIAL</span> compliance began partway through the record</span>
+          <span><span class="status-badge fail" style="padding:3px 8px;">NOT ESTABLISHED</span> no record confirms this</span>
+        </div>
+        <div class="checklist" id="checklist-container"></div>
+      </div>
+    </section>
+
+    <section id="misuse">
+      <div class="eyebrow">Interactive · 03</div>
+      <h2 class="section-title">The misuse-case database</h2>
+      <p class="section-sub">Every case below ended in a guilty plea, a criminal charge, a resignation, or a termination &mdash; not an allegation. All were caught by a victim, a coworker, or a later audit. None was stopped by the search process itself.</p>
+      <div class="card">
+        <div class="misuse-controls" id="misuse-filters"></div>
+        <div class="case-grid" id="case-grid"></div>
+      </div>
+    </section>
+
+    <section id="fields">
+      <div class="eyebrow">Interactive · 04</div>
+      <h2 class="section-title">What a search record actually captures</h2>
+      <p class="section-sub">Different agencies, same underlying system, different rules for what an officer has to type before Flock returns an answer.</p>
+      <div class="card">
+        <div class="field-table-scroll">
+          <table class="field-table" id="field-table"></table>
+        </div>
+        <p style="font-size:12.5px; color:var(--muted); margin-top:14px; margin-bottom:0;">"Free text accepted" means the field exists but nothing validates what's typed into it &mdash; a single word satisfies the requirement.</p>
+      </div>
+    </section>
+
+    <section id="takeaway">
+      <div class="takeaway">
+        <div class="eyebrow">Primary Takeaway</div>
+        <p class="big">Flock creates an audit trail. That does not mean an independent person verifies each search before the information is returned.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--ink);">Sources &amp; methodology</strong>
+    <ul class="sources-list">
+      <li>Weber County Sheriff's Office written responses to public records requests, Aug. 6, 2026 and following, via Utah Civic Compact (utahciviccompact.org/alpr)</li>
+      <li>KSL, "Group cites 'striking' Weber County data on Flock cameras as reason for lawmakers to act," Daniel Woodruff, Aug. 13, 2026 (Lt. Colby Ryan monthly-audit statement)</li>
+      <li>Utah Code &sect;&sect; 41-6a-2002 through -2006 (Automatic License Plate Reader System Act), as amended by S.B. 250 (2023) and H.B. 468 (2025, procedurally killed)</li>
+      <li>UDOT ALPRS Special Use Permit program page, connect.udot.utah.gov</li>
+      <li>Utah DPS/SIAC statewide ALPR data-sharing MOU naming Weber County (Chief Deputy Josh Byrd, signed; County Commission vote page blank)</li>
+      <li>ACLU of Massachusetts, Flock network sharing-settings documentation (Oct. 2025)</li>
+      <li>Milwaukee County District Attorney's Office criminal complaints, Josue Ayala (Feb. 2026) and Tehrangi Chapman (Jul. 2026); Outagamie County complaint, Cristian Morales; ACLU of Wisconsin reporting on Frank McGrath</li>
+      <li>Orange County (CA) District Attorney's Office press release, Robert Jay Josett guilty plea, Apr. 2026</li>
+      <li>Georgia Bureau of Investigation, Albany PD officer arrests, Jul. 6, 2026; reporting on Savannah, DeKalb County, Fayetteville, Greene County, and Cherokee County cases</li>
+    </ul>
+    <p style="margin-top:16px;">This page makes no claim that every search lacking a documented reason was unlawful, or that any named agency acted in bad faith. It documents what the process requires, what the records show was actually captured, and where the two diverge.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---------- FLOWCHART DATA ----------
+  const steps = [
+    {
+      title:"Officer enters plate",
+      who:"Requesting officer",
+      detail:[
+        "This is the entire access gate. Once an agency has network access, any of its officers can query with personal login credentials &mdash; no second person is involved in initiating a search.",
+        "Access is granted per agency, not per search. Once an agency is approved to share with Weber County's network, its officers query directly, and no one at the county reviews individual searches."
+      ],
+      gap:null
+    },
+    {
+      title:"Officer enters reason or incident number",
+      who:"Requesting officer",
+      detail:[
+        "The field exists, but nothing validates what's typed into it. In the Milwaukee case, prosecutors say Officer Josue Ayala logged 179 searches with the single word \u201cinvestigation.\u201d In Menasha, Officer Cristian Morales listed \u201cwelfare\u201d as the reason for five searches and entered no case number at all.",
+        "Utah's S.B. 250 (2023) requires a law enforcement agency to preserve the crime type and incident number for each search &mdash; but that requirement governs what the agency must keep on file, not what stops a search from running. A search returns results regardless of what's typed."
+      ],
+      gap:"No validation before the search executes"
+    },
+    {
+      title:"Flock searches participating networks",
+      who:"Flock's platform",
+      detail:[
+        "Flock's own network-sharing settings, documented by the ACLU of Massachusetts in October 2025, include toggles that automatically accept share requests from agencies within a selected distance or statewide, and options to make a network discoverable nationwide.",
+        "The median search of Weber County's cameras reaches 2,950 separate networks at once. The system is built to maximize how many agencies' data a single query touches &mdash; that design choice happens upstream of any individual officer's judgment."
+      ],
+      gap:null
+    },
+    {
+      title:"Results return before audit",
+      who:"Automated",
+      detail:[
+        "This is the step most people assume doesn't exist. There is no pause here, no second person, no automated check against the stated reason. The officer has the vehicle's location history before anyone outside their own screen has seen the query."
+      ],
+      gap:"The only step that happens in real time \u2014 and no independent person is in the loop"
+    },
+    {
+      title:"Officer's own agency may review later",
+      who:"Requesting agency",
+      detail:[
+        "Milwaukee's own audit function existed before Ayala's searches were caught &mdash; it simply wasn't being used. The department's Chief of Staff said afterward that the assumption had been that the audit function in place was being utilized, and the gaps in that system weren't understood until they were exposed.",
+        "Ayala wasn't caught by that audit. He was caught because a victim searched her own plate on a third-party website and reported it. Milwaukee added mandatory case numbers and a monthly audit only after the case became public &mdash; and those new controls are what later caught Detective Tehrangi Chapman, who had been one of the investigators on Ayala's case."
+      ],
+      gap:"Depends entirely on whether the review actually happens \u2014 and on this evidence, often doesn't until something else exposes it"
+    },
+    {
+      title:"Camera-owning agency sees limited audit information",
+      who:"Weber County Sheriff's Office",
+      detail:[
+        "Weber County Sheriff's Lt. Colby Ryan told KSL the office audits its system monthly, and that Houston Police Department's high-volume queries were tied to documented active investigations.",
+        "Asked in writing for any audit, compliance review, or self-assessment of the system, the Sheriff's Office initially responded, \u201cThis is not a record that we maintain.\u201d The office later clarified that audits had been performed, but no log of them was kept &mdash; and it has since created a form to log audits going forward. That form applies only from this point on; it produces nothing for the prior four and a half years.",
+        "Under the Utah DPS/SIAC statewide sharing agreement Weber County signed, each participating agency is solely responsible for its own misuse under Utah's Governmental Immunity Act &mdash; there is no shared liability and no mechanism for Weber County to verify what a requesting agency's own internal review, if any, actually found."
+      ],
+      gap:"The agency that owns the cameras has no way to confirm 3,343 other agencies are reviewing their own officers' searches"
+    }
+  ];
+
+  function renderFlow(){
+    const container = document.getElementById('flow-container');
+    let html = '';
+    steps.forEach((s,i)=>{
+      html += `<div class="flow-step" data-idx="${i}">
+        <div class="step-head">
+          <div class="step-num">${i+1}</div>
+          <div class="step-title">${s.title}</div>
+          <div class="step-who">${s.who}</div>
+          <div class="step-caret">&#9656;</div>
+        </div>
+        <div class="step-detail">
+          ${s.detail.map(p=>`<p>${p}</p>`).join('')}
+          ${s.gap ? `<span class="gap-flag">Gap: ${s.gap}</span>` : ''}
+        </div>
+      </div>`;
+      if(i < steps.length-1) html += `<div class="flow-connector">&#8595;</div>`;
+    });
+    container.innerHTML = html;
+    container.querySelectorAll('.flow-step').forEach(el=>{
+      el.addEventListener('click', ()=> el.classList.toggle('open'));
+    });
+    // open step 4 (results return) by default to make the point immediately
+    container.querySelector('.flow-step[data-idx="3"]').classList.add('open');
+  }
+  renderFlow();
+
+  // ---------- SB 250 CHECKLIST ----------
+  const checklistItems = [
+    {status:"warn", title:"Preserve the crime type and incident number for each search — Utah Code \u00a7 41-6a-2005(6)(a)(ii)", detail:"Per Utah Civic Compact's review of the released search records, a case-number field first appears in the data in February 2025, and a structured reason menu rolled out in mid-2025. Every earlier search in the 5.17-million-record set predates a field that could satisfy this requirement."},
+    {status:"fail", title:"Preserve records of audits performed on the system", detail:"Weber County's written response to a records request stated that no such record is maintained. The office later said audits happened but weren't logged \u2014 meaning nothing on paper confirms an audit occurred at any point before August 2026."},
+    {status:"warn", title:"Publish the agency's ALPR policy on a public website — a UDOT permit precondition under S.B. 250", detail:"This applies to any agency seeking a UDOT ALPRS Special Use Permit for cameras in a state right-of-way. Whether Weber County's own camera locations required this permit, and whether a current policy is published, is not established in the records reviewed for this piece."},
+    {status:"fail", title:"Provide UDOT an updated, current list of ALPR camera locations", detail:"A statewide requirement for any permitted installation. Not confirmed one way or the other for Weber County's ten cameras in the records reviewed here."},
+    {status:"pass", title:"Enter a statewide data-sharing MOU through DPS/SIAC with the required 5-year audit-trail provision", detail:"Weber County's Chief Deputy signed this MOU with the Department of Public Safety's Statewide Information and Analysis Center. The county's own County Commission signature and vote lines, however, are blank on the copy released \u2014 no recorded commission vote authorizing it has surfaced."},
+    {status:"fail", title:"Cap data retention at nine months absent a preservation request, disclosure order, or warrant \u2014 \u00a7 41-6a-2004", detail:"Not established either way in the records reviewed here; no retention audit or deletion log has been produced."},
+    {status:"fail", title:"Verify that out-of-state recipient agencies use the data only for a purpose Utah law authorizes", detail:"No mechanism exists for Weber County, or any Utah agency, to check this. It would require confirming compliance at up to 3,343 separate agencies across 45 states, none of which report back."}
+  ];
+  function renderChecklist(){
+    document.getElementById('checklist-container').innerHTML = checklistItems.map(item => `
+      <div class="check-item">
+        <span class="status-badge ${item.status}">${item.status === 'pass' ? 'Documented' : item.status === 'warn' ? 'Partial' : 'Not established'}</span>
+        <div class="check-body">
+          <strong>${item.title}</strong>
+          <p>${item.detail}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+  renderChecklist();
+
+  // ---------- MISUSE CASE DATABASE ----------
+  const cases = [
+    {state:"WI", name:"Josue Ayala", dept:"Milwaukee PD", desc:"An 8-year MPD officer allegedly ran 179 unauthorized Flock searches over roughly two months in 2025 to track a woman he was dating and her ex-partner, logging each search with the single word \u201cinvestigation.\u201d Uncovered only after one victim searched her own plate on a third-party site.", outcome:"Resigned; pleaded guilty to misdemeanor attempted misconduct in public office; sentenced to 1 year probation."},
+    {state:"WI", name:"Tehrangi Chapman", dept:"Milwaukee PD (Internal Affairs)", desc:"A 22-year veteran detective who had been assigned to investigate the Ayala case was found to have run about 20 unauthorized Flock searches on two people over roughly six years, plus placed an unauthorized GPS tracker on one victim's vehicle. Caught by the wider audit Milwaukee launched after Ayala.", outcome:"Charged with felony misconduct in public office and misdemeanor misuse of a GPS device; case pending."},
+    {state:"WI", name:"Cristian Morales", dept:"Menasha PD", desc:"Made five Flock searches for a woman's vehicle in one morning while off duty, on his personal phone, logging the reason as \u201cwelfare\u201d and entering no case number for any of them. A records search showed the queries reached networks spanning 15,000\u201392,000 cameras \u2014 indicating a state or nationwide search for a purely personal reason.", outcome:"Charged with misconduct in public office; ultimately sentenced on a felony misconduct count."},
+    {state:"WI", name:"Frank McGrath", dept:"Kenosha County Sheriff's Office", desc:"A sheriff's deputy found by an internal investigation to have used Flock, alongside a squad-car tracking system, to surveil a fellow deputy he had been dating.", outcome:"Resigned following the internal investigation."},
+    {state:"CA", name:"Robert Jay Josett", dept:"Costa Mesa PD", desc:"Used the Flock system to locate the vehicle of a woman he was involved with and her romantic interests, then continued illegally accessing Flock data in June 2024 to find a new address \u2014 six months after he had already been placed on administrative leave for a related database misuse case.", outcome:"Pleaded guilty to three misdemeanors including unauthorized computer access; sentenced to 3 years probation; certification review pending before California POST."},
+    {state:"GA", name:"Five officers", dept:"Albany PD", desc:"The Georgia Bureau of Investigation arrested five former Albany officers on July 6, 2026 on charges of Misuse of License Plate Data and Violation of Oath of Office, following an internal audit that found repeated searches with no law-enforcement purpose.", outcome:"Arrested and fired."},
+    {state:"GA", name:"Six officers", dept:"Savannah PD", desc:"Part of the broader Georgia pattern of Flock-access misuse identified across multiple departments over roughly a year.", outcome:"Fired."},
+    {state:"GA", name:"Sgt. Kabiru Salawu", dept:"DeKalb County", desc:"Named in the same statewide pattern of Flock misuse across Georgia law enforcement.", outcome:"Arrested."},
+    {state:"GA", name:"Three officers", dept:"Fayetteville PD", desc:"Part of the same statewide Georgia pattern of Flock-access misuse.", outcome:"Fired."},
+    {state:"GA", name:"Deputies", dept:"Greene &amp; Cherokee County Sheriff's Offices", desc:"Additional agencies named in Georgia's statewide Flock-misuse pattern, alongside Albany, Savannah, DeKalb, and Fayetteville.", outcome:"Disciplined or under investigation."}
+  ];
+
+  let activeFilter = 'ALL';
+  function renderFilters(){
+    const states = ['ALL', ...new Set(cases.map(c=>c.state))];
+    const labels = {ALL:'All states', WI:'Wisconsin', CA:'California', GA:'Georgia'};
+    document.getElementById('misuse-filters').innerHTML = states.map(s=>
+      `<button class="filter-btn ${s===activeFilter?'active':''}" data-state="${s}">${labels[s]||s} (${s==='ALL'?cases.length:cases.filter(c=>c.state===s).length})</button>`
+    ).join('');
+    document.querySelectorAll('.filter-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{ activeFilter = btn.dataset.state; renderFilters(); renderCases(); });
+    });
+  }
+  function renderCases(){
+    const shown = activeFilter==='ALL' ? cases : cases.filter(c=>c.state===activeFilter);
+    document.getElementById('case-grid').innerHTML = shown.map(c => `
+      <div class="case-card">
+        <div class="case-top">
+          <div class="case-name">${c.name}</div>
+          <div class="case-state">${c.state}</div>
+        </div>
+        <div class="case-dept">${c.dept}</div>
+        <div class="case-desc">${c.desc}</div>
+        <div class="case-outcome"><strong>Outcome:</strong> ${c.outcome}</div>
+      </div>
+    `).join('');
+  }
+  renderFilters();
+  renderCases();
+
+  // ---------- FIELD COMPARISON TABLE ----------
+  const fieldRows = [
+    {field:"Case / incident number", utahMin:"Required to be preserved (§41-6a-2005)", dps639:"Required before search", lexipol:"Not required", milwaukee:"Required by policy, unenforced", weber:"Field added Feb 2025"},
+    {field:"Documented reasonable suspicion", utahMin:"Not explicitly required for search itself", dps639:"Required, in writing", lexipol:"Explicitly NOT required", milwaukee:"Investigative purpose required by policy", weber:"Not established"},
+    {field:"Structured reason (dropdown/menu)", utahMin:"Not specified", dps639:"Not specified", lexipol:"Not specified", milwaukee:"Free text accepted", weber:"Added mid-2025"},
+    {field:"Free-text reason accepted", utahMin:"Effectively yes", dps639:"No — written justification required", lexipol:"Yes", milwaukee:"Yes — single word accepted in practice", weber:"Yes, prior to mid-2025 rollout"},
+    {field:"Independent review before results return", utahMin:"Not required", dps639:"Not required", lexipol:"Not required", milwaukee:"Not required", weber:"Not required"},
+    {field:"Retention of search-count record (5 yrs)", utahMin:"Required (§41-6a-2005(6)(b))", dps639:"Follows statute", lexipol:"Follows statute", milwaukee:"Not confirmed pre-2026 reforms", weber:"Not maintained per WCSO's own written response"}
+  ];
+  function statusClass(text){
+    const t = text.toLowerCase();
+    if(t.includes('not required') || t.includes('not maintain') || t.includes('not establish')) return 'no';
+    if(t.includes('required') && !t.includes('not')) return 'yes';
+    return 'partial';
+  }
+  function renderFieldTable(){
+    const cols = [
+      {key:'field', label:'Requirement'},
+      {key:'utahMin', label:'Utah statutory minimum'},
+      {key:'dps639', label:'Utah DPS Policy 639'},
+      {key:'lexipol', label:'Lexipol municipal template'},
+      {key:'milwaukee', label:'Milwaukee PD policy'},
+      {key:'weber', label:"Weber Co. network (per released data)"}
+    ];
+    let html = '<thead><tr>' + cols.map(c=>`<th>${c.label}</th>`).join('') + '</tr></thead><tbody>';
+    fieldRows.forEach(row=>{
+      html += '<tr>';
+      cols.forEach(c=>{
+        if(c.key==='field'){
+          html += `<td class="field-name">${row[c.key]}</td>`;
+        } else {
+          html += `<td><span class="yn ${statusClass(row[c.key])}">${row[c.key]}</span></td>`;
+        }
+      });
+      html += '</tr>';
+    });
+    html += '</tbody>';
+    document.getElementById('field-table').innerHTML = html;
+  }
+  renderFieldTable();
+})();
+</script>
+</body>
+</html>
