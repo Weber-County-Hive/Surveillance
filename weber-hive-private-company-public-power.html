@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Private Company, Public Power — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --help:#3f5d45; --help-bg:#e9efe7;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --dead:#4a4438; --dead-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:56px 0 44px;
+  }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(1.9rem, 4.4vw, 2.9rem); line-height:1.12; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.06rem; color:#c9c3ae; max-width:700px; margin:0 0 30px; }
+  .hero-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(214,184,105,0.25); border:1px solid rgba(214,184,105,0.25); border-radius:10px; overflow:hidden; }
+  .hero-stat{ background:rgba(20,26,36,0.65); padding:16px 14px; }
+  .hero-stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.4rem; color:var(--brass-bright); }
+  .hero-stat .lbl{ font-size:11.5px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:700px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+
+  .finding-block{ border-left:4px solid var(--brass); background:var(--paper-card); padding:20px 24px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:32px 0; }
+  .finding-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.15rem; margin:0 0 8px; }
+  .finding-block p{ margin:0; font-size:14.5px; color:var(--muted); }
+
+  .rubric-row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:8px; margin-top:10px; }
+  .rubric-item{ font-size:12.5px; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:8px 10px; }
+  .rubric-item .dim{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:3px; }
+
+  .verdict-pill{ font-family:"IBM Plex Mono",monospace; font-size:10px; text-transform:uppercase; font-weight:700; padding:4px 10px; border-radius:12px; }
+  .verdict-pill.help{ background:var(--help-bg); color:var(--help); }
+  .verdict-pill.mixed{ background:var(--mixed-bg); color:var(--mixed); }
+  .verdict-pill.harm{ background:var(--harm-bg); color:var(--harm); }
+  .verdict-pill.dead{ background:var(--dead-bg); color:var(--dead); }
+  .vote-strip{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .vote-chip{ font-family:"IBM Plex Mono",monospace; font-size:12px; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:5px 10px; }
+  .vote-chip b{ color:var(--brass-dark); }
+
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:36px 30px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.2rem,2.8vw,1.55rem); max-width:720px; margin:0 auto; line-height:1.45; }
+
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+  /* --- Data lifecycle diagram (interactive) --- */
+  .lifecycle-wrap{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:28px 24px; }
+  .lc-track{ display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-bottom:22px; }
+  .lc-node{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:700; padding:10px 14px; border-radius:8px; border:2px solid var(--line); background:var(--paper); color:var(--muted); cursor:pointer; text-align:center; min-width:110px; }
+  .lc-node.active{ border-color:var(--brass); background:var(--ink); color:var(--brass-bright); }
+  .lc-arrow{ align-self:center; color:var(--line); font-size:16px; }
+  .lc-detail{ border-left:4px solid var(--brass); background:var(--paper); border-radius:0 10px 10px 0; padding:18px 22px; min-height:110px; }
+  .lc-detail h4{ font-family:"Fraunces",serif; margin:0 0 8px; font-size:1.1rem; color:var(--ink); }
+  .lc-detail p{ margin:0 0 8px; font-size:14px; color:var(--muted); }
+  .lc-detail p:last-child{ margin-bottom:0; }
+  .lc-who{ display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:999px; margin-right:6px; margin-bottom:8px; }
+  .lc-who.vendor{ background:var(--mixed-bg); color:var(--mixed); }
+  .lc-who.county{ background:var(--help-bg); color:var(--help); }
+  .lc-who.other{ background:var(--harm-bg); color:var(--harm); }
+  .lc-who.unclear{ background:var(--dead-bg); color:var(--dead); }
+
+  /* --- Retention comparison calculator --- */
+  .calc-wrap{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+  .calc-row{ display:flex; align-items:center; gap:16px; margin-bottom:14px; flex-wrap:wrap; }
+  .calc-label{ font-family:"IBM Plex Mono",monospace; font-size:12px; text-transform:uppercase; color:var(--muted); min-width:170px; }
+  .calc-track{ flex:1; min-width:200px; position:relative; height:34px; background:var(--paper); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .calc-bar{ position:absolute; top:0; left:0; bottom:0; border-radius:8px 0 0 8px; display:flex; align-items:center; padding-left:10px; font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:700; color:#fff; white-space:nowrap; }
+  .calc-bar.vendor-bar{ background:var(--mixed); }
+  .calc-bar.audit-bar{ background:var(--help); }
+  .calc-note{ font-size:13px; color:var(--muted); margin-top:16px; }
+  .calc-input-row{ display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .calc-input-row input[type=range]{ flex:1; accent-color:var(--brass); }
+  .calc-days-display{ font-family:"IBM Plex Mono",monospace; font-weight:700; color:var(--brass-dark); min-width:80px; text-align:right; }
+
+  /* --- Responsibility matrix --- */
+  .matrix-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); background:var(--paper-card); }
+  table.matrix{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:680px; }
+  table.matrix th{ background:var(--ink); color:#efe9d8; font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; text-align:center; padding:10px 8px; }
+  table.matrix th:first-child{ text-align:left; }
+  table.matrix td{ padding:11px 10px; border-top:1px solid var(--line); text-align:center; }
+  table.matrix td:first-child{ text-align:left; font-weight:600; }
+  table.matrix tr:nth-child(even) td{ background:rgba(214,184,105,0.06); }
+  .dot{ display:inline-block; width:22px; height:22px; border-radius:50%; font-size:12px; font-weight:700; line-height:22px; }
+  .dot.full{ background:var(--help-bg); color:var(--help); }
+  .dot.partial{ background:var(--mixed-bg); color:var(--mixed); }
+  .dot.none{ background:var(--harm-bg); color:var(--harm); }
+  .matrix-legend{ display:flex; gap:16px; flex-wrap:wrap; font-size:12px; color:var(--muted); padding:12px 16px; border-top:1px solid var(--line); }
+  .matrix-legend span{ display:flex; align-items:center; gap:6px; }
+
+  /* --- Contract language explorer --- */
+  .clause-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px; }
+  .clause-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:16px; cursor:pointer; transition:border-color .15s ease; }
+  .clause-card:hover{ border-color:var(--brass); }
+  .clause-card .clause-id{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; color:var(--brass-dark); margin-bottom:6px; }
+  .clause-card .clause-title{ font-family:"Fraunces",serif; font-weight:600; font-size:1.0rem; margin-bottom:6px; }
+  .clause-card .clause-teaser{ font-size:13px; color:var(--muted); }
+  .clause-full{ display:none; margin-top:32px; }
+  .clause-full.open{ display:block; }
+  .clause-full .card{ border-left:4px solid var(--brass); }
+  .clause-full .clause-text{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:14px; margin:12px 0; color:var(--ink); }
+  .clause-close{ font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:700; background:none; border:1px solid var(--line); border-radius:6px; padding:6px 12px; cursor:pointer; color:var(--muted); float:right; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="questions.html">The Weber County Hive</a> &rsaquo; Surveillance Series &rsaquo; Article 6</div>
+    <div class="kicker">Article 6 of 6</div>
+    <h1>Private Company, Public Power</h1>
+    <p class="subhead">Flock is a private vendor. The cameras run on public power, watch public roads, and feed a network searched by public employees. When something goes wrong &mdash; a stale alert, a data breach, an unauthorized search &mdash; the honest answer to "whose fault is that" is often: it depends which link in the chain you ask.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">30 days</div><div class="lbl">Flock's own stated retention</div></div>
+      <div class="hero-stat"><div class="num">5 years</div><div class="lbl">Utah's required audit-log retention</div></div>
+      <div class="hero-stat"><div class="num">2027</div><div class="lbl">new contractor-compliance deadline under H.B. 450</div></div>
+      <div class="hero-stat"><div class="num">0</div><div class="lbl">single end-to-end auditor for the whole chain</div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <section id="contractor-status">
+      <div class="eyebrow">The Legal Starting Point</div>
+      <h2 class="section-title">Flock is a government contractor. That status does most of the work.</h2>
+      <p class="section-sub">Two separate statutes decide how much of this is Weber County's responsibility and how much is Flock's &mdash; and both turn on the same word: contractor.</p>
+      <div class="finding-block">
+        <p class="q">S.B. 250's government-agent framing</p>
+        <p>Utah's ALPR statute treats a vendor operating under contract with a law enforcement agency as effectively standing in the agency's shoes for purposes of the statute's restrictions and permitted-use rules &mdash; the obligations attach to the government's use of the system, with the vendor bound by the terms of its contract rather than by an independent statutory duty of its own.</p>
+      </div>
+      <div class="finding-block">
+        <p class="q">H.B. 450's contractor requirements</p>
+        <p>A contractor that processes or has access to personal data under a contract with a governmental entity is subject to the Government Data Privacy Act "to the same extent as the governmental entity." But contracts entered into or renewed only have to contain that compliance language starting <strong>July 1, 2027</strong> &mdash; pushed back a year from the original bill's July 1, 2026 date. Weber County's Flock contract, signed in 2021, isn't required to include this language until its next renewal after that date.</p>
+      </div>
+    </section>
+
+    <section id="lifecycle">
+      <div class="eyebrow">Follow The Record</div>
+      <h2 class="section-title">Data-lifecycle diagram: click each stage</h2>
+      <p class="section-sub">A single license-plate capture passes through several hands before anyone can call it "done." Each stage below is controlled by a different party &mdash; click through to see who.</p>
+
+      <div class="lifecycle-wrap">
+        <div class="lc-track" id="lc-track"></div>
+        <div class="lc-detail" id="lc-detail"></div>
+      </div>
+    </section>
+
+    <section id="retention-calc">
+      <div class="eyebrow">The Numbers Don't Match</div>
+      <h2 class="section-title">Retention comparison calculator</h2>
+      <p class="section-sub">Flock states it retains raw capture data for as little as 30 days by default. Utah requires five years of search-audit records. Slide to see how far apart those two clocks actually run.</p>
+
+      <div class="calc-wrap">
+        <div class="calc-input-row">
+          <span class="calc-label" style="min-width:140px;">Days elapsed</span>
+          <input type="range" id="calc-slider" min="0" max="1825" value="30" step="5">
+          <span class="calc-days-display" id="calc-days">30 days</span>
+        </div>
+        <div class="calc-row">
+          <div class="calc-label">Flock raw capture</div>
+          <div class="calc-track"><div class="calc-bar vendor-bar" id="calc-vendor-bar" style="width:1.6%;">30 days</div></div>
+        </div>
+        <div class="calc-row">
+          <div class="calc-label">Utah audit-log requirement</div>
+          <div class="calc-track"><div class="calc-bar audit-bar" id="calc-audit-bar" style="width:100%;">5 years (1,825 days)</div></div>
+        </div>
+        <p class="calc-note" id="calc-note">At 30 days, the raw vehicle-location capture is already gone under Flock's default retention &mdash; but the record that a search happened at all is required to survive for another 1,795 days after that.</p>
+      </div>
+    </section>
+
+    <section id="responsibility">
+      <div class="eyebrow">Who Actually Answers For What</div>
+      <h2 class="section-title">Responsibility matrix</h2>
+      <p class="section-sub">For each function, who is actually accountable if it fails &mdash; the vendor, the county, a searching agency, or no one clearly?</p>
+
+      <div class="matrix-wrap">
+        <table class="matrix">
+          <thead>
+            <tr><th>Function</th><th>Flock</th><th>Weber County</th><th>Searching Agency</th><th>State (ODP/Legislature)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Camera hardware &amp; uptime</td>
+              <td><span class="dot full">&#10003;</span></td>
+              <td><span class="dot partial">&#8320;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+            </tr>
+            <tr>
+              <td>Deciding who gets network access</td>
+              <td><span class="dot partial">&#8320;</span></td>
+              <td><span class="dot full">&#10003;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+            </tr>
+            <tr>
+              <td>Verifying an out-of-state search reason</td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot partial">&#8320;</span></td>
+              <td><span class="dot full">&#10003;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+            </tr>
+            <tr>
+              <td>Enforcing the 5-year audit-log requirement</td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot partial">&#8320;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot partial">&#8320;</span></td>
+            </tr>
+            <tr>
+              <td>AI/aggregated-data training use</td>
+              <td><span class="dot full">&#10003;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+            </tr>
+            <tr>
+              <td>Deleting data on request/deadline</td>
+              <td><span class="dot full">&#10003;</span></td>
+              <td><span class="dot partial">&#8320;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+            </tr>
+            <tr>
+              <td>Data received warrant-free from another agency (H.B. 261 exception)</td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot full">&#10003;</span></td>
+              <td><span class="dot partial">&#8320;</span></td>
+            </tr>
+            <tr>
+              <td>Single end-to-end audit of the whole chain</td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+              <td><span class="dot none">&mdash;</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="matrix-legend">
+          <span><span class="dot full" style="width:16px;height:16px;line-height:16px;font-size:10px;">&#10003;</span> Clearly responsible</span>
+          <span><span class="dot partial" style="width:16px;height:16px;line-height:16px;font-size:10px;">&#8320;</span> Partial / contract-dependent</span>
+          <span><span class="dot none" style="width:16px;height:16px;line-height:16px;font-size:10px;">&mdash;</span> No clear responsibility</span>
+        </div>
+      </div>
+      <p style="font-size:13.5px; color:var(--muted); margin-top:14px;">The last row is the finding: no single box in this table is fully checked all the way across. Nothing in Utah law names one party responsible for auditing the record from camera capture to final search, contractor to county to whichever out-of-state agency runs a query.</p>
+    </section>
+
+    <section id="clauses">
+      <div class="eyebrow">In Flock's Own Words</div>
+      <h2 class="section-title">Contract-language explorer</h2>
+      <p class="section-sub">Click a clause to read what Flock's publicly available Master Services Agreement actually says.</p>
+
+      <div class="clause-grid" id="clause-grid"></div>
+      <div class="clause-full" id="clause-full"></div>
+    </section>
+
+    <section id="ucpa-exemption">
+      <div class="eyebrow">Where This Exemption Came From</div>
+      <h2 class="section-title">The 2022 law nobody debated as a surveillance question</h2>
+      <div class="finding-block">
+        <p class="q">S.B. 227 (2022) — the government-contractor exemption</p>
+        <p>The Utah Consumer Privacy Act exempts a person acting as a government contractor from most of its consumer-data obligations. That exemption was in S.B. 227 as introduced by Sen. Kirk Cullimore, passed 28&ndash;0 in the Senate and 71&ndash;1 in the House, and signed by Gov. Cox on March 24, 2022. Nothing in that record shows the Legislature debating how the exemption would apply to a company like Flock, which uses government contracts to operate a nationwide surveillance and vehicle-recognition network. The exemption was written for ordinary state contractors &mdash; software vendors, printers, consultants &mdash; not with ALPR specifically in mind, and it has applied to ALPR vendors since.</p>
+      </div>
+    </section>
+
+    <div class="takeaway">
+      <div class="eyebrow">The Throughline</div>
+      <p class="big">A private company operates infrastructure that exercises public power &mdash; and the law splits responsibility for it three or four ways at once. Ask Flock who's accountable and they can point to the county's contract. Ask the county and they can point to Flock's technology. Ask the state and they can point to a statute written for government contractors in general, never surveillance vendors specifically. Every answer is partly true. None of them is complete.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-top:0;"><strong>Sources</strong></p>
+    <ul class="sources-list">
+      <li>Flock Safety Master Services Agreement, publicly available contract text, Sections 2.1, 4.1, 4.4</li>
+      <li>Utah Code § 41-6a-2003, § 41-6a-2004, § 41-6a-2005 (ALPR System Act)</li>
+      <li>H.B. 450, Data Privacy Amendments (2026 General Session), § 63A-19-401.4 (contractor requirements), enrolled text and full redline</li>
+      <li>H.B. 261, Electronic Information Privacy Act Amendments (2026 General Session), enacting § 77-23c-104.1, enrolled text</li>
+      <li>Utah Code § 13-61-102(2)(a) (Utah Consumer Privacy Act, government-contractor exemption); S.B. 227 (2022 General Session) vote history, le.utah.gov</li>
+    </ul>
+    <p style="margin-bottom:0; margin-top:16px;">Part of a six-part series on ALPR and privacy oversight in Weber County. &larr; <a href="weber-hive-privacy-report-hb450.html">Article 5: The Privacy Report You Cannot Read</a></p>
+  </div>
+</footer>
+
+<script>
+// Data lifecycle diagram
+const lcStages = [
+  { label: "CAPTURE", who: [["vendor","Flock hardware"]], title: "A camera captures the plate",
+    text: ["A Flock camera photographs a license plate, timestamp, and location as a vehicle passes. This is Flock's hardware, running on Flock's software, on a device Weber County pays a subscription fee to use."] },
+  { label: "STORAGE", who: [["vendor","Flock infrastructure"]], title: "The image and data are stored on Flock's systems",
+    text: ["Raw capture data lives on Flock-controlled cloud infrastructure. Flock's own default retention for raw footage is as short as 30 days &mdash; short enough that the underlying image is often gone well before Utah's 5-year audit-log requirement would apply to anything."] },
+  { label: "SEARCH", who: [["county","Weber Co."], ["other","Any network agency"]], title: "An officer &mdash; anywhere on the network &mdash; searches it",
+    text: ["Any agency connected to the same Flock network can search the data, not just Weber County. The search itself generates a log entry: who searched, when, and (in theory) why. That log entry is what Utah's 5-year retention requirement actually governs &mdash; not the underlying image."] },
+  { label: "SHARING", who: [["vendor","Flock network"], ["other","Requesting agency"]], title: "The record can travel to another agency entirely",
+    text: ["Multi-agency network sharing means a Weber County capture can be searched by an agency thousands of miles away. Under H.B. 261's new exception, a Utah agency can also receive electronic information warrant-free from an out-of-state or federal agency that lawfully obtained it under that agency's own rules &mdash; effectively a second export pathway alongside the network search itself."] },
+  { label: "AI TRAINING", who: [["vendor","Flock, contractually"]], title: "Aggregated data can train Flock's own models",
+    text: ["Flock's Master Services Agreement (Section 4.4) grants Flock a perpetual, royalty-free license to use aggregated or anonymized data to train its own AI models and vehicle-recognition algorithms &mdash; a commercial use that continues independent of how long any single record is retained for law enforcement purposes."] },
+  { label: "DELETION", who: [["vendor","Flock's process"], ["county","County's request"]], title: "Deletion happens on Flock's schedule, on Flock's systems",
+    text: ["When data is deleted, it's deleted by Flock, on Flock's infrastructure, according to Flock's stated process. Weber County has no independent copy to verify against and no independent technical means of confirming deletion actually occurred as described."] }
+];
+let lcIndex = 0;
+const lcTrack = document.getElementById('lc-track');
+const lcDetail = document.getElementById('lc-detail');
+
+function renderLcTrack(){
+  lcTrack.innerHTML = '';
+  lcStages.forEach((s, i) => {
+    const node = document.createElement('div');
+    node.className = 'lc-node' + (i === lcIndex ? ' active' : '');
+    node.textContent = s.label;
+    node.addEventListener('click', () => { lcIndex = i; renderLc(); });
+    lcTrack.appendChild(node);
+    if (i < lcStages.length - 1) {
+      const arrow = document.createElement('div');
+      arrow.className = 'lc-arrow';
+      arrow.textContent = '\u2192';
+      lcTrack.appendChild(arrow);
+    }
+  });
+}
+function renderLc(){
+  renderLcTrack();
+  const s = lcStages[lcIndex];
+  const whoHtml = s.who.map(w => '<span class="lc-who ' + w[0] + '">' + w[1] + '</span>').join('');
+  lcDetail.innerHTML = '<h4>' + s.title + '</h4>' + whoHtml + '<br>' +
+    s.text.map(t => '<p>' + t + '</p>').join('');
+}
+renderLc();
+
+// Retention calculator
+const calcSlider = document.getElementById('calc-slider');
+const calcDays = document.getElementById('calc-days');
+const calcVendorBar = document.getElementById('calc-vendor-bar');
+const calcAuditBar = document.getElementById('calc-audit-bar');
+const calcNote = document.getElementById('calc-note');
+const VENDOR_DAYS = 30;
+const AUDIT_DAYS = 1825;
+
+function renderCalc(){
+  const days = parseInt(calcSlider.value, 10);
+  calcDays.textContent = days + (days === 1 ? ' day' : ' days');
+  const vendorPct = Math.min(100, (VENDOR_DAYS / AUDIT_DAYS) * 100);
+  calcVendorBar.style.width = vendorPct + '%';
+  const auditPct = Math.max(2, Math.min(100, (Math.min(days, AUDIT_DAYS) / AUDIT_DAYS) * 100));
+  calcAuditBar.style.width = auditPct + '%';
+  calcAuditBar.textContent = (days >= AUDIT_DAYS ? '5 years (1,825 days) — requirement met' : (AUDIT_DAYS - days) + ' days remaining on the 5-year requirement');
+  if (days < VENDOR_DAYS) {
+    calcNote.textContent = "At " + days + " days, Flock's default retention window for this capture hasn't closed yet — but the record is already required to exist for " + (AUDIT_DAYS - days) + " more days after that.";
+  } else {
+    calcNote.textContent = "At " + days + " days, the raw vehicle-location capture is already gone under Flock's default 30-day retention — but the record that a search happened at all is still required to survive for " + Math.max(0, AUDIT_DAYS - days) + " more days.";
+  }
+}
+calcSlider.addEventListener('input', renderCalc);
+renderCalc();
+
+// Contract clause explorer
+const clauses = [
+  { id: "clause-21", tag: "MSA § 2.1", title: "Service Scope", teaser: "Defines what Flock is contracted to provide — the camera network, hosting, and search platform.",
+    text: "Section 2.1 establishes the baseline service: Flock provides camera hardware, cloud-hosted data storage, and the search interface officers use. Everything downstream in this article — retention, sharing, AI training — happens inside the infrastructure this clause defines Flock as owning and operating." },
+  { id: "clause-41", tag: "MSA § 4.1", title: "Data Ownership", teaser: "Government agencies own their own raw footage — but ownership and control are not the same thing.",
+    text: "Section 4.1 states that the contracting government agency owns the raw footage and search data it generates. In practice, that data lives entirely on Flock's infrastructure, is deleted according to Flock's process, and is searchable across a multi-agency network the county doesn't control — ownership on paper, without matching technical control." },
+  { id: "clause-44", tag: "MSA § 4.4", title: "Aggregated Data & AI Training Rights", teaser: "Flock keeps a perpetual, royalty-free license to use aggregated data for its own commercial AI products.", 
+    text: "Section 4.4 grants Flock a perpetual, royalty-free license to use aggregated or anonymized data — drawn from the same captures government agencies pay to generate — to train Flock's own AI models, vehicle-recognition ('Vehicle Fingerprint') algorithms, and other commercial products. This is not a data sale in the traditional sense; it's a standing commercial-use right built into the same contract that governs law enforcement's access." },
+  { id: "clause-retention", tag: "Vendor Policy", title: "Default 30-Day Retention", teaser: "Flock's stated default keeps raw capture data for as little as 30 days.",
+    text: "Flock's publicly stated default retention period for raw ALPR capture data is as short as 30 days, configurable by the contracting agency up to Utah's statutory ceiling. That default sits far inside the 5-year window Utah law requires for the search-audit record — the underlying image and the record that someone searched for it are governed by two entirely different clocks." }
+];
+const clauseGrid = document.getElementById('clause-grid');
+const clauseFull = document.getElementById('clause-full');
+
+clauses.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'clause-card';
+  card.innerHTML = '<div class="clause-id">' + c.tag + '</div><div class="clause-title">' + c.title + '</div><div class="clause-teaser">' + c.teaser + '</div>';
+  card.addEventListener('click', () => openClause(c.id));
+  clauseGrid.appendChild(card);
+});
+
+function openClause(id){
+  const c = clauses.find(x => x.id === id);
+  clauseFull.innerHTML =
+    '<div class="card"><button class="clause-close" id="clause-close-btn">Close &times;</button>' +
+    '<div class="clause-id">' + c.tag + '</div>' +
+    '<h3 style="margin:6px 0 4px;">' + c.title + '</h3>' +
+    '<div class="clause-text">' + c.text + '</div>' +
+    '</div>';
+  clauseFull.classList.add('open');
+  document.getElementById('clause-close-btn').addEventListener('click', () => {
+    clauseFull.classList.remove('open');
+  });
+  clauseFull.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+</script>
+</body>
+</html>
