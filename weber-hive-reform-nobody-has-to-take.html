@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Reform Nobody Has to Take — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --help:#3f5d45; --help-bg:#e9efe7;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --dead:#4a4438; --dead-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:56px 0 44px;
+  }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(1.9rem, 4.4vw, 2.9rem); line-height:1.12; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.06rem; color:#c9c3ae; max-width:700px; margin:0 0 30px; }
+  .hero-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(214,184,105,0.25); border:1px solid rgba(214,184,105,0.25); border-radius:10px; overflow:hidden; }
+  .hero-stat{ background:rgba(20,26,36,0.65); padding:16px 14px; }
+  .hero-stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.3rem; color:var(--brass-bright); }
+  .hero-stat .lbl{ font-size:11.5px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:700px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+
+  .finding-block{ border-left:4px solid var(--brass); background:var(--paper-card); padding:20px 24px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:32px 0; }
+  .finding-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.15rem; margin:0 0 8px; }
+  .finding-block p{ margin:0; font-size:14.5px; color:var(--muted); }
+  .finding-block.quote{ border-left-color:var(--harm); }
+  .finding-block blockquote{ font-family:"Fraunces",serif; font-style:italic; font-size:1.1rem; color:var(--ink); margin:0 0 8px; line-height:1.5; }
+  .finding-block cite{ font-family:"IBM Plex Mono",monospace; font-style:normal; font-size:12px; color:var(--muted); }
+
+  .unknown-banner{ background:var(--dead-bg); border:1px solid var(--dead); border-radius:10px; padding:16px 20px; margin-bottom:24px; display:flex; gap:14px; align-items:flex-start; }
+  .unknown-banner .icon{ font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:16px; color:var(--dead); flex-shrink:0; }
+  .unknown-banner p{ margin:0; font-size:14px; color:var(--dead); }
+
+  .rubric-row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:8px; margin-top:10px; }
+  .rubric-item{ font-size:12.5px; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:8px 10px; }
+  .rubric-item .dim{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:3px; }
+
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:36px 30px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.2rem,2.8vw,1.55rem); max-width:720px; margin:0 auto; line-height:1.45; }
+
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+  /* Mandatory vs optional toggle */
+  .toggle-row{ display:flex; gap:0; margin-bottom:18px; border:1px solid var(--line); border-radius:8px; overflow:hidden; width:fit-content; }
+  .toggle-btn{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:700; letter-spacing:0.03em; padding:10px 20px; background:var(--paper-card); color:var(--muted); border:none; cursor:pointer; }
+  .toggle-btn.active{ background:var(--ink); color:var(--brass-bright); }
+  .toggle-panel{ display:none; }
+  .toggle-panel.active{ display:block; }
+  .check-list{ list-style:none; margin:0; padding:0; }
+  .check-list li{ display:flex; align-items:flex-start; gap:10px; padding:9px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .check-list li:last-child{ border-bottom:none; }
+  .check-icon{ flex-shrink:0; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; margin-top:2px; }
+  .check-icon.yes{ background:var(--help-bg); color:var(--help); }
+  .check-icon.no{ background:var(--harm-bg); color:var(--harm); }
+  .check-icon.opt{ background:var(--mixed-bg); color:var(--mixed); }
+
+  /* Retention path explorer */
+  .path-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:680px){ .path-wrap{ grid-template-columns:1fr; } }
+  .path-col{ border-radius:12px; padding:20px; border:2px solid var(--line); cursor:pointer; transition:border-color .15s ease; }
+  .path-col:hover{ border-color:var(--brass); }
+  .path-col.active{ border-color:var(--brass); background:var(--paper-card); box-shadow:var(--shadow); }
+  .path-col h3{ font-size:1.05rem; margin:0 0 10px; font-family:"Fraunces",serif; }
+  .path-col .path-tag{ display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:999px; margin-bottom:10px; }
+  .path-col.opt-in .path-tag{ background:var(--help-bg); color:var(--help); }
+  .path-col.opt-out .path-tag{ background:var(--harm-bg); color:var(--harm); }
+  .path-col p{ font-size:13.5px; color:var(--muted); margin:0; }
+  .path-detail{ margin-top:16px; border-left:4px solid var(--brass); background:var(--paper); border-radius:0 10px 10px 0; padding:16px 20px; font-size:13.5px; color:var(--muted); display:none; }
+  .path-detail.open{ display:block; }
+
+  /* Critic quote grid */
+  .critic-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:16px; }
+  .critic-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:18px; }
+  .critic-card .critic-name{ font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; color:var(--brass-dark); margin-bottom:8px; font-weight:700; }
+  .critic-card blockquote{ font-family:"Fraunces",serif; font-style:italic; font-size:1.0rem; margin:0; color:var(--ink); line-height:1.5; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">The Weber County Hive</a> &rsaquo; Surveillance Series &rsaquo; Article 7</div>
+    <div class="kicker">Article 7 of 7</div>
+    <h1>The Reform Nobody Has to Take</h1>
+    <p class="subhead">On August 13, 2026, Flock announced a sweeping set of privacy reforms for its ALPR network &mdash; new retention defaults, mandatory case codes, automated misuse detection. Read closely, one of the headline changes is optional. Nothing in the announcement requires any agency to actually adopt it.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">Aug. 13</div><div class="lbl">2026 — date Flock announced the reforms</div></div>
+      <div class="hero-stat"><div class="num">Opt-in</div><div class="lbl">status of the new 7-day retention default</div></div>
+      <div class="hero-stat"><div class="num">Jan. 1</div><div class="lbl">2027 — deadline for case codes and audit tools, which are NOT opt-in</div></div>
+      <div class="hero-stat"><div class="num">Unknown</div><div class="lbl">whether Weber County has adopted the new default</div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <div class="unknown-banner">
+      <span class="icon">!</span>
+      <p><strong>What this article does not claim:</strong> nothing here says Weber County's retention period has changed, stayed the same, or is being reconsidered. No public statement from Weber County or the Sheriff's Office confirming its status has been found as of this writing. That's an open question for a direct records request, not something this piece answers.</p>
+    </div>
+
+    <section id="announcement">
+      <div class="eyebrow">What Flock Actually Announced</div>
+      <h2 class="section-title">A real reform package, confirmed industry-wide</h2>
+      <p class="section-sub">This is not in dispute — Flock's own blog post and more than a dozen news outlets confirm the same set of changes, announced August 13, 2026.</p>
+      <div class="card">
+        <ul style="font-size:14.5px; line-height:1.9; margin:0;">
+          <li>A new <strong>7-day default retention recommendation</strong>, down from 30 days, with a new &ldquo;Evidence Mode&rdquo; that lets detectives preserve specific records tied to an active investigation past that window</li>
+          <li><strong>Mandatory case codes</strong> — officers must enter a code from their agency's own records management system before running a search, required for all law enforcement customers by January 1, 2027</li>
+          <li><strong>Mandatory Audit Assistance</strong> &mdash; a machine-learning tool that flags abnormal search patterns for administrator review, optional since April 2026, becoming mandatory for all law enforcement customers by the end of 2026</li>
+          <li><strong>Proactive lockouts</strong> &mdash; an account whose activity meets Flock's criteria for abnormal behavior automatically loses access pending administrator review</li>
+          <li><strong>Offense-type filtering</strong> &mdash; a customer agency can now choose which categories of offense (homicide, arson, etc.) outside agencies are allowed to search its data for, which Flock says would let an agency block outside searches tied to immigration enforcement specifically</li>
+          <li><strong>Security changes</strong> responsive to a November 2025 letter from Sen. Ron Wyden to the FTC flagging the lack of mandatory multi-factor authentication: Flock is now requiring MFA, commissioning an independent security review by Bishop Fox, and launching a Coordinated Vulnerability Disclosure program</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="opt-status">
+      <div class="eyebrow">The Detail That Matters</div>
+      <h2 class="section-title">Not every reform in this package works the same way</h2>
+      <p class="section-sub">Toggle between the two categories below. This is the single most important distinction in the whole announcement.</p>
+
+      <div class="toggle-row" id="reform-toggle">
+        <button class="toggle-btn active" data-panel="mandatory">Mandatory for everyone</button>
+        <button class="toggle-btn" data-panel="optional">Opt-in only</button>
+      </div>
+
+      <div class="toggle-panel active" id="mandatory">
+        <div class="card">
+          <ul class="check-list">
+            <li><span class="check-icon yes">&#10003;</span><span><strong>Case codes required before a search runs</strong> — applies to all law enforcement customers by Jan. 1, 2027</span></li>
+            <li><span class="check-icon yes">&#10003;</span><span><strong>Audit Assistance activated</strong> — applies to all law enforcement customers by end of 2026</span></li>
+            <li><span class="check-icon yes">&#10003;</span><span><strong>Proactive lockout on flagged abnormal activity</strong> — tied to Audit Assistance, same mandatory rollout</span></li>
+            <li><span class="check-icon yes">&#10003;</span><span><strong>Multi-factor authentication</strong> — security requirement, applies broadly per Flock's announcement</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="toggle-panel" id="optional">
+        <div class="card">
+          <ul class="check-list">
+            <li><span class="check-icon opt">&#8320;</span><span><strong>7-day default retention</strong> — new customers get this as the default; <strong>existing customers keep their current, previously approved retention period unless they choose to switch</strong></span></li>
+            <li><span class="check-icon opt">&#8320;</span><span><strong>Offense-type filtering for outside searches</strong> — a capability an agency can choose to configure, not something applied automatically</span></li>
+          </ul>
+          <p style="margin:14px 0 0; font-size:13.5px; color:var(--muted);">Nothing in the public reporting on this announcement describes a mechanism for confirming which agencies have opted in to the shorter retention window and which haven't, or a public list of which posture each of Flock's thousands of law enforcement customers has chosen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="paths">
+      <div class="eyebrow">Two Paths, Same Announcement</div>
+      <h2 class="section-title">What "Flock announced shorter retention" can actually mean for a given agency</h2>
+      <p class="section-sub">Click each path. Both are fully consistent with the same headline.</p>
+
+      <div class="path-wrap">
+        <div class="path-col opt-in" id="path-optin">
+          <span class="path-tag">Path A</span>
+          <h3>Agency opts in</h3>
+          <p>Switches to the new 7-day default, gains access to Evidence Mode for active-investigation exceptions.</p>
+        </div>
+        <div class="path-col opt-out" id="path-optout">
+          <span class="path-tag">Path B</span>
+          <h3>Agency does nothing</h3>
+          <p>Keeps whatever retention period it already had — 30 days, 60 days, or longer — with no requirement to announce that choice publicly.</p>
+        </div>
+      </div>
+      <div class="path-detail" id="path-detail-optin">
+        <strong>Path A, in practice:</strong> The agency's retention window shortens to 7 days for ordinary captures. Detectives can still preserve specific records tied to an active case using Evidence Mode, so nothing about actual investigations is lost — only the default window for data nobody has flagged as relevant to anything narrows.
+      </div>
+      <div class="path-detail" id="path-detail-optout">
+        <strong>Path B, in practice:</strong> Nothing changes. The agency's retention period is whatever it was before August 13 — which, per multiple Flock ALPR audits reviewed elsewhere in this series, is very commonly still the original 30-day manufacturer default. The agency can describe itself as covered by Flock's "reformed" platform without having adopted the one reform that actually shortens how long ordinary location data is kept.
+      </div>
+    </section>
+
+    <section id="critics">
+      <div class="eyebrow">How Critics Read the Same Announcement</div>
+      <h2 class="section-title">"Window dressing," or "a step in the right direction"?</h2>
+      <p class="section-sub">Both reactions are on the record, from different vantage points.</p>
+
+      <div class="critic-grid">
+        <div class="critic-card">
+          <div class="critic-name">ACLU</div>
+          <blockquote>Called the shorter retention period "a step in the right direction" &mdash; while dismissing the other safeguards as "retreads" of inadequate protections.</blockquote>
+        </div>
+        <div class="critic-card">
+          <div class="critic-name">Robert Frommer, Institute for Justice</div>
+          <blockquote>Called the reforms "window dressing" from a company in "panic mode," arguing searches should instead require approval "by judges with real warrants."</blockquote>
+        </div>
+      </div>
+
+      <div class="finding-block quote" style="margin-top:24px;">
+        <p class="q">The gap that survives the reform, per outside analysis</p>
+        <p>Even after case codes become mandatory in January 2027, nothing in the announced changes verifies that a code an officer enters actually corresponds to a real, open case. An officer can still type any case number into the required field. The mandatory field closes the "no reason given at all" gap this series has documented elsewhere &mdash; it does not close the "nobody checks if the reason is true" gap.</p>
+      </div>
+    </section>
+
+    <div class="takeaway">
+      <div class="eyebrow">The Throughline</div>
+      <p class="big">This is the same shape as every legislative reform this series has documented &mdash; real, mandatory pieces (case codes, audit tools, MFA) sitting next to an optional piece (the actual retention shortening) that gets described in headlines as if it applies to everyone. Whether Weber County has taken Path A or Path B isn't something this piece can answer. It's the next records request.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-top:0;"><strong>Sources</strong></p>
+    <ul class="sources-list">
+      <li>Flock Safety, "Flock Updates Privacy, Accountability, Security, and Transparency Safeguards," company blog, Aug. 13, 2026</li>
+      <li>NBC News, "Surveillance company Flock moves to increase oversight after police misuse," Aug. 13, 2026</li>
+      <li>Police1, "Flock privacy updates: 7-day default for ALPR data, mandatory misuse safeguards," Aug. 2026</li>
+      <li>Tech Times, "Flock Safety Reforms Leave the Warrant Gap Open: Officers Can Type Any Case Number," Aug. 13, 2026</li>
+      <li>Slashdot / Associated Press, Aug. 14, 2026</li>
+      <li>Sen. Ron Wyden, letter to FTC Chair Andrew Ferguson regarding Flock cybersecurity practices, Nov. 3, 2025</li>
+      <li>Minnesota Security Consortium independent ALPR audits (Woodbury, Hopkins, Robbinsdale, and others), 2025&ndash;2026 &mdash; cited elsewhere in this series showing 30-day default as the common baseline prior to this announcement</li>
+    </ul>
+    <p style="margin-bottom:0; margin-top:16px;">Part of a seven-part series on ALPR and privacy oversight in Weber County. &larr; <a href="weber-hive-private-company-public-power.html">Article 6: Private Company, Public Power</a> &nbsp;|&nbsp; <a href="index.html">All articles &rarr;</a></p>
+  </div>
+</footer>
+
+<script>
+// Mandatory vs optional toggle
+document.querySelectorAll('#reform-toggle .toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#reform-toggle .toggle-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.toggle-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+  });
+});
+
+// Path explorer
+function setupPath(colId, detailId){
+  const col = document.getElementById(colId);
+  const detail = document.getElementById(detailId);
+  col.addEventListener('click', () => {
+    document.querySelectorAll('.path-col').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.path-detail').forEach(d => d.classList.remove('open'));
+    col.classList.add('active');
+    detail.classList.add('open');
+  });
+}
+setupPath('path-optin', 'path-detail-optin');
+setupPath('path-optout', 'path-detail-optout');
+</script>
+</body>
+</html>
