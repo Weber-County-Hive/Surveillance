@@ -3,480 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>You Asked, We Checked the Record — Weber County Hive</title>
+<title>Eleven Questions Readers Keep Asking — Weber County Hive</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#1c2430;
-    --ink-2:#262f3f;
-    --paper:#f6f2e6;
-    --paper-card:#fffdf8;
-    --text:#211e19;
-    --muted:#5c574c;
-    --brass:#a9812f;
-    --brass-dark:#7c5f22;
-    --record:#3f5d45;
-    --record-bg:#e9efe7;
-    --objection:#8a3b2e;
-    --objection-bg:#f3e5e0;
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
     --line:#dcd2b7;
-    --shadow: 0 10px 30px rgba(28,36,48,0.10);
+    --help:#3f5d45; --help-bg:#e9efe7;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --dead:#4a4438; --dead-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--text);
-    font-family:"Source Serif 4", Georgia, serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,.display{
-    font-family:"Fraunces", Georgia, serif;
-    font-weight:700;
-    letter-spacing:-0.01em;
-  }
-  .mono{
-    font-family:"IBM Plex Mono", monospace;
-    letter-spacing:0.02em;
-  }
-  a{color:var(--brass-dark);}
-  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
-
-  /* Skip link for keyboard/screen reader users */
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:900px; margin:0 auto; padding:0 24px; }
   .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
   .skip-link:focus{left:16px;top:16px;}
 
-  /* ===== HERO ===== */
   header.hero{
-    background:
-      radial-gradient(1200px 400px at 15% -10%, rgba(169,129,47,0.25), transparent 60%),
-      linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
-    color:#efe9d8;
-    padding:72px 0 56px;
-    position:relative;
-    overflow:hidden;
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:56px 0 44px;
   }
-  header.hero::after{
-    content:"";
-    position:absolute; inset:0;
-    background-image: repeating-linear-gradient(180deg, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 4px);
-    pointer-events:none;
-    mix-blend-mode:overlay;
-  }
-  .kicker{
-    font-family:"IBM Plex Mono", monospace;
-    text-transform:uppercase;
-    font-size:12.5px;
-    letter-spacing:0.16em;
-    color:#c8a854;
-    margin-bottom:18px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .kicker .dot{width:7px;height:7px;border-radius:50%;background:#c8a854;display:inline-block;}
-  h1.display{
-    font-size:clamp(2.2rem, 5vw, 3.4rem);
-    line-height:1.06;
-    margin:0 0 22px;
-    color:#f7f2e2;
-  }
-  h1.display em{
-    font-style:italic;
-    font-weight:500;
-    color:#d6b869;
-  }
-  .hero-dek{
-    font-size:1.14rem;
-    max-width:56ch;
-    color:#cfc9b8;
-    margin:0;
-  }
-  .hero-meta{
-    margin-top:34px;
-    display:flex; gap:22px; flex-wrap:wrap;
-    font-family:"IBM Plex Mono", monospace;
-    font-size:12px;
-    color:#a89f86;
-    text-transform:uppercase;
-    letter-spacing:0.08em;
-    border-top:1px solid rgba(255,255,255,0.14);
-    padding-top:18px;
-  }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(1.9rem, 4.4vw, 2.9rem); line-height:1.12; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.06rem; color:#c9c3ae; max-width:680px; margin:0 0 0; }
 
-  /* ===== PLAIN LANGUAGE PANEL ===== */
-  .plain-panel{
-    background:var(--paper-card);
-    border:1px solid var(--line);
-    border-left:5px solid var(--brass);
-    border-radius:4px;
-    padding:26px 28px;
-    margin:-34px auto 0;
-    max-width:820px;
-    box-shadow:var(--shadow);
-    position:relative;
-    z-index:2;
-  }
-  .plain-panel h2{
-    font-size:0.95rem;
-    text-transform:uppercase;
-    letter-spacing:0.1em;
-    color:var(--brass-dark);
-    margin:0 0 10px;
-    font-family:"IBM Plex Mono", monospace;
-    font-weight:600;
-  }
-  .plain-panel p{margin:0 0 10px; color:var(--text); font-size:1.02rem;}
-  .plain-panel p:last-child{margin-bottom:0;}
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:700px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
 
-  main{padding:56px 0 20px;}
+  /* Filter row */
+  .filter-row{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .filter-btn{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:700; padding:8px 14px; border-radius:999px; border:1px solid var(--brass); background:var(--paper-card); color:var(--brass-dark); cursor:pointer; }
+  .filter-btn.active{ background:var(--brass); color:var(--ink); }
 
-  section.intro p{font-size:1.06rem; color:var(--text);}
-  section.intro{margin-bottom:44px;}
+  /* Accordion */
+  .faq-item{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); margin-bottom:12px; overflow:hidden; }
+  .faq-item.hidden-by-filter{ display:none; }
+  .faq-q{ display:flex; align-items:center; gap:14px; padding:18px 22px; cursor:pointer; }
+  .faq-q:hover{ background:rgba(214,184,105,0.06); }
+  .faq-num{ font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:13px; color:var(--brass-bright); background:var(--ink); width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .faq-q-text{ font-family:"Fraunces",serif; font-weight:600; font-size:1.05rem; margin:0; flex:1; color:var(--ink); }
+  .faq-toggle{ font-family:"IBM Plex Mono",monospace; font-weight:700; color:var(--brass-dark); font-size:16px; flex-shrink:0; transition:transform .15s ease; }
+  .faq-item.open .faq-toggle{ transform:rotate(45deg); }
+  .faq-a{ display:none; padding:0 22px 22px 64px; font-size:14.5px; color:var(--muted); }
+  .faq-item.open .faq-a{ display:block; }
+  .faq-a p{ margin:0 0 12px; }
+  .faq-a p:last-child{ margin-bottom:0; }
+  .faq-tag{ display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:700; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:var(--mixed-bg); color:var(--mixed); margin-bottom:10px; }
+  .faq-a .case-cite{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin:10px 0; }
 
-  /* ===== TOC ===== */
-  .toc{
-    margin:0 0 52px;
-    background:var(--paper-card);
-    border:1px solid var(--line);
-    border-radius:4px;
-    padding:22px 24px 8px;
-  }
-  .toc h2{
-    font-family:"IBM Plex Mono", monospace;
-    text-transform:uppercase;
-    font-size:12.5px;
-    letter-spacing:0.14em;
-    color:var(--muted);
-    margin:0 0 14px;
-    font-weight:600;
-  }
-  .toc-list{
-    list-style:none; margin:0; padding:0 0 14px;
-    display:grid; grid-template-columns:1fr 1fr; gap:6px 22px;
-  }
-  @media (max-width:640px){ .toc-list{grid-template-columns:1fr;} }
-  .toc-list li{border-bottom:1px dashed var(--line);}
-  .toc-list button{
-    all:unset; cursor:pointer;
-    display:flex; align-items:baseline; gap:10px;
-    width:100%; padding:9px 2px;
-    font-family:"Source Serif 4", serif;
-    color:var(--text);
-    font-size:0.96rem;
-  }
-  .toc-list button:hover, .toc-list button:focus-visible{color:var(--brass-dark);}
-  .toc-list .num{
-    font-family:"IBM Plex Mono", monospace;
-    color:var(--brass);
-    font-size:0.82rem;
-    flex-shrink:0;
-  }
-  .toc-list button:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:36px 30px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.2rem,2.8vw,1.55rem); max-width:720px; margin:0 auto; line-height:1.45; }
 
-  /* ===== EXHIBIT CARDS ===== */
-  .exhibits{display:flex; flex-direction:column; gap:16px; margin-bottom:56px;}
-  .exhibit{
-    background:var(--paper-card);
-    border:1px solid var(--line);
-    border-radius:4px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-    scroll-margin-top:20px;
-  }
-  .exhibit-head{
-    all:unset;
-    display:flex; align-items:center; gap:16px;
-    width:100%; cursor:pointer;
-    padding:18px 22px;
-  }
-  .exhibit-head:focus-visible{outline:2px solid var(--brass); outline-offset:-2px;}
-  .ex-num{
-    font-family:"IBM Plex Mono", monospace;
-    font-size:0.72rem;
-    color:var(--brass-dark);
-    background:rgba(169,129,47,0.14);
-    border:1px solid rgba(169,129,47,0.35);
-    border-radius:3px;
-    padding:4px 8px;
-    white-space:nowrap;
-    flex-shrink:0;
-  }
-  .ex-title{
-    font-family:"Fraunces", serif;
-    font-weight:600;
-    font-size:1.08rem;
-    color:var(--text);
-    flex:1;
-    text-align:left;
-  }
-  .chevron{
-    flex-shrink:0;
-    width:20px; height:20px;
-    color:var(--brass-dark);
-    transition:transform 0.25s ease;
-  }
-  .exhibit[data-open="true"] .chevron{transform:rotate(180deg);}
-
-  .exhibit-body{
-    display:grid;
-    grid-template-rows:0fr;
-    transition:grid-template-rows 0.32s ease;
-  }
-  .exhibit[data-open="true"] .exhibit-body{grid-template-rows:1fr;}
-  .exhibit-body-inner{overflow:hidden;}
-
-  .tag-row{padding:0 22px; margin-top:2px;}
-  .tag{
-    display:inline-flex; align-items:center; gap:6px;
-    font-family:"IBM Plex Mono", monospace;
-    font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em;
-    padding:3px 9px; border-radius:20px;
-    font-weight:600;
-  }
-  .tag.objection{background:var(--objection-bg); color:var(--objection);}
-  .tag.record{background:var(--record-bg); color:var(--record);}
-
-  .objection-quote{
-    margin:12px 22px 14px;
-    padding:14px 16px;
-    background:var(--objection-bg);
-    border-left:3px solid var(--objection);
-    border-radius:0 3px 3px 0;
-    font-family:"Fraunces", serif;
-    font-style:italic;
-    font-weight:500;
-    font-size:1.02rem;
-    color:#4a2620;
-  }
-
-  .answer{padding:2px 22px 24px;}
-  .answer p{margin:0 0 14px; color:var(--text);}
-  .answer p:last-child{margin-bottom:0;}
-  .answer strong{color:var(--brass-dark);}
-
-  .compare-grid{
-    display:grid; grid-template-columns:1fr 1fr; gap:14px;
-    margin:14px 0;
-  }
-  @media (max-width:560px){.compare-grid{grid-template-columns:1fr;}}
-  .compare-col{
-    border:1px solid var(--line); border-radius:4px; padding:14px 16px;
-    background:#fbf8f0;
-  }
-  .compare-col h4{
-    margin:0 0 8px; font-family:"IBM Plex Mono", monospace;
-    font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em;
-    color:var(--muted);
-  }
-  .compare-col ul{margin:0; padding-left:18px; font-size:0.94rem;}
-  .compare-col li{margin-bottom:5px;}
-
-  .case-note{
-    margin:14px 0 0;
-    padding:12px 14px;
-    border:1px dashed var(--brass);
-    border-radius:4px;
-    background:rgba(169,129,47,0.07);
-    font-size:0.92rem;
-  }
-  .case-note .mono{font-size:0.72rem; color:var(--brass-dark); display:block; margin-bottom:5px; text-transform:uppercase; letter-spacing:0.08em;}
-
-  .example-list{margin:12px 0; padding-left:0; list-style:none;}
-  .example-list li{
-    padding:10px 0 10px 18px;
-    border-left:2px solid var(--line);
-    margin-bottom:4px;
-    font-size:0.97rem;
-  }
-
-  .sources-note{
-    margin-top:16px;
-    padding-top:12px;
-    border-top:1px solid var(--line);
-    font-family:"IBM Plex Mono", monospace;
-    font-size:0.76rem;
-    color:var(--muted);
-    line-height:1.7;
-  }
-  .sources-note strong{color:var(--muted); font-weight:600;}
-
-  /* ===== STAT CALLOUT ===== */
-  .stat-callout{
-    background:var(--ink);
-    color:#efe9d8;
-    border-radius:6px;
-    padding:38px 34px;
-    margin:8px 0 56px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-  }
-  .stat-callout .big{
-    font-family:"Fraunces", serif;
-    font-weight:700;
-    font-size:clamp(2.6rem,7vw,4rem);
-    color:#d6b869;
-    line-height:1;
-    margin-bottom:10px;
-  }
-  .stat-callout .label{
-    font-family:"IBM Plex Mono", monospace;
-    text-transform:uppercase;
-    letter-spacing:0.1em;
-    font-size:0.8rem;
-    color:#cfc9b8;
-  }
-  .stat-callout p{max-width:52ch; margin:16px auto 0; color:#cfc9b8; font-size:0.98rem;}
-
-  /* ===== CLOSING ===== */
-  section.closing{margin-bottom:56px;}
-  section.closing h2{font-size:1.5rem; margin-bottom:14px;}
-  section.closing p{font-size:1.02rem;}
-
-  /* ===== SOURCES SECTION ===== */
-  .sources-section{
-    background:var(--paper-card);
-    border:1px solid var(--line);
-    border-radius:4px;
-    padding:28px 28px 8px;
-    margin-bottom:56px;
-  }
-  .sources-section h2{
-    font-family:"IBM Plex Mono", monospace;
-    text-transform:uppercase;
-    font-size:12.5px;
-    letter-spacing:0.14em;
-    color:var(--muted);
-    margin:0 0 18px;
-  }
-  .source-group{margin-bottom:20px;}
-  .source-group h3{
-    font-family:"Fraunces", serif;
-    font-size:0.98rem;
-    color:var(--brass-dark);
-    margin:0 0 8px;
-  }
-  .source-group ul{margin:0 0 4px; padding-left:20px; font-size:0.92rem; color:var(--text);}
-  .source-group li{margin-bottom:6px;}
-
-  footer{
-    padding:34px 0 60px;
-    border-top:1px solid var(--line);
-    font-family:"IBM Plex Mono", monospace;
-    font-size:0.78rem;
-    color:var(--muted);
-    text-align:center;
-  }
-  footer a{color:var(--brass-dark);}
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    .chevron, .exhibit-body{transition:none;}
-  }
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <header class="hero">
   <div class="wrap">
-    <div class="kicker"><span class="dot"></span>The Weber County Hive — Reader Mailbag</div>
-    <h1 class="display">You asked.<br><em>We checked the record.</em></h1>
-    <p class="hero-dek">Ten questions readers actually sent after our Flock camera investigation — the skeptical ones, the fair ones, the ones we asked ourselves before we started reporting.</p>
-    <div class="hero-meta">
-      <span>Weber County, Utah</span>
-      <span>August 2026</span>
-      <span>10 questions on the record</span>
-    </div>
+    <div class="breadcrumb"><a href="index.html">The Weber County Hive</a> &rsaquo; Surveillance Series &rsaquo; FAQ</div>
+    <div class="kicker">Start Here</div>
+    <h1>Eleven Questions Readers Keep Asking</h1>
+    <p class="subhead">Direct answers to the pushback we hear most often about this series &mdash; drawn from real reader comments, not hypothetical objections. Click any question to expand it.</p>
   </div>
 </header>
 
-<div class="plain-panel wrap">
-  <h2>New to this story? Start here.</h2>
-  <p>Flock Safety cameras read license plates across Weber County and store the data in a searchable database. Some readers pushed back on our reporting — fair questions, healthy skepticism. This page answers the ten we heard most, in plain language, with the public records and court cases behind each answer.</p>
-  <p>Tap any question below to open it. Nothing here requires a law degree to follow.</p>
-</div>
-
-<main id="main-content">
+<main id="main">
   <div class="wrap">
 
-    <section class="intro">
-      <p>When we published our investigation into Flock surveillance in Weber County, readers responded with questions — smart ones, fair ones, the same ones we asked ourselves when we started reporting. Below are the ten we heard most often, answered one at a time, with the sources behind each answer.</p>
+    <section id="faq">
+      <div class="eyebrow">Filter By Topic</div>
+      <div class="filter-row" id="faq-filter"></div>
+      <div id="faq-list"></div>
     </section>
 
-    <nav class="toc" aria-label="Jump to a question">
-      <h2>Jump to a question</h2>
-      <ul class="toc-list" id="toc-list"></ul>
-    </nav>
-
-    <div class="exhibits" id="exhibits"></div>
-
-    <div class="stat-callout">
-      <div class="big">1.6 million</div>
-      <div class="label">Searches by federal agencies, cited in California litigation</div>
-      <p>That figure comes from discovery in the Gibbs Mura v. Flock Safety litigation — searches run against Flock's databases by agencies including ICE and CBP. It's the same vendor system deployed in Weber County.</p>
-    </div>
-
-    <section class="closing">
-      <h2>Where this leaves us</h2>
-      <p>These are legitimate questions, and skepticism about a story like this one is healthy. Flock cameras are real, they're deployed in Weber County, and — as the record below shows — they're accessible to police without a documented warrant requirement. Class-action litigation elsewhere is producing evidence that unauthorized searches happen.</p>
-      <p>What you do with that information is up to you. We'll keep filing records requests and reporting what comes back.</p>
-    </section>
-
-    <div class="sources-section">
-      <h2>Sources &amp; public records cited above</h2>
-
-      <div class="source-group">
-        <h3>Court cases</h3>
-        <ul>
-          <li><em>Carpenter v. United States</em>, 585 U.S. 296 (2018) — U.S. Supreme Court, on cell-site location data</li>
-          <li><em>Schmidt v. City of Norfolk</em>, E.D. Va. — motion to dismiss denied Feb. 2025; summary judgment granted for the city Jan. 27, 2026; on appeal as No. 26-1227, 4th Circuit</li>
-          <li><em>Chatrie v. United States</em> — U.S. Supreme Court, decided June 29, 2026, on geofence location requests</li>
-          <li><em>United States v. Knotts</em>, 460 U.S. 276 (1983)</li>
-          <li><em>United States v. Jones</em>, 565 U.S. 400 (2012)</li>
-          <li><em>Leaders of a Beautiful Struggle v. Baltimore Police Dept.</em>, 4th Cir. (2021)</li>
-        </ul>
-      </div>
-
-      <div class="source-group">
-        <h3>Active litigation</h3>
-        <ul>
-          <li>Home Depot / Lowe's class action, filed April 2026 — 173 locations named</li>
-          <li><em>Gibbs Mura v. Flock Safety</em>, filed February 2026, amended April 2026</li>
-          <li>San Francisco class action re: 1.6 million searches by 250+ agencies</li>
-        </ul>
-      </div>
-
-      <div class="source-group">
-        <h3>Local records</h3>
-        <ul>
-          <li>Weber County Flock Safety contract, signed August 23, 2021</li>
-          <li>Washington Terrace Interlocal Agreement, June 4, 2022</li>
-          <li>GRAMA request pending for Weber County Flock search logs</li>
-        </ul>
-      </div>
-
-      <div class="source-group">
-        <h3>Reporting</h3>
-        <ul>
-          <li>404 Media — immigration-enforcement agencies' use of Flock search data</li>
-          <li>Mountain View, CA — Flock contract termination following an internal audit</li>
-        </ul>
-      </div>
-
-      <div class="source-group">
-        <h3>Officer misuse — criminal cases</h3>
-        <ul>
-          <li>Milwaukee County court records — State v. Josue Ayala (charged Feb. 2026, sentenced July 2026)</li>
-          <li>Milwaukee County court records — State v. Tehrangi Chapman (charged July 2026)</li>
-          <li>Orange County Superior Court records — People v. Robert Jay Josett (guilty plea April 2026)</li>
-          <li>Costa Mesa City Council staff report, February 2026, acknowledging "security breaches and misuse"</li>
-          <li>haveibeenflocked.com — public transparency tool that surfaced the Ayala misuse</li>
-        </ul>
-      </div>
+    <div class="takeaway">
+      <div class="eyebrow">Where To Go Next</div>
+      <p class="big">If you're new to this investigation, Article 1 lays out the scale of what's actually happening &mdash; 5.17 million searches of Weber County's ALPR data since 2022. <a href="weber-hive-5-million-searches.html" style="color:var(--brass-bright);">Start there &rarr;</a></p>
     </div>
 
   </div>
@@ -484,321 +110,141 @@
 
 <footer>
   <div class="wrap">
-    The Weber County Hive · webercountyhive.substack.com · Public records, plainly explained.
+    <p style="margin-top:0;"><strong>Sources</strong></p>
+    <ul class="sources-list">
+      <li><em>United States v. Knotts</em>, 460 U.S. 276 (1983); <em>United States v. Jones</em>, 565 U.S. 400 (2012); <em>Carpenter v. United States</em>, 585 U.S. 296 (2018)</li>
+      <li><em>United States v. Chatrie</em>, decided June 2026 &mdash; geofence-based cell location requests require a warrant</li>
+      <li><em>Schmidt v. City of Norfolk</em>, ongoing Fourth Circuit appeal as of this writing &mdash; live, unsettled litigation directly on point for ALPR network data</li>
+      <li>Reader questions compiled from Facebook comment engagement on this series, 2026</li>
+    </ul>
+    <p style="margin-bottom:0; margin-top:16px;">Part of a six-part series on ALPR and privacy oversight in Weber County. <a href="index.html">See all articles &rarr;</a></p>
   </div>
 </footer>
 
 <script>
-const DATA = [
+const faqs = [
   {
-    id: "q1",
-    short: "\u201cI\u2019m in public. I have no expectation of privacy.\u201d",
-    tag: "record",
-    question: "You\u2019re right that license plates are displayed in public. Why does it matter if a camera reads it?",
-    answer: `
-      <p>You're correct that courts have held people have reduced privacy expectations in public spaces. But there's a real legal line between two very different things.</p>
-      <div class="compare-grid">
-        <div class="compare-col">
-          <h4>A single observation</h4>
-          <ul>
-            <li>An officer sees you drive by</li>
-            <li>One camera, one moment</li>
-            <li>Courts have long held this is lawful</li>
-          </ul>
-        </div>
-        <div class="compare-col">
-          <h4>A searchable database</h4>
-          <ul>
-            <li>Thousands of observations, stitched together</li>
-            <li>Reconstructs where you went, when, how often</li>
-            <li>This is the part courts are actively wrestling with</li>
-          </ul>
-        </div>
-      </div>
-      <p>In <em>Carpenter v. United States</em> (2018), the Supreme Court held that when the government pulls together enough location data to reveal the pattern of a person's movements over time, that aggregation can itself be a Fourth Amendment search requiring a warrant &mdash; even though each individual data point, on its own, might not be. Chief Justice Roberts was careful to call that holding narrow, and it didn't address ALPR or conventional security cameras directly. But the underlying reasoning &mdash; that volume and pattern matter, not just the individual snapshot &mdash; is exactly the argument now being tested against Flock's databases in court.</p>
-      <p>Flock's stated purpose isn't observing individual drivers. It's building a permanent, searchable record of where every vehicle in Weber County traveled, when, and how often. That's the part that moves this from "observation" toward "systematic tracking" &mdash; and it's still an open legal question, not a settled one.</p>
-    `,
-    sources: "Carpenter v. United States, 585 U.S. 296 (2018)"
+    q: "My phone already tracks me way more than Flock does. Why focus on this?",
+    tag: "Why Flock specifically",
+    a: [
+      "Your phone's location tracking is a fair comparison in one sense &mdash; both are aggregated movement data. But there's a real difference in who built the system, why, and what oversight applies. A phone's location services are something you can turn off, and courts have started drawing real Fourth Amendment lines around bulk access to that data (see <em>Carpenter v. United States</em> below). ALPR networks are a government-purchased, government-operated system with far less individual control and, as this series has documented, real gaps in the oversight that's supposed to apply to it.",
+      "The comparison actually cuts the other way from how it's usually meant: the fact that phone-location tracking has drawn serious legal scrutiny is a reason to scrutinize ALPR too, not a reason to let it go unexamined because something else is also concerning."
+    ]
   },
   {
-    id: "q2",
-    short: "\u201cMy phone already tracks me. Why single out Flock?\u201d",
-    tag: "record",
-    question: "My phone tracks me constantly. Google knows everywhere I go. Why are you focused on Flock when I'm already being surveilled by my device?",
-    answer: `
-      <p>Private companies do track your phone aggressively, and that's a real problem worth fixing. But there's a critical difference in what each kind of tracking can be used for.</p>
-      <div class="compare-grid">
-        <div class="compare-col">
-          <h4>Your phone (a private company)</h4>
-          <ul>
-            <li>Google can track you &mdash; it can't arrest you</li>
-            <li>Can't be used to prosecute or detain you directly</li>
-            <li>Governed by privacy policy and regulation</li>
-          </ul>
-        </div>
-        <div class="compare-col">
-          <h4>Flock (the government)</h4>
-          <ul>
-            <li>Police can use it to place you at a scene</li>
-            <li>Can be shared with federal agencies like ICE</li>
-            <li>Governed by the Constitution &mdash; which requires warrants for searches</li>
-          </ul>
-        </div>
-      </div>
-      <p>Your phone's tracking is bad privacy policy. Flock is a constitutional question, because it's the government doing the watching. Both are worth fixing &mdash; but they're fixed through different tools, and the Constitution only restricts one of them.</p>
-    `,
-    sources: "General Fourth Amendment framework"
+    q: "Isn't this the same as the cameras at Lowe's or Home Depot? Those are private businesses.",
+    tag: "Public vs. private",
+    a: [
+      "Retail Flock deployments are real and documented &mdash; but the meaningful line isn't public vs. private ownership of the camera. It's whether the data ends up in the same law-enforcement-searchable network either way. Flock's retail customers can and do share their camera feeds into the same multi-agency network that public agencies search, which means a private parking-lot camera's data can be searched by police the same way Weber County's own cameras can.",
+      "So &ldquo;it's a private company's camera&rdquo; doesn't actually change who can search the resulting data or what it's used for."
+    ]
   },
   {
-    id: "q3",
-    short: "\u201cThe Constitution doesn\u2019t even mention privacy.\u201d",
-    tag: "record",
-    question: "I saw that privacy isn't actually in the Constitution. Isn't that the end of the argument?",
-    answer: `
-      <p>This is a common talking point, but it's incomplete. The word "privacy" doesn't appear in the Constitution's text &mdash; that part is true. But privacy protections run through several amendments:</p>
-      <ul class="example-list">
-        <li><strong>First Amendment</strong> &mdash; protects privacy of belief, religion, and association</li>
-        <li><strong>Third Amendment</strong> &mdash; protects the privacy of your home from quartered soldiers</li>
-        <li><strong>Fourth Amendment</strong> &mdash; shields people from unreasonable government searches</li>
-        <li><strong>Fifth Amendment</strong> &mdash; protects privacy from compelled self-incrimination</li>
-      </ul>
-      <p>Courts have consistently read privacy protection as implied across these amendments, even without the word appearing. For this story specifically, it's the Fourth Amendment that matters: Flock surveillance raises the question of whether searching aggregated movement data without a warrant is an unreasonable search.</p>
-    `,
-    sources: "U.S. Constitution, Amendments I, III, IV, V"
+    q: "I have nothing to hide. Why does this matter to me?",
+    tag: "Nothing to hide",
+    a: [
+      "This isn't really about any one person's guilt or innocence. It's about whether a system exists that can misidentify an innocent person and put them in a dangerous situation before anyone checks the underlying facts &mdash; which is exactly what happened in two documented cases covered in Article 3 of this series, to people who also had nothing to hide.",
+      "It's also about who else gets to look at where you've been. The data doesn't stay with the officer who ran the search &mdash; this series has documented over five million searches of Weber County's own camera data from agencies in 45 other states, most with no connection to any Weber County investigation."
+    ]
   },
   {
-    id: "q4",
-    short: "\u201cWhy focus on Flock when there are so many surveillance systems?\u201d",
-    tag: "record",
-    question: "Phones, TVs, social media all track you. Your investigation of Flock seems narrow. Why not tackle everything?",
-    answer: `
-      <p>Surveillance really is everywhere &mdash; that part of the objection is fair. Here's why Flock is where we started:</p>
-      <ul class="example-list">
-        <li><strong>Government surveillance is different.</strong> The Constitution restricts government action, not private companies. A private company's tracking needs regulation; a government agency's search needs a warrant.</li>
-        <li><strong>It's a winnable fight.</strong> Washington State already passed a law requiring warrants for ALPR searches. That's a concrete, achievable policy change &mdash; easier than overhauling every surveillance system at once.</li>
-        <li><strong>It's already being tested in court.</strong> The California lawsuits and the Norfolk/Chatrie litigation (see the next question) are actively building the legal record.</li>
-      </ul>
-      <p>Phone and app tracking are real concerns worth separate reporting. But government surveillance comes with constitutional limits already on the books &mdash; that gives us a concrete lever to demand accountability now.</p>
-    `,
-    sources: "See sources for Q7"
+    q: "The Constitution doesn't even mention \"privacy\" &mdash; where is this right coming from?",
+    tag: "Constitutional law",
+    a: [
+      "The word \"privacy\" doesn't appear in the Fourth Amendment's text, but the modern legal framework for what counts as a \"search\" has been built by the Supreme Court over decades, and it's directly relevant here.",
+      "<div class='case-cite'><strong>United States v. Knotts</strong> (1983) &mdash; tracking a single trip on public roads generally isn't a Fourth Amendment search.<br><strong>United States v. Jones</strong> (2012) &mdash; but attaching a GPS device for prolonged, continuous tracking can be.<br><strong>Carpenter v. United States</strong> (2018) &mdash; the Court held that accessing days of aggregated cell-site location data does require a warrant, because prolonged tracking reveals a &ldquo;privacies of life&rdquo; that a single observation doesn't.</div>",
+      "That arc &mdash; single observation vs. aggregated, continuous tracking &mdash; is exactly the legal question ALPR network data raises, and it isn't fully settled yet. See the next question."
+    ]
   },
   {
-    id: "q5",
-    short: "\u201cAren\u2019t these the same as traffic enforcement cameras?\u201d",
-    tag: "record",
-    question: "I actually like the idea of traffic cameras for speeding and red lights. Aren't Flock cameras the same thing?",
-    answer: `
-      <p>No &mdash; and Utah's own legislature drew this exact distinction when it banned traffic enforcement cameras.</p>
-      <div class="compare-grid">
-        <div class="compare-col">
-          <h4>Traffic cameras (banned in Utah)</h4>
-          <ul>
-            <li>Photograph one violation, one moment</li>
-            <li>Document a specific speed or red-light run</li>
-            <li>Data deleted once the case closes</li>
-            <li>Purpose: enforce a traffic law</li>
-          </ul>
-        </div>
-        <div class="compare-col">
-          <h4>Flock cameras (deployed here)</h4>
-          <ul>
-            <li>Photograph every vehicle, continuously</li>
-            <li>Build a searchable database of movement</li>
-            <li>Data retained for extended periods</li>
-            <li>Purpose: track movement over time</li>
-          </ul>
-        </div>
-      </div>
-      <p>Utah's legislature banned traffic cameras because lawmakers saw a privacy problem in that narrower technology. Flock wasn't on their radar at the time &mdash; it arrived later, marketed as "public safety" infrastructure rather than traffic enforcement, and does something categorically different: comprehensive movement tracking, not violation enforcement.</p>
-    `,
-    sources: "Utah traffic camera statute history; Weber County Flock deployment records"
+    q: "Do police actually need a warrant to use this data?",
+    tag: "Constitutional law",
+    a: [
+      "It depends what's being asked, and the law here is genuinely unsettled &mdash; not something either side can claim with full certainty.",
+      "The Carroll doctrine's &ldquo;automobile exception&rdquo; lets officers search a vehicle without a warrant if they have probable cause to believe it contains evidence of a crime. That's a different legal question from whether persistent, network-wide ALPR data collection and searching is itself a Fourth Amendment search requiring a warrant in the first place.",
+      "<div class='case-cite'><strong>United States v. Chatrie</strong> (decided June 2026) &mdash; the Supreme Court held that geofence-based cell location requests require a warrant, reinforcing the <em>Carpenter</em> line on aggregated location data.<br><strong>Schmidt v. City of Norfolk</strong> &mdash; an ongoing Fourth Circuit appeal, directly on point for ALPR network data, still pending as of this writing. <em>Chatrie</em> landed in the middle of that appeal and arguably undercuts the lower court's earlier reasoning.</div>",
+      "Short version: this is actively contested law, not settled in either direction. Anyone telling you it's fully resolved &mdash; in favor of warrant requirements or against them &mdash; is ahead of where the courts actually are."
+    ]
   },
   {
-    id: "q6",
-    short: "\u201cI have nothing to hide.\u201d",
-    tag: "record",
-    question: "I'm not doing anything wrong, so surveillance doesn't bother me. If you're innocent, why worry?",
-    answer: `
-      <p>This argument tends to break down once you consider that "suspicious" is defined by whoever's in power &mdash; and that definition can change.</p>
-      <ul class="example-list">
-        <li>A woman visiting a clinic has nothing to hide &mdash; until the underlying procedure becomes criminalized, and her movement history becomes evidence.</li>
-        <li>A man attending a place of worship has nothing to hide &mdash; until surveillance of that group becomes normalized, and his attendance becomes evidence.</li>
-        <li>Someone at a public rally has nothing to hide &mdash; until political surveillance becomes justified, and her location data proves she was there.</li>
-      </ul>
-      <p>You might not be doing anything wrong today. But laws change, definitions of "suspicious" change, and leadership changes. Flock builds a permanent record of movement. Even if today's local law enforcement is entirely trustworthy, a warrant requirement protects against tomorrow's use of the same database &mdash; not just today's.</p>
-    `,
-    sources: "General framework, consistent with reporting on ALPR mission creep"
+    q: "Isn't this just like the traffic cameras other states use?",
+    tag: "Why Flock specifically",
+    a: [
+      "No, and the distinction matters. Traffic enforcement cameras (red-light, speed cameras) are actually banned by the Utah Legislature. ALPR systems like Flock are a different category entirely &mdash; they're not issuing citations for a specific observed violation, they're continuously logging every vehicle that passes, building a searchable movement history regardless of whether any violation occurred.",
+      "The legislature drew a line against traffic-enforcement cameras specifically while leaving ALPR largely unregulated by comparison &mdash; which is itself worth noticing."
+    ]
   },
   {
-    id: "q7",
-    short: "\u201cHow do you know police search without warrants?\u201d",
-    tag: "objection",
-    question: "You're assuming police don't follow warrant requirements. What evidence do you have that they actually bypass warrants?",
-    answer: `
-      <p>Fair question. Here's what's actually documented, and here's what's still an open legal fight rather than a settled fact.</p>
-      <p><strong>What's documented locally:</strong> Weber County's Flock contract references "applicable governing law" but doesn't specify which law, or require warrant documentation for each search. Flock's system lets an officer type a free-text "case number" or "reason" to justify a search &mdash; but that field isn't validated in real time against an actual warrant number or case docket. It accepts whatever is typed in.</p>
-      <p><strong>What's documented nationally:</strong> Discovery in California litigation shows roughly 1.6 million searches were run against Flock's databases by federal agencies, including ICE and CBP, without local authorization &mdash; a pattern consistent with no warrant requirement being enforced.</p>
-      <div class="case-note">
-        <span class="mono">Case status &mdash; corrected</span>
-        The strongest constitutional test of this is <em>Schmidt v. City of Norfolk</em>, a federal case (not a state court ruling) over Norfolk, Virginia's ~175-camera Flock network. A judge initially let the case proceed past a motion to dismiss in Feb. 2025. But on Jan. 27, 2026, the same judge granted <strong>summary judgment for the city</strong> &mdash; finding the plaintiffs couldn't show the system tracked the entirety of a person's movements, given a 21-day data retention window and limited camera count. That ruling is now on appeal to the Fourth Circuit.
-      </div>
-      <p>What may cut the other way on appeal: in June 2026, the U.S. Supreme Court decided <em>Chatrie v. United States</em>, holding that geofence data requests to tech companies are a Fourth Amendment search &mdash; and rejecting the government's argument that a short timeframe escapes Fourth Amendment protection. That's the exact reasoning Norfolk's ruling leaned on. Whether it changes the outcome on appeal is still an open question.</p>
-      <p>We've filed a GRAMA request for Weber County's actual search logs to see whether warrant numbers are documented for searches run here. We'll report what comes back.</p>
-    `,
-    sources: "Weber County Flock contract; Schmidt v. City of Norfolk (E.D. Va.); Chatrie v. United States (2026); pending GRAMA request"
+    q: "We've reversed course on new technology before. Why should this be different?",
+    tag: "History & precedent",
+    a: [
+      "That's a fair historical pattern to raise &mdash; plenty of technologies that seemed inevitable have been rolled back or heavily restricted once their costs became clear. But that's an argument for scrutinizing this while it's still expanding, not a reason to assume it'll sort itself out. Every past reversal followed public attention and documentation first. This series is part of that same process, not a departure from it."
+    ]
   },
   {
-    id: "q8",
-    short: "\u201cWe\u2019ve stopped bad technology before \u2014 DDT, thalidomide.\u201d",
-    tag: "record",
-    question: "Humans are good at recognizing harmful technology and fixing it. We banned DDT, recalled bad drugs. Why assume we can't fix Flock?",
-    answer: `
-      <p>We do course-correct on harmful technology &mdash; but surveillance data behaves differently than a chemical or a drug.</p>
-      <div class="compare-grid">
-        <div class="compare-col">
-          <h4>DDT / thalidomide</h4>
-          <ul>
-            <li>Harm is physical and observable</li>
-            <li>Gets documented relatively quickly</li>
-            <li>Ban stops new exposure immediately</li>
-          </ul>
-        </div>
-        <div class="compare-col">
-          <h4>A movement database</h4>
-          <ul>
-            <li>Harm is invisible until it's used against someone</li>
-            <li>Takes years to document the pattern</li>
-            <li>A ban doesn't erase years of data already collected</li>
-          </ul>
-        </div>
-      </div>
-      <p>By the time surveillance harm is well-documented enough to act on, the database already exists &mdash; potentially years of movement history for millions of people. That's why a warrant requirement now matters: not because it stops Flock today, but because it builds accountability into the system before we're trying to undo years of accumulated data.</p>
-    `,
-    sources: "General framework"
+    q: "Where's your evidence? Can I see your sources?",
+    tag: "Sourcing",
+    a: [
+      "Every article in this series is built entirely from public records &mdash; GRAMA productions, enrolled bill text, committee minutes, vote histories, and named news reporting with direct citations. Each article ends with a full source list. Nothing in this series relies on an anonymous tip or an unverifiable claim; if a fact came from public records, the request or document is named.",
+      "If you want the underlying dataset for the search-volume numbers specifically, the archive is linked in Article 1."
+    ]
   },
   {
-    id: "q9",
-    short: "\u201cCan you share your sources?\u201d",
-    tag: "record",
-    question: "Your sources — are they trustworthy? Can you prove what you're claiming?",
-    answer: `
-      <p>Yes. Here's what everything in this piece rests on, so you can check it yourself.</p>
-      <p><strong>Active litigation:</strong> the Home Depot/Lowe's class action (filed April 2026, alleging 173 locations tracked); <em>Gibbs Mura v. Flock Safety</em> (filed Feb. 2026, amended April 2026), which cites 1.6 million searches by federal agencies. Both cite discovery documents.</p>
-      <p><strong>Fourth Amendment case law:</strong> <em>Carpenter v. United States</em> (2018); <em>Schmidt v. City of Norfolk</em>, now on appeal after summary judgment for the city; <em>Chatrie v. United States</em> (June 2026), the most significant Fourth Amendment ruling from the Supreme Court in roughly eight years.</p>
-      <p><strong>Weber County records:</strong> the Flock contract signed August 23, 2021, and the Washington Terrace Interlocal Agreement from June 4, 2022 &mdash; both public records. Neither specifies a warrant requirement for searches.</p>
-      <p><strong>Reporting:</strong> 404 Media's reporting on immigration-enforcement use of Flock search data, and Mountain View, California's decision to terminate its Flock contract after an internal audit.</p>
-      <p>The contracts are public records. The lawsuits are public court filings. The reporting is published and linkable. Check any of it.</p>
-    `,
-    sources: "See Sources section below"
+    q: "How is it even possible for someone to search this data without a real reason?",
+    tag: "How the system works",
+    a: [
+      "Flock's own platform requires a search reason to be entered as free text &mdash; but that field isn't validated against an actual case number, an active warrant, or any other record that would confirm the stated reason is real. Article 2 of this series documents this in detail: over 41% of the searches in Weber County's dataset carry a stated reason that doesn't match any permitted use under Utah's own ALPR statute.",
+      "That's the gap in one sentence: the system asks officers to say why they're searching, but nothing checks whether the answer is true."
+    ]
   },
   {
-    id: "q10",
-    short: "\u201cWhy so many cameras at Lowe's and Home Depot?\u201d",
-    tag: "objection",
-    question: "Are these the same cameras used for retail theft? Do the stores get paid to have them?",
-    answer: `
-      <p>This is the part most people miss. Lowe's and Home Depot contract directly with Flock on a paid subscription &mdash; they pay Flock monthly to run these cameras. The stated purpose is loss prevention: stopping organized retail theft. That's a real, legitimate problem.</p>
-      <p>But once those cameras are installed, local law enforcement can tap into the same system. Police can search the database for any vehicle, at any time, and that data can be shared onward &mdash; including with federal agencies like ICE and CBP.</p>
-      <p>So the arrangement ends up being: the store gets an anti-theft tool it paid for. Police get a searchable surveillance database they didn't have to buy or install themselves. And the customer in the parking lot &mdash; who was there to buy paint &mdash; is photographed, logged, and never told any of this is happening.</p>
-    `,
-    sources: "Home Depot/Lowe's class action, filed April 2026"
+    q: "Isn't it unfair to assume officers will misuse this?",
+    tag: "Nothing to hide",
+    a: [
+      "This series isn't built on an assumption that any individual officer will misuse the system &mdash; it's built on documented cases where that already happened, in multiple states, verified through named public records and court filings. Article 2 covers ten such cases. The point of pointing out a gap in oversight isn't distrust of people currently using the system responsibly; it's that a system with no real verification step will eventually be misused by someone, and right now there's little in place to catch it quickly when that happens."
+    ]
   },
   {
-    id: "q11",
-    short: "\u201cHas the system actually been used to stalk someone?\u201d",
-    tag: "objection",
-    question: "You keep saying 'misuse is possible.' Has an officer actually used Flock to stalk someone, and did the safeguards catch it?",
-    answer: `
-      <p>Yes &mdash; and the documented cases aren't isolated bad actors. They're a pattern of the same safety protocol failing in the same way, in more than one department. These are drawn from criminal charges, guilty pleas, court sentencing records, and a city council's own staff report &mdash; all public record.</p>
-
-      <div class="case-note">
-        <span class="mono">Case &mdash; Milwaukee PD, Officer Josue Ayala</span>
-        An eight-year officer ran <strong>179 searches over about two months</strong> in 2025, tracking a romantic partner 124 times and that person's ex-partner 55 times. Every search was logged with the same one-word justification: <em>"investigation."</em> The department's own audit process didn't catch it &mdash; the victim found out by checking her own plate on a public transparency site, haveibeenflocked.com. Ayala pleaded guilty to a reduced misdemeanor and was sentenced to one year of probation and a $500 fine, and resigned as part of the plea.
-      </div>
-
-      <div class="case-note">
-        <span class="mono">Case &mdash; Milwaukee PD, Detective Tehrangi Chapman</span>
-        Chapman was the Internal Affairs detective assigned to investigate Ayala. While running that investigation, he was separately using Flock himself &mdash; 17 unauthorized searches tracking one person's vehicle over roughly a year, plus installing a GPS tracker on that same vehicle. He was charged with felony misconduct in public office. <strong>The person investigating the misuse was committing it at the same time.</strong>
-      </div>
-
-      <div class="case-note">
-        <span class="mono">Case &mdash; Costa Mesa PD, Officer Robert Jay Josett</span>
-        Josett used Flock and other police databases to track a mistress, her new partner, and his own wife, then escalated into months of harassment &mdash; over 100 calls and texts in a single day at its peak, and driving past the victim's house in violation of a restraining order. Costa Mesa placed him on administrative leave in December 2023 while investigating him. <strong>Six months later, while still suspended and under investigation, he logged back into Flock</strong> and used it to find his mistress's new boyfriend's home address. Nothing in the system stopped him &mdash; his access simply hadn't been shut off. He pleaded guilty to three misdemeanors and was sentenced to three years of probation and a year-long domestic violence program; the Orange County DA referred his case for decertification review.
-      </div>
-
-      <p><strong>This is the safety-protocol bypass, specifically:</strong> being placed on leave or under investigation doesn't automatically cut off an officer's access to the system. Nothing in the public record shows Flock requiring two-factor authentication, so a working password is all it takes. And the "reason for search" field officers fill out isn't checked against an actual case number in real time &mdash; it accepts whatever is typed in, including a single word.</p>
-
-      <p>Put together, that means the two things a system like this depends on &mdash; catching misuse after the fact, and cutting off access when someone is already under investigation &mdash; both failed. In Costa Mesa's case, both failed on the same officer, back to back.</p>
-
-      <p><strong>What we can and can't say about Weber County:</strong> we have no evidence, one way or the other, that this specific pattern has happened here. These are documented cases from other departments running the same vendor system. What we don't yet know is whether Weber County's Flock access is disabled automatically when an officer is placed on leave, whether logins require anything beyond a password, or whether the "reason for search" field here is any more specific than the one-word entries seen elsewhere. That's exactly what our pending GRAMA request for local access logs and policy is meant to answer.</p>
-    `,
-    sources: "Milwaukee County court records (State v. Ayala; State v. Chapman); Orange County Superior Court records (People v. Josett); Costa Mesa City Council staff report, Feb. 2026; haveibeenflocked.com"
+    q: "If this is illegal, why hasn't a court stopped it already?",
+    tag: "Constitutional law",
+    a: [
+      "Because the underlying legal question &mdash; whether ALPR network data collection itself requires a warrant &mdash; hasn't been fully resolved yet. <em>Schmidt v. City of Norfolk</em> is a live Fourth Circuit appeal raising exactly this question, still pending. Court cases like this take years, and no Utah-specific lawsuit challenging ALPR use has been filed as of this series' publication. The absence of a ruling isn't the same as a ruling that the practice is fine &mdash; it just means the question is still open."
+    ]
   }
 ];
 
-const tocList = document.getElementById('toc-list');
-const exhibitsWrap = document.getElementById('exhibits');
-
-DATA.forEach((item, i) => {
-  const num = String(i + 1).padStart(2, '0');
-
-  // TOC entry
-  const li = document.createElement('li');
-  const tocBtn = document.createElement('button');
-  tocBtn.type = 'button';
-  tocBtn.dataset.scrollTo = item.id;
-  tocBtn.innerHTML = `<span class="num">Q${num}</span><span>${item.short}</span>`;
-  li.appendChild(tocBtn);
-  tocList.appendChild(li);
-
-  // Exhibit card
-  const card = document.createElement('article');
-  card.className = 'exhibit';
-  card.id = item.id;
-  card.dataset.open = 'false';
-
-  const tagLabel = item.tag === 'objection' ? 'Objection' : 'On the record';
-
-  card.innerHTML = `
-    <button class="exhibit-head" aria-expanded="false">
-      <span class="ex-num">Q${num}</span>
-      <span class="ex-title">${item.short}</span>
-      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <div class="exhibit-body">
-      <div class="exhibit-body-inner">
-        <div class="tag-row"><span class="tag ${item.tag}">${tagLabel}</span></div>
-        <div class="objection-quote">&ldquo;${item.question}&rdquo;</div>
-        <div class="answer">${item.answer}</div>
-        <div class="answer sources-note"><strong>Sources:</strong> ${item.sources}</div>
-      </div>
-    </div>
-  `;
-  exhibitsWrap.appendChild(card);
-
-  const headBtn = card.querySelector('.exhibit-head');
-  headBtn.addEventListener('click', () => {
-    const isOpen = card.dataset.open === 'true';
-    card.dataset.open = isOpen ? 'false' : 'true';
-    headBtn.setAttribute('aria-expanded', String(!isOpen));
+const filterRow = document.getElementById('faq-filter');
+const allTags = ["All"].concat([...new Set(faqs.map(f => f.tag))]);
+allTags.forEach((tag, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn' + (i === 0 ? ' active' : '');
+  btn.textContent = tag;
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#faq-filter .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.classList.toggle('hidden-by-filter', tag !== 'All' && item.dataset.tag !== tag);
+    });
   });
+  filterRow.appendChild(btn);
 });
 
-// Scroll-to buttons (never use <a href="#">, per house rule — some viewers
-// treat anchor hrefs as outbound navigation)
-document.querySelectorAll('[data-scroll-to]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = document.getElementById(btn.dataset.scrollTo);
-    if (!target) return;
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // open the card it points to
-    if (target.classList.contains('exhibit')) {
-      target.dataset.open = 'true';
-      target.querySelector('.exhibit-head').setAttribute('aria-expanded', 'true');
-    }
+const faqList = document.getElementById('faq-list');
+faqs.forEach((f, i) => {
+  const item = document.createElement('div');
+  item.className = 'faq-item';
+  item.dataset.tag = f.tag;
+  item.innerHTML =
+    '<div class="faq-q">' +
+      '<div class="faq-num">' + (i+1) + '</div>' +
+      '<p class="faq-q-text">' + f.q + '</p>' +
+      '<div class="faq-toggle">+</div>' +
+    '</div>' +
+    '<div class="faq-a"><span class="faq-tag">' + f.tag + '</span>' + f.a.map(p => '<p>' + p + '</p>').join('') + '</div>';
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    item.classList.toggle('open');
   });
+  faqList.appendChild(item);
 });
 </script>
 </body>
