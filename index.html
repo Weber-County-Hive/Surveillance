@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weber County Hive — Surveillance Series</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --help:#3f5d45; --help-bg:#e9efe7;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --dead:#4a4438; --dead-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); text-decoration:none; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1200px 420px at 15% -10%, rgba(214,184,105,0.22), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:60px 0 48px;
+  }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(2.0rem, 5vw, 3.2rem); line-height:1.1; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.08rem; color:#c9c3ae; max-width:680px; margin:0 0 30px; }
+  .hero-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(214,184,105,0.25); border:1px solid rgba(214,184,105,0.25); border-radius:10px; overflow:hidden; }
+  .hero-stat{ background:rgba(20,26,36,0.65); padding:16px 14px; }
+  .hero-stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.5rem; color:var(--brass-bright); }
+  .hero-stat .lbl{ font-size:11.5px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:700px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+
+  /* Filter row */
+  .filter-row{ display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap; }
+  .filter-btn{ font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:700; padding:8px 16px; border-radius:999px; border:1px solid var(--brass); background:var(--paper-card); color:var(--brass-dark); cursor:pointer; }
+  .filter-btn.active{ background:var(--brass); color:var(--ink); }
+
+  /* Article rail */
+  .rail{ position:relative; }
+  .rail::before{ content:""; position:absolute; left:27px; top:8px; bottom:8px; width:2px; background:var(--line); z-index:0; }
+  .article-row{ position:relative; display:flex; gap:20px; margin-bottom:22px; z-index:1; }
+  .article-row.hidden-by-filter{ display:none; }
+  .num-badge{ flex-shrink:0; width:56px; height:56px; border-radius:50%; background:var(--ink); color:var(--brass-bright); display:flex; align-items:center; justify-content:center; font-family:"Fraunces",serif; font-weight:700; font-size:1.3rem; border:3px solid var(--paper); box-shadow:var(--shadow); }
+  .num-badge.placeholder{ background:var(--paper-card); color:var(--line); border:2px dashed var(--line); box-shadow:none; }
+  .article-card{ flex:1; background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:22px 24px; transition:border-color .15s ease; }
+  .article-card:hover{ border-color:var(--brass); }
+  .article-card.placeholder{ box-shadow:none; border-style:dashed; }
+  .article-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap; margin-bottom:8px; }
+  .article-title{ font-family:"Fraunces",serif; font-weight:700; font-size:1.25rem; margin:0; color:var(--ink); }
+  .article-title a{ color:inherit; }
+  .article-title a:hover{ color:var(--brass-dark); }
+  .status-pill{ font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:700; text-transform:uppercase; padding:3px 10px; border-radius:999px; white-space:nowrap; }
+  .status-pill.live{ background:var(--help-bg); color:var(--help); }
+  .status-pill.soon{ background:var(--mixed-bg); color:var(--mixed); }
+  .article-desc{ font-size:14.5px; color:var(--muted); margin:0 0 12px; max-width:640px; }
+  .article-tags{ display:flex; gap:6px; flex-wrap:wrap; }
+  .tag{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:3px 9px; color:var(--muted); }
+
+  .committee-note{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:22px 24px; }
+  .committee-note h3{ font-size:1.05rem; margin:0 0 8px; }
+  .committee-note p{ font-size:14px; color:var(--muted); margin:0; }
+
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb">The Weber County Hive</div>
+    <div class="kicker">Investigative Series</div>
+    <h1>License Plate Cameras, Public Records, and Who's Actually Watching</h1>
+    <p class="subhead">A running investigation into automatic license plate reader surveillance in Weber County &mdash; how it's deployed, who oversees it, what the law actually requires, and what happens when the system gets it wrong. New entries added as the reporting continues.</p>
+    <div class="hero-stats" id="hero-stats"></div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <section id="series">
+      <div class="eyebrow">The Series</div>
+      <h2 class="section-title">Six articles so far</h2>
+      <p class="section-sub">Read in order, or jump to whichever piece answers your question. Filter by topic below.</p>
+
+      <div class="filter-row" id="topic-filter"></div>
+
+      <div class="rail" id="article-rail"></div>
+    </section>
+
+    <section id="related">
+      <div class="eyebrow">Related</div>
+      <h2 class="section-title">Also from this investigation</h2>
+      <div class="committee-note">
+        <h3>The Committees That Decide Whether ALPR Gets Oversight</h3>
+        <p>A companion case-file page tracking every legislative committee that has heard an ALPR-related bill since 2023 &mdash; who sat on it, how they voted, and what happened to the bill afterward. Lives on the Committees board rather than this series, but covers the same ground from the legislative side. <a href="weber-hive-committee-alpr-oversight.html">Read it &rarr;</a></p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-top:0;">This page is updated as new reporting is added to the series &mdash; check back for additions.</p>
+    <p style="margin-bottom:0;">The Weber County Hive publishes from public records. Have a tip or a correction? Get in touch.</p>
+  </div>
+</footer>
+
+<script>
+// ---------------------------------------------------------------
+// SERIES DATA — add a new object here to add a new article.
+// Set status to "live" once published, "soon" for a placeholder card.
+// ---------------------------------------------------------------
+const articles = [
+  {
+    num: "FAQ",
+    title: "Eleven Questions Readers Keep Asking",
+    desc: "A direct-answer rebuttal to the most common pushback on this series — the &ldquo;nothing to hide&rdquo; argument, constitutional privacy protections, traffic cameras vs. Flock, and more. Start here if you're new to the series.",
+    href: "questions.html",
+    tags: ["FAQ", "Start here"],
+    status: "live"
+  },
+  {
+    num: 1,
+    title: "Ten Cameras, Five Million Searches",
+    desc: "5,171,087 searches of Weber County's ALPR data since Feb. 2022 — 96.6% from out of state, spanning 3,343 agencies in 45 states. What the raw numbers show about who's actually looking, and why.",
+    href: "weber-hive-5-million-searches.html",
+    tags: ["Scale", "Interstate sharing"],
+    status: "live"
+  },
+  {
+    num: 2,
+    title: "Nobody Approves Each Search",
+    desc: "Flock's own export schema has no field for crime type. Ten verified misuse cases from Wisconsin, California, and Georgia — and what Weber County's own audit records do and don't show.",
+    href: "weber-hive-nobody-approves-each-search.html",
+    tags: ["Oversight gap", "Misuse cases"],
+    status: "live"
+  },
+  {
+    num: 3,
+    title: "The Camera Said &ldquo;Match.&rdquo; Police Drew Their Guns.",
+    desc: "Two documented cases where the camera worked exactly as designed — and an innocent person still ended up at gunpoint, or in court. The difference between a database failure and a human one.",
+    href: "weber-hive-camera-said-match.html",
+    tags: ["Human cost", "Case studies"],
+    status: "live"
+  },
+  {
+    num: 4,
+    title: "Utah's Required Records and the GRAMA Gap",
+    desc: "What S.B. 250 requires agencies to preserve, compared field-by-field against Weber County's actual GRAMA production and what Flock's platform can even export.",
+    href: "weber-hive-grama-gap.html",
+    tags: ["Statute", "Records law"],
+    status: "live"
+  },
+  {
+    num: 5,
+    title: "The Privacy Report You Cannot Read",
+    desc: "Utah requires a detailed annual privacy report from every agency — then classifies it as protected. Inside H.B. 450: the auditor position that got eliminated, and the surveillance-authorization requirement that got stripped out hours before the final vote.",
+    href: "weber-hive-privacy-report-hb450.html",
+    tags: ["H.B. 450", "Legislature"],
+    status: "live"
+  },
+  {
+    num: 6,
+    title: "Private Company, Public Power",
+    desc: "Flock is a private vendor operating public infrastructure. When something goes wrong, responsibility splits between the company, the county, and every agency that can search the network — and no one owns the whole chain.",
+    href: "weber-hive-private-company-public-power.html",
+    tags: ["Contracts", "Accountability"],
+    status: "live"
+  }
+  // Next article goes here — copy the shape above, bump "num", set status.
+];
+
+// ---------------------------------------------------------------
+// Render hero stats
+// ---------------------------------------------------------------
+const liveCount = articles.filter(a => a.status === "live").length;
+const heroStats = document.getElementById('hero-stats');
+const stats = [
+  { num: liveCount, lbl: "articles published so far" },
+  { num: "5.17M", lbl: "ALPR searches examined in the dataset" },
+  { num: "2026", lbl: "legislative session covered in depth" },
+  { num: "0", lbl: "single agency accountable for the whole chain" }
+];
+stats.forEach(s => {
+  const el = document.createElement('div');
+  el.className = 'hero-stat';
+  el.innerHTML = '<div class="num">' + s.num + '</div><div class="lbl">' + s.lbl + '</div>';
+  heroStats.appendChild(el);
+});
+
+// ---------------------------------------------------------------
+// Render topic filter
+// ---------------------------------------------------------------
+const allTags = ["All"].concat([...new Set(articles.flatMap(a => a.tags))]);
+const filterRow = document.getElementById('topic-filter');
+allTags.forEach((tag, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn' + (i === 0 ? ' active' : '');
+  btn.textContent = tag;
+  btn.dataset.tag = tag;
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.article-row').forEach(row => {
+      const rowTags = row.dataset.tags.split('|');
+      row.classList.toggle('hidden-by-filter', tag !== 'All' && !rowTags.includes(tag));
+    });
+  });
+  filterRow.appendChild(btn);
+});
+
+// ---------------------------------------------------------------
+// Render article rail
+// ---------------------------------------------------------------
+const rail = document.getElementById('article-rail');
+articles.forEach(a => {
+  const row = document.createElement('div');
+  row.className = 'article-row';
+  row.dataset.tags = a.tags.join('|');
+
+  const isLive = a.status === 'live';
+  const badge = document.createElement('div');
+  badge.className = 'num-badge' + (isLive ? '' : ' placeholder');
+  badge.textContent = a.num;
+
+  const card = document.createElement('div');
+  card.className = 'article-card' + (isLive ? '' : ' placeholder');
+  card.innerHTML =
+    '<div class="article-top">' +
+      '<h3 class="article-title">' + (isLive ? '<a href="' + a.href + '">' + a.title + '</a>' : a.title) + '</h3>' +
+      '<span class="status-pill ' + (isLive ? 'live' : 'soon') + '">' + (isLive ? 'Published' : 'Coming soon') + '</span>' +
+    '</div>' +
+    '<p class="article-desc">' + a.desc + '</p>' +
+    '<div class="article-tags">' + a.tags.map(t => '<span class="tag">' + t + '</span>').join('') + '</div>';
+
+  row.appendChild(badge);
+  row.appendChild(card);
+  rail.appendChild(row);
+});
+</script>
+</body>
+</html>
