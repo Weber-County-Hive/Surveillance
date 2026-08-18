@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Privacy Report You Cannot Read — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --help:#3f5d45; --help-bg:#e9efe7;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --dead:#4a4438; --dead-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:56px 0 44px;
+  }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(1.9rem, 4.4vw, 2.9rem); line-height:1.12; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.06rem; color:#c9c3ae; max-width:700px; margin:0 0 30px; }
+  .hero-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(214,184,105,0.25); border:1px solid rgba(214,184,105,0.25); border-radius:10px; overflow:hidden; }
+  .hero-stat{ background:rgba(20,26,36,0.65); padding:16px 14px; }
+  .hero-stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.5rem; color:var(--brass-bright); }
+  .hero-stat .lbl{ font-size:11.5px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:700px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+
+  .finding-block{ border-left:4px solid var(--brass); background:var(--paper-card); padding:20px 24px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:32px 0; }
+  .finding-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.15rem; margin:0 0 8px; }
+  .finding-block p{ margin:0; font-size:14.5px; color:var(--muted); }
+
+  .rubric-row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:8px; margin-top:10px; }
+  .rubric-item{ font-size:12.5px; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:8px 10px; }
+  .rubric-item .dim{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:3px; }
+
+  /* Timeline */
+  .timeline{ position:relative; padding-left:28px; }
+  .timeline::before{ content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px; background:var(--line); }
+  .tl-item{ position:relative; padding-bottom:22px; }
+  .tl-item::before{ content:""; position:absolute; left:-28px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--brass); border:2px solid var(--paper-card); }
+  .tl-item.dead::before{ background:var(--harm); }
+  .tl-item.win::before{ background:var(--help); }
+  .tl-date{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--brass-dark); font-weight:700; }
+  .tl-desc{ font-size:14px; margin-top:2px; }
+
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:36px 30px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.2rem,2.8vw,1.55rem); max-width:720px; margin:0 auto; line-height:1.45; }
+
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+  /* Explorer table (public vs protected) */
+  .explorer{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); background:var(--paper-card); }
+  table.exp{ width:100%; border-collapse:collapse; font-size:14px; min-width:640px; }
+  table.exp th{ background:var(--ink); color:#efe9d8; font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; text-align:left; padding:12px 14px; }
+  table.exp td{ padding:12px 14px; border-top:1px solid var(--line); vertical-align:top; }
+  table.exp tr:nth-child(even) td{ background:rgba(214,184,105,0.06); }
+  .pill{ display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px; }
+  .pill.public{ background:var(--help-bg); color:var(--help); }
+  .pill.protected{ background:var(--harm-bg); color:var(--harm); }
+  .pill.mixed{ background:var(--mixed-bg); color:var(--mixed); }
+
+  /* Membership chart */
+  .member-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:14px; }
+  .member-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:16px; }
+  .member-card .appointer{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--brass-dark); margin-bottom:6px; }
+  .member-card .role{ font-family:"Fraunces",serif; font-weight:600; font-size:1.0rem; margin-bottom:4px; }
+  .member-card .desc{ font-size:13px; color:var(--muted); }
+  .member-card.new{ border-color:var(--brass); box-shadow:0 0 0 1px var(--brass) inset; }
+  .new-tag{ display:inline-block; margin-top:8px; font-family:"IBM Plex Mono",monospace; font-size:10px; background:var(--brass); color:var(--ink); padding:2px 7px; border-radius:4px; font-weight:700; }
+
+  /* Comparison split */
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:680px){ .split{ grid-template-columns:1fr; } }
+  .split-col{ border-radius:12px; padding:20px; }
+  .split-col.knows{ background:var(--ink); color:#efe9d8; }
+  .split-col.sees{ background:var(--paper-card); border:1px solid var(--line); }
+  .split-col h3{ font-size:1.05rem; margin:0 0 12px; }
+  .split-col.knows h3{ color:var(--brass-bright); }
+  .split-col ul{ margin:0; padding-left:18px; font-size:14px; }
+  .split-col.knows ul{ color:#c9c3ae; }
+  .split-col.sees ul{ color:var(--muted); }
+  .split-col li{ margin-bottom:8px; }
+
+  /* Expandable explorer rows */
+  table.exp tbody tr.exp-row{ cursor:pointer; }
+  table.exp tbody tr.exp-row:hover td{ background:rgba(214,184,105,0.14); }
+  table.exp tbody tr.exp-row td:first-child{ position:relative; padding-left:34px; }
+  table.exp tbody tr.exp-row td:first-child::before{
+    content:"+"; position:absolute; left:12px; top:12px; font-family:"IBM Plex Mono",monospace;
+    font-weight:700; color:var(--brass-dark); width:16px; height:16px; text-align:center; line-height:16px;
+    border:1px solid var(--brass); border-radius:4px; font-size:12px;
+  }
+  table.exp tbody tr.exp-row.open td:first-child::before{ content:"\2212"; background:var(--brass); color:#fff; }
+  tr.exp-detail{ display:none; }
+  tr.exp-detail.open{ display:table-row; }
+  tr.exp-detail td{ background:var(--paper) !important; border-top:none; padding:0 14px 16px 34px; font-size:13.5px; }
+  .exp-detail-box{ border-left:3px solid var(--brass); padding:10px 14px; background:var(--paper-card); border-radius:0 8px 8px 0; }
+  .exp-detail-box .lbl{ font-family:"IBM Plex Mono",monospace; font-size:10px; text-transform:uppercase; color:var(--brass-dark); display:block; margin-bottom:3px; }
+  .exp-detail-box p{ margin:0 0 10px; }
+  .exp-detail-box p:last-child{ margin-bottom:0; }
+  .exp-hint{ font-size:12px; color:var(--muted); margin:8px 0 0; font-style:italic; }
+
+  /* Timeline stepper */
+  .stepper-wrap{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+  .stepper-progress{ display:flex; gap:4px; margin-bottom:20px; }
+  .stepper-progress .seg{ flex:1; height:5px; border-radius:3px; background:var(--line); cursor:pointer; }
+  .stepper-progress .seg.done{ background:var(--brass); }
+  .stepper-progress .seg.current{ background:var(--brass-dark); }
+  .step-card{ min-height:150px; }
+  .step-index{ font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted); margin-bottom:4px; }
+  .step-time{ font-family:"Fraunces",serif; font-weight:700; font-size:1.5rem; color:var(--brass-dark); margin:0 0 10px; }
+  .step-desc{ font-size:15px; line-height:1.6; margin:0; }
+  .step-flag{ display:inline-block; margin-top:12px; font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; }
+  .step-flag.ok{ background:var(--help-bg); color:var(--help); }
+  .step-flag.bad{ background:var(--harm-bg); color:var(--harm); }
+  .stepper-nav{ display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:10px; }
+  .stepper-nav button{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:700; letter-spacing:0.04em; background:var(--ink); color:#efe9d8; border:none; padding:10px 18px; border-radius:8px; cursor:pointer; }
+  .stepper-nav button:disabled{ opacity:0.35; cursor:default; }
+  .stepper-nav button:not(:disabled):hover{ background:var(--brass-dark); }
+  .stepper-nav .step-count{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--muted); }
+
+  /* Toggle */
+  .toggle-row{ display:flex; gap:0; margin-bottom:18px; border:1px solid var(--line); border-radius:8px; overflow:hidden; width:fit-content; }
+  .toggle-btn{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:700; letter-spacing:0.03em; padding:10px 20px; background:var(--paper-card); color:var(--muted); border:none; cursor:pointer; }
+  .toggle-btn.active{ background:var(--ink); color:var(--brass-bright); }
+  .toggle-panel{ display:none; }
+  .toggle-panel.active{ display:block; }
+
+  /* Membership filter */
+  .filter-row{ display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .filter-btn{ font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:700; padding:8px 16px; border-radius:999px; border:1px solid var(--brass); background:var(--paper-card); color:var(--brass-dark); cursor:pointer; }
+  .filter-btn.active{ background:var(--brass); color:var(--ink); }
+  .member-card{ transition:opacity .15s ease; }
+  .member-card.hidden-by-filter{ display:none; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="questions.html">The Weber County Hive</a> &rsaquo; Surveillance Series &rsaquo; Article 5</div>
+    <div class="kicker">Article 5 of 6</div>
+    <h1>The Privacy Report You Cannot Read</h1>
+    <p class="subhead">Utah requires every governmental entity to write a detailed annual report on its own data practices &mdash; who it shares data with, what it collects, what's non-compliant. Then the same law that requires the report classifies it as protected. The public can request it. The law lets the agency say no.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">9</div><div class="lbl">required contents of the annual privacy program report</div></div>
+      <div class="hero-stat"><div class="num">2027</div><div class="lbl">state privacy auditor position eliminated this session</div></div>
+      <div class="hero-stat"><div class="num">6</div><div class="lbl">substitute versions of H.B. 450 before passage</div></div>
+      <div class="hero-stat"><div class="num">0</div><div class="lbl">committee votes on the version that actually passed</div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <section id="what-the-report-contains">
+      <div class="eyebrow">The Report</div>
+      <h2 class="section-title">What every agency has to tell the state &mdash; and no one else</h2>
+      <p class="section-sub">Under the Government Data Privacy Act, the chief administrative officer of every governmental entity in Utah &mdash; that includes Weber County and the Sheriff's Office &mdash; must file this report every year, by December 31.</p>
+
+      <div class="card">
+        <p style="margin-top:0;">The privacy program report has to include, by statute:</p>
+        <ul style="font-size:14.5px; line-height:1.8; columns:2; column-gap:32px;">
+          <li>How the entity has initiated its privacy program</li>
+          <li>A description of its privacy practices and high-risk processing activities</li>
+          <li>A list of the <strong>types of personal data the entity currently shares, sells, or purchases</strong></li>
+          <li>The <strong>legal basis</strong> for sharing, selling, or purchasing that data</li>
+          <li>The <strong>category of individuals or entities</strong> the data is shared with, sold to, or purchased from</li>
+          <li>The percentage of employees who've completed required data-privacy training</li>
+          <li>A description of any <strong>non-compliant processing activities</strong> and the entity's plan to fix them</li>
+        </ul>
+        <p style="margin-bottom:0; font-size:14.5px;">That last one matters specifically for Weber County: any ALPR activity implemented before May 7, 2025 &mdash; which covers the county's 2021 Flock contract &mdash; is required to already appear in this report as a documented non-compliant activity, with a stated strategy for bringing it into compliance by July 1, 2027.</p>
+      </div>
+    </section>
+
+    <section id="protected">
+      <div class="eyebrow">The Catch</div>
+      <h2 class="section-title">Public versus protected: the explorer</h2>
+      <p class="section-sub">The same statute that requires the report also tells you exactly what happens to it once it's written.</p>
+
+      <div class="explorer">
+        <table class="exp" id="exp-table">
+          <thead>
+            <tr><th>What the statute says</th><th>Status</th><th>What it means in practice</th></tr>
+          </thead>
+          <tbody>
+            <tr class="exp-row" data-target="d1">
+              <td>The report "shall be considered a <strong>protected record</strong>"</td>
+              <td><span class="pill protected">Protected</span></td>
+              <td>Protected records under GRAMA can be withheld from a public records request &mdash; the default is non-disclosure, not disclosure</td>
+            </tr>
+            <tr class="exp-detail" id="d1"><td colspan="3">
+              <div class="exp-detail-box">
+                <span class="lbl">Statute text</span>
+                <p>&sect; 63A-19-401.3(2)(a): "The report described in Subsection (1) shall ... be considered a protected record under Section 63G-2-305."</p>
+                <span class="lbl">What this means for a records request</span>
+                <p>Protected records are one of GRAMA's non-public classifications &mdash; alongside private and controlled records. An agency can lawfully deny a request for this report on that basis alone, without weighing public interest against disclosure the way it must for some other categories.</p>
+              </div>
+            </td></tr>
+
+            <tr class="exp-row" data-target="d2">
+              <td>The report must be shared with the Office of Data Privacy "on or before December 31 each year"</td>
+              <td><span class="pill mixed">State only</span></td>
+              <td>The state itself sees every entity's full report annually. The public does not get the same access.</td>
+            </tr>
+            <tr class="exp-detail" id="d2"><td colspan="3">
+              <div class="exp-detail-box">
+                <span class="lbl">Statute text</span>
+                <p>&sect; 63A-19-401.3(2)(b): the report shall be "shared with the office, in accordance with Section 63G-2-206, on or before December 31 each year."</p>
+                <span class="lbl">Why it's worth flagging</span>
+                <p>Section 63G-2-206 is GRAMA's inter-governmental sharing provision &mdash; it lets one government office see another's protected records for official use. So the flow of information runs entirely within government: entity to ODP. The statute never routes a copy, a summary, or an aggregate version to the public.</p>
+              </div>
+            </td></tr>
+
+            <tr class="exp-row" data-target="d3">
+              <td>The entity must retain the report for "no less than five years"</td>
+              <td><span class="pill mixed">Exists, not visible</span></td>
+              <td>The record exists and is preserved &mdash; it's simply not classified as something the public can inspect</td>
+            </tr>
+            <tr class="exp-detail" id="d3"><td colspan="3">
+              <div class="exp-detail-box">
+                <span class="lbl">Statute text</span>
+                <p>&sect; 63A-19-401.3(2)(c): the report must be "retained by the governmental entity for no less than five years."</p>
+                <span class="lbl">The gap this creates</span>
+                <p>Five years of retained reports for Weber County, the Sheriff's Office, and every other entity in the state &mdash; a running documentary record of what's shared, sold, or non-compliant &mdash; sits on file the entire time, protected the entire time.</p>
+              </div>
+            </td></tr>
+
+            <tr class="exp-row" data-target="d4">
+              <td>The Privacy Commission "may study and recommend which information ... should be a public record"</td>
+              <td><span class="pill mixed">Future, discretionary</span></td>
+              <td>There is a path to making parts of it public &mdash; but it runs through a 14-member commission's own discretion, not a public right</td>
+            </tr>
+            <tr class="exp-detail" id="d4"><td colspan="3">
+              <div class="exp-detail-box">
+                <span class="lbl">Statute text</span>
+                <p>&sect; 63A-19-204(2)(g): the commission may "study and recommend which information contained in the privacy program report described in Section 63A-19-401.3 should be a public record."</p>
+                <span class="lbl">Why "may" matters</span>
+                <p>Nothing requires the commission to take up this study, on any timeline. It's a standing option the commission can exercise &mdash; or not. See the membership chart below for who sits on that commission now.</p>
+              </div>
+            </td></tr>
+
+            <tr class="exp-row" data-target="d5">
+              <td>A new technology-transparency study is due to the Government Operations Interim Committee by <strong>November 2027</strong></td>
+              <td><span class="pill mixed">Deferred</span></td>
+              <td>This is the section that started as a real authorization requirement for ALPR, facial recognition, drones, and cell-site simulators &mdash; see below</td>
+            </tr>
+            <tr class="exp-detail" id="d5"><td colspan="3">
+              <div class="exp-detail-box">
+                <span class="lbl">Statute text</span>
+                <p>&sect; 63A-19-407(3): "On or before the November 2027 interim meeting, the office shall report the findings and recommendations of the study ... to the Government Operations Interim Committee, including any recommended legislation."</p>
+                <span class="lbl">What this used to be</span>
+                <p>This section began life as "Truth in Surveillance" &mdash; a real pre-deployment authorization requirement. It didn't survive committee. The full story is below.</p>
+              </div>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="exp-hint">Click any row for the statute text and what it actually means.</p>
+    </section>
+
+    <section id="truth-in-surveillance">
+      <div class="eyebrow">What Was Cut</div>
+      <h2 class="section-title">The bill briefly had teeth. Then it didn't.</h2>
+      <p class="section-sub">H.B. 450's introduced version contained a section literally titled "Truth in Surveillance." It is gone from the law Utah actually passed.</p>
+
+      <div class="finding-block">
+        <p class="q">What the introduced bill would have required</p>
+        <p>Before implementing a facial recognition system, a drone for persistent aerial surveillance, a license plate reader, or a cell-site simulator, a governmental entity that isn't a state agency would have had to <strong>get authorization from its own elected legislative body, in an open public meeting</strong> &mdash; with a description of the technology, the data it collects, its risks, and how it would be governed. Entities that already had one of these systems running &mdash; Weber County's Flock cameras included &mdash; would have had to report to their legislative body by November 30, 2026, and obtain that authorization retroactively by May 6, 2027.</p>
+      </div>
+
+      <div class="finding-block" style="border-left-color:var(--harm);">
+        <p class="q">What actually passed</p>
+        <p>All of it was deleted &mdash; the authorization requirement, the deadlines, the definitions built around it. In its place: a non-binding joint study by the Office of Data Privacy and the Privacy Commission, due to the Government Operations Interim Committee by the <strong>November 2027</strong> interim meeting. No authorization requirement. No legislative-body vote. No deadline for any individual agency to justify what it already has running.</p>
+      </div>
+
+      <div class="stepper-wrap">
+        <p style="margin-top:0; font-weight:600;">How it happened, hour by hour &mdash; March 4, 2026</p>
+        <div class="stepper-progress" id="tl-progress"></div>
+        <div class="step-card" id="tl-card"></div>
+        <div class="stepper-nav">
+          <button id="tl-prev">&larr; Back</button>
+          <span class="step-count" id="tl-count"></span>
+          <button id="tl-next">Next &rarr;</button>
+        </div>
+      </div>
+      <p style="margin:14px 0 0; font-size:13.5px; color:var(--muted);">Neither chamber's standing committee ever voted on the bill that became law. The version every committee actually reviewed and approved is not the version Gov. Cox signed.</p>
+    </section>
+
+    <section id="auditor">
+      <div class="eyebrow">Who Was Supposed to Check</div>
+      <h2 class="section-title">Utah had a dedicated privacy auditor. It doesn't anymore.</h2>
+      <p class="section-sub">Before this session, Utah law created a specific, Senate-confirmed position &mdash; the state privacy auditor &mdash; with a detailed, mandatory job. H.B. 450 removes the position and folds a version of the job into the state auditor's office generally.</p>
+
+      <div class="toggle-row" id="aud-toggle">
+        <button class="toggle-btn active" data-panel="aud-old">Before H.B. 450</button>
+        <button class="toggle-btn" data-panel="aud-new">After H.B. 450</button>
+      </div>
+
+      <div class="toggle-panel active" id="aud-old">
+        <div class="split-col knows" style="border-radius:12px;">
+          <h3>What the old law required, in detail</h3>
+          <ul>
+            <li>A dedicated <strong>state privacy auditor</strong>, appointed with the advice and consent of the Senate</li>
+            <li>Compile privacy practices of every governmental entity</li>
+            <li>Identify annually which entities' practices pose the greatest privacy risk</li>
+            <li>Audit each year "in as timely a manner as possible" &mdash; the highest-risk practices</li>
+            <li>Trigger a <strong>mandatory public hearing within 90 days</strong> for any entity that receives a reform recommendation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="toggle-panel" id="aud-new">
+        <div class="split-col sees" style="border-radius:12px;">
+          <h3>What H.B. 450 replaces it with</h3>
+          <ul>
+            <li>No dedicated position. No Senate confirmation requirement.</li>
+            <li>One new line: "the state auditor <strong>may</strong> audit the privacy practices of governmental entities"</li>
+            <li>The detailed duties above &mdash; compile, identify highest-risk, audit each year, 90-day hearing &mdash; are technically still on the books, word for word, just reassigned from a named officer to "the state auditor" generally</li>
+            <li>Result: a real tension between a new permissive top line and an untouched mandatory paragraph now assigned to no one in particular</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="commission">
+      <div class="eyebrow">Who's In The Room</div>
+      <h2 class="section-title">Privacy Commission membership, before and after</h2>
+      <p class="section-sub">H.B. 450 restructures the 12-to-14-member Utah Privacy Commission, which develops standards and reviews government privacy practices. New seats highlighted.</p>
+
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All seats (11)</button>
+        <button class="filter-btn" data-filter="new">New seats only (2)</button>
+      </div>
+
+      <div class="member-grid" id="member-grid">
+        <div class="member-card" data-cat="all">
+          <div class="appointer">Governor appoints</div>
+          <div class="role">Tech, cybersecurity, industry, data-privacy-law experience</div>
+          <div class="desc">Four members, unchanged categories</div>
+        </div>
+        <div class="member-card new" data-cat="all new">
+          <div class="appointer">Governor appoints</div>
+          <div class="role">Private citizen representing the public</div>
+          <div class="desc">A general public seat that did not previously exist on the commission</div>
+          <span class="new-tag">NEW</span>
+        </div>
+        <div class="member-card new" data-cat="all new">
+          <div class="appointer">State Board of Education appoints</div>
+          <div class="role">One member representing public education entities and student privacy interests</div>
+          <div class="desc">First seat tied to K-12 specifically</div>
+          <span class="new-tag">NEW</span>
+        </div>
+        <div class="member-card" data-cat="all">
+          <div class="appointer">State Auditor appoints</div>
+          <div class="role">Tech, cybersecurity, industry, data-privacy-law, and municipal-civil-liberties experience</div>
+          <div class="desc">Five members</div>
+        </div>
+        <div class="member-card" data-cat="all">
+          <div class="appointer">Attorney General appoints</div>
+          <div class="role">Prosecutor/appellate + civil liberties experience, and law enforcement representation</div>
+          <div class="desc">Two members</div>
+        </div>
+      </div>
+      <p style="font-size:13.5px; color:var(--muted); margin-top:14px;">Commission staffing and support also moves in this bill &mdash; from the State Auditor's office to the Office of Data Privacy itself, the same office the commission is partly meant to review.</p>
+    </section>
+
+    <section id="oversight-split">
+      <div class="eyebrow">Where The Reports Actually Go</div>
+      <h2 class="section-title">What Utah knows versus what residents can see</h2>
+      <p class="section-sub">Even the internal reporting lines don't fully agree with each other after this bill.</p>
+
+      <div class="card">
+        <div class="rubric-row" style="grid-template-columns:repeat(auto-fit, minmax(260px,1fr));">
+          <div class="rubric-item">
+            <span class="dim">Chief Privacy Officer's annual report</span>
+            Moved from the Judiciary Interim Committee to the <strong>Government Operations Interim Committee</strong>; deadline moved from October 1 to June 30
+          </div>
+          <div class="rubric-item">
+            <span class="dim">Privacy Commission's annual report</span>
+            Also moved to <strong>Government Operations Interim Committee</strong>
+          </div>
+          <div class="rubric-item">
+            <span class="dim">State auditor's own privacy-audit report</span>
+            <strong>Still says Judiciary Interim Committee</strong> in the statute &mdash; not updated to match the other two
+          </div>
+          <div class="rubric-item">
+            <span class="dim">SEDI program's annual report</span>
+            Goes to Economic Development &amp; Workforce Services Interim Committee &mdash; a fourth committee, for a closely related subject
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="verification-note">
+      <div class="eyebrow">Read Before You Publish</div>
+      <h2 class="section-title">One thing worth checking on Weber County specifically</h2>
+      <div class="finding-block">
+        <p class="q">Law enforcement itself opposed the bill's original version</p>
+        <p>At the February 18, 2026 hearing, the Utah Chiefs of Police, the Chair of the Law Enforcement Legislative Committee, and the Utah County Sheriff all testified in opposition to the bill as introduced. The bill was held that day. By the time it returned as Substitute #2 on February 24, that opposition had softened to neutral testimony. What changed between those two versions to bring law enforcement off opposition hasn't been checked against this piece yet &mdash; worth pulling before publication if it bears on the auditor or surveillance-study sections above.</p>
+      </div>
+    </section>
+
+    <div class="takeaway">
+      <div class="eyebrow">The Throughline</div>
+      <p class="big">Utah built a detailed, mandatory report on exactly the questions this whole series has been asking &mdash; who agencies share data with, what's non-compliant, what the risks are. Then it classified that report as protected, deleted the one section that would have required public authorization before deploying surveillance technology, and replaced a Senate-confirmed auditor with a permissive line no one is required to act on.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-top:0;"><strong>Sources</strong></p>
+    <ul class="sources-list">
+      <li>H.B. 450, Data Privacy Amendments (2026 General Session) &mdash; enrolled text and full redline (HB0450S06 compared with HB0450), le.utah.gov</li>
+      <li>H.B. 450 vote and action history, le.utah.gov Bill Status page</li>
+      <li>House Political Subdivisions Standing Committee minutes, Feb. 18 and Feb. 24, 2026</li>
+      <li>Senate Government Operations and Political Subdivisions Standing Committee minutes, Feb. 25, 2026</li>
+      <li>Utah Code §§ 63A-19-101 et seq. (Government Data Privacy Act); §§ 67-3-1, 67-3-13 (state auditor)</li>
+    </ul>
+    <p style="margin-bottom:0; margin-top:16px;">Part of a six-part series on ALPR and privacy oversight in Weber County. &larr; <a href="weber-hive-grama-gap.html">Article 4: The GRAMA Gap</a></p>
+  </div>
+</footer>
+
+<script>
+// 1. Expandable explorer rows
+document.querySelectorAll('#exp-table .exp-row').forEach(row => {
+  row.addEventListener('click', () => {
+    const detail = document.getElementById(row.dataset.target);
+    const opening = !row.classList.contains('open');
+    document.querySelectorAll('#exp-table .exp-row.open').forEach(r => {
+      if (r !== row) { r.classList.remove('open'); document.getElementById(r.dataset.target).classList.remove('open'); }
+    });
+    row.classList.toggle('open', opening);
+    detail.classList.toggle('open', opening);
+  });
+});
+
+// 2. Timeline stepper
+const tlSteps = [
+  { time: "3:08 PM", desc: "Senate Judiciary, Law Enforcement &amp; Criminal Justice Committee gives a favorable recommendation to Substitute #5 &mdash; the version that still contained the authorization requirement.", flag: "ok", flagText: "Authorization requirement intact" },
+  { time: "5:01 PM", desc: "Placed on the Senate 2nd Reading Calendar.", flag: null },
+  { time: "5:03 \u2013 5:08 PM", desc: "Sent to Senate Rules Committee, then back to 2nd Reading &mdash; five minutes later.", flag: null },
+  { time: "7:20 \u2013 8:26 PM", desc: "Normal reading rules suspended; the bill is circled, then uncircled.", flag: null },
+  { time: "8:27 PM", desc: "<strong>Substituted from #5 to #6</strong> &mdash; the version with the authorization requirement stripped out, on a voice vote.", flag: "bad", flagText: "Authorization requirement removed" },
+  { time: "8:30 PM", desc: "Passed the Senate, 28\u20130\u20131, three minutes after the substitution.", flag: "bad", flagText: "No committee re-vote" },
+  { time: "Next day", desc: "House concurs with the Senate's changes, 66\u20131\u20138 &mdash; no new House committee hearing on the substitute either.", flag: "bad", flagText: "House also skipped committee" }
+];
+let tlIndex = 0;
+const tlCard = document.getElementById('tl-card');
+const tlProgress = document.getElementById('tl-progress');
+const tlCount = document.getElementById('tl-count');
+const tlPrev = document.getElementById('tl-prev');
+const tlNext = document.getElementById('tl-next');
+
+function renderProgress(){
+  tlProgress.innerHTML = '';
+  tlSteps.forEach((s, i) => {
+    const seg = document.createElement('div');
+    seg.className = 'seg' + (i < tlIndex ? ' done' : (i === tlIndex ? ' current' : ''));
+    seg.addEventListener('click', () => { tlIndex = i; renderStep(); });
+    tlProgress.appendChild(seg);
+  });
+}
+function renderStep(){
+  const s = tlSteps[tlIndex];
+  tlCard.innerHTML =
+    '<div class="step-index">Step ' + (tlIndex+1) + ' of ' + tlSteps.length + '</div>' +
+    '<div class="step-time">' + s.time + '</div>' +
+    '<p class="step-desc">' + s.desc + '</p>' +
+    (s.flag ? '<span class="step-flag ' + s.flag + '">' + s.flagText + '</span>' : '');
+  tlCount.textContent = (tlIndex+1) + ' / ' + tlSteps.length;
+  tlPrev.disabled = tlIndex === 0;
+  tlNext.disabled = tlIndex === tlSteps.length - 1;
+  renderProgress();
+}
+tlPrev.addEventListener('click', () => { if (tlIndex > 0) { tlIndex--; renderStep(); } });
+tlNext.addEventListener('click', () => { if (tlIndex < tlSteps.length - 1) { tlIndex++; renderStep(); } });
+renderStep();
+
+// 3. Auditor before/after toggle
+document.querySelectorAll('#aud-toggle .toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#aud-toggle .toggle-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.toggle-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+  });
+});
+
+// 4. Membership filter
+document.querySelectorAll('.filter-row .filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-row .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('#member-grid .member-card').forEach(card => {
+      const cats = card.dataset.cat.split(' ');
+      card.classList.toggle('hidden-by-filter', filter !== 'all' && !cats.includes(filter));
+    });
+  });
+});
+</script>
+</body>
+</html>
