@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ten Cameras, Five Million Searches — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430;
+    --ink-2:#262f3f;
+    --paper:#f6f2e6;
+    --paper-card:#fffdf8;
+    --text:#211e19;
+    --muted:#5c574c;
+    --brass:#a9812f;
+    --brass-bright:#d6b869;
+    --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --heat-0:#e7e0c9;
+    --heat-1:#d6b869;
+    --heat-2:#a9812f;
+    --heat-3:#7c5f22;
+    --heat-4:#4a3a15;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:"Source Serif 4", Georgia, serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:960px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  /* HERO */
+  header.hero{
+    background:
+      radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%),
+      linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8;
+    padding:64px 0 48px;
+  }
+  .kicker{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass-bright);
+    margin-bottom:18px;
+  }
+  header.hero h1{
+    font-size:clamp(2.2rem, 5.2vw, 3.6rem);
+    line-height:1.04;
+    margin:0 0 18px;
+    color:#faf6ea;
+  }
+  .subhead{
+    font-size:1.15rem;
+    color:#c9c3ae;
+    max-width:640px;
+    margin:0 0 34px;
+  }
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:rgba(214,184,105,0.25);
+    border:1px solid rgba(214,184,105,0.25);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .hero-stat{ background:rgba(20,26,36,0.65); padding:18px 16px; }
+  .hero-stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.7rem; color:var(--brass-bright); }
+  .hero-stat .lbl{ font-size:12px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  main{ padding:56px 0 40px; }
+  section{ margin-bottom:64px; }
+  h2.section-title{
+    font-size:clamp(1.5rem,3vw,2.1rem);
+    margin:0 0 8px;
+    color:var(--ink);
+  }
+  .section-sub{ color:var(--muted); font-size:1.02rem; max-width:640px; margin:0 0 28px; }
+  .eyebrow{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--brass-dark);
+    margin-bottom:10px;
+  }
+
+  .card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    padding:26px;
+  }
+
+  /* central question */
+  .question-block{
+    border-left:4px solid var(--brass);
+    background:var(--paper-card);
+    padding:20px 24px;
+    border-radius:0 10px 10px 0;
+    box-shadow:var(--shadow);
+    margin:36px 0;
+  }
+  .question-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.25rem; margin:0; }
+
+  /* stat grid */
+  .stat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .stat-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:18px; }
+  .stat-card .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.9rem; color:var(--brass-dark); }
+  .stat-card .lbl{ font-size:13px; color:var(--muted); margin-top:6px; }
+  @media (max-width:680px){ .stat-grid{ grid-template-columns:repeat(2,1fr); } }
+
+  /* Timeline */
+  #timeline-chart{ width:100%; height:340px; }
+  .timeline-legend{ display:flex; gap:20px; margin-top:14px; font-size:12.5px; color:var(--muted); flex-wrap:wrap; }
+  .timeline-legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .swatch{ width:11px; height:11px; border-radius:2px; display:inline-block; }
+  .year-tip{
+    position:absolute; pointer-events:none; background:var(--ink); color:#faf6ea;
+    font-family:"IBM Plex Mono",monospace; font-size:12px; padding:8px 10px; border-radius:6px;
+    box-shadow:var(--shadow); opacity:0; transition:opacity .12s; max-width:220px; z-index:20;
+  }
+  .chart-wrap{ position:relative; }
+
+  /* Agency table */
+  .table-controls{ display:flex; gap:12px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
+  .search-box{
+    flex:1; min-width:200px;
+    font-family:"IBM Plex Mono",monospace; font-size:13.5px;
+    padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:#fff;
+  }
+  .search-box:focus{ outline:2px solid var(--brass); outline-offset:1px; }
+  table.agency-table{ width:100%; border-collapse:collapse; font-size:14px; }
+  table.agency-table th, table.agency-table td{ text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); }
+  table.agency-table th{
+    font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--brass-dark); cursor:pointer; user-select:none; white-space:nowrap; position:sticky; top:0; background:var(--paper-card);
+  }
+  table.agency-table th:hover{ color:var(--ink); }
+  table.agency-table td.num-col, table.agency-table th.num-col{ text-align:right; font-family:"IBM Plex Mono",monospace; }
+  table.agency-table tbody tr:hover{ background:#f2ead6; }
+  .table-scroll{ max-height:520px; overflow-y:auto; border:1px solid var(--line); border-radius:8px; }
+  .bar-cell{ display:flex; align-items:center; gap:8px; }
+  .bar-track{ flex:1; height:7px; background:var(--line); border-radius:4px; overflow:hidden; min-width:60px; }
+  .bar-fill{ height:100%; background:linear-gradient(90deg,var(--brass),var(--brass-dark)); }
+  .state-pill{
+    font-family:"IBM Plex Mono",monospace; font-size:10.5px; padding:2px 6px; border-radius:4px;
+    background:var(--heat-0); color:var(--ink); font-weight:600;
+  }
+  .table-note{ font-size:12.5px; color:var(--muted); margin-top:10px; }
+
+  /* Heat map */
+  .heatmap-grid{
+    display:grid;
+    grid-template-columns:repeat(12, minmax(0,1fr));
+    gap:4px;
+    max-width:640px;
+    margin:0 auto 18px;
+  }
+  .tile{
+    aspect-ratio:1/1;
+    border-radius:5px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:11px;
+    color:var(--ink); cursor:default; position:relative;
+    transition:transform .1s;
+  }
+  .tile:hover{ transform:scale(1.12); z-index:5; box-shadow:var(--shadow); }
+  .tile.empty{ background:transparent; }
+  .tile-tip{
+    position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%);
+    background:var(--ink); color:#faf6ea; font-size:11.5px; padding:6px 9px; border-radius:6px;
+    white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .12s;
+  }
+  .tile:hover .tile-tip{ opacity:1; }
+  .heat-legend{ display:flex; align-items:center; gap:8px; justify-content:center; font-size:12px; color:var(--muted); font-family:"IBM Plex Mono",monospace; }
+  .heat-legend .swatch{ width:16px; height:16px; border-radius:3px; }
+
+  /* Network reach visual */
+  .network-wrap{ display:flex; flex-direction:column; align-items:center; gap:18px; }
+  #network-svg{ max-width:100%; height:auto; }
+  .network-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; width:100%; max-width:560px; }
+  .network-stats .stat-card{ text-align:center; }
+  .toggle-row{ display:flex; gap:8px; margin-bottom:6px; }
+  .toggle-btn{
+    font-family:"IBM Plex Mono",monospace; font-size:12px; padding:8px 14px; border-radius:20px;
+    border:1px solid var(--line); background:#fff; cursor:pointer; color:var(--muted);
+  }
+  .toggle-btn.active{ background:var(--ink); color:#faf6ea; border-color:var(--ink); }
+
+  /* takeaway */
+  .takeaway{
+    background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; border-radius:14px; padding:40px 32px; text-align:center;
+  }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.3rem,3vw,1.8rem); max-width:640px; margin:0 auto; line-height:1.35; }
+
+  footer{ border-top:1px solid var(--line); padding:32px 0 60px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">The Weber County Hive · Surveillance Investigation</div>
+    <h1>Ten Cameras,<br>Five Million Searches</h1>
+    <p class="subhead">Weber County operates ten license plate reader cameras. Records the county released under GRAMA show how far the data traveled — and how little the county controls once it leaves.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">5,171,087</div><div class="lbl">total searches, Feb 2022 &ndash; Jul 2026</div></div>
+      <div class="hero-stat"><div class="num">96.6%</div><div class="lbl">of searches from outside Utah</div></div>
+      <div class="hero-stat"><div class="num">3,343</div><div class="lbl">distinct agencies have searched this network</div></div>
+      <div class="hero-stat"><div class="num">45</div><div class="lbl">states have searched it</div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <div class="question-block">
+      <p class="q">How did ten Weber County cameras become searchable by thousands of agencies nationwide?</p>
+    </div>
+
+    <section id="numbers">
+      <div class="eyebrow">The Numbers</div>
+      <h2 class="section-title">What the records show</h2>
+      <p class="section-sub">Every figure below comes from records Weber County released under Utah's GRAMA, or from documents the county published itself. Source: Utah Civic Compact's GRAMA production, cross&#8209;checked against KSL and the Standard&#8209;Examiner's Aug. 13&ndash;14, 2026 coverage.</p>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num">159th <span style="font-size:1rem;">of 245</span></div><div class="lbl">Where Weber County's own Sheriff's Office ranks among agencies searching its network in 2026</div></div>
+        <div class="stat-card"><div class="num">43%</div><div class="lbl">of all activity came from Texas alone</div></div>
+        <div class="stat-card"><div class="num">36.8%</div><div class="lbl">of all-time searches came from one department: Houston PD, 1,400 miles away</div></div>
+        <div class="stat-card"><div class="num">125,719</div><div class="lbl">searches came from federal agencies &mdash; 103,558 from the U.S. Postal Inspection Service alone</div></div>
+        <div class="stat-card"><div class="num">179</div><div class="lbl">searches came from Flock's own vendor accounts, including 78 from an account named "Flock Safety &ndash; Sales"</div></div>
+        <div class="stat-card"><div class="num">41.4%</div><div class="lbl">of all searches carry a stated reason that matches no purpose Utah law permits for these systems</div></div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="eyebrow">Interactive · 01</div>
+      <h2 class="section-title">Search volume by year</h2>
+      <p class="section-sub">Weber County's network went from a few hundred thousand searches a year to over 1.6 million &mdash; a partial, seven-month total for 2026 that already leads every prior full year. Hover a bar for agency counts.</p>
+      <div class="card chart-wrap">
+        <svg id="timeline-chart" viewBox="0 0 720 340" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="year-tip" id="year-tip"></div>
+      </div>
+      <div class="timeline-legend">
+        <span><span class="swatch" style="background:var(--brass-dark);"></span>Total searches</span>
+        <span><span class="swatch" style="background:var(--heat-0); border:1px solid var(--line);"></span>Distinct agencies (right axis)</span>
+      </div>
+    </section>
+
+    <section id="agencies">
+      <div class="eyebrow">Interactive · 02</div>
+      <h2 class="section-title">Who searched Weber County's cameras — 2026</h2>
+      <p class="section-sub">The 50 agencies responsible for 85.6% of all activity in 2026 (Jan&ndash;Jul, the most recent complete production). Search or sort to explore. Weber County's own Sheriff's Office does not appear on this list &mdash; it ranks 159th of 245 agencies on its own network.</p>
+      <div class="card">
+        <div class="table-controls">
+          <input type="text" class="search-box" id="agency-search" placeholder="Search agency or state (e.g. &quot;Houston&quot;, &quot;TX&quot;, &quot;sheriff&quot;)&hellip;" aria-label="Search agencies">
+        </div>
+        <div class="table-scroll">
+          <table class="agency-table" id="agency-table">
+            <thead>
+              <tr>
+                <th data-key="rank" class="num-col">#</th>
+                <th data-key="agency">Agency</th>
+                <th data-key="state">State</th>
+                <th data-key="searches" class="num-col">Searches</th>
+                <th data-key="pct" class="num-col">% of 2026</th>
+              </tr>
+            </thead>
+            <tbody id="agency-tbody"></tbody>
+          </table>
+        </div>
+        <p class="table-note">Full record set (5,171,087 rows, 2022&ndash;2026) is archived by Utah Civic Compact: <a href="https://archive.org/details/weber-county-alpr-records" target="_blank" rel="noopener">archive.org/details/weber-county-alpr-records</a></p>
+      </div>
+    </section>
+
+    <section id="heatmap">
+      <div class="eyebrow">Interactive · 03</div>
+      <h2 class="section-title">Where the searches came from</h2>
+      <p class="section-sub">State-by-state totals among 2026's top 50 requesting agencies (85.6% of the year). Darker states searched more. Hover a tile for the total.</p>
+      <div class="card">
+        <div class="heatmap-grid" id="heatmap-grid"></div>
+        <div class="heat-legend">
+          <span>Fewer searches</span>
+          <span class="swatch" style="background:var(--heat-0);"></span>
+          <span class="swatch" style="background:var(--heat-1);"></span>
+          <span class="swatch" style="background:var(--heat-2);"></span>
+          <span class="swatch" style="background:var(--heat-3);"></span>
+          <span class="swatch" style="background:var(--heat-4);"></span>
+          <span>More searches</span>
+        </div>
+        <p class="table-note" style="text-align:center;">Grid position is a stylized cartogram, not to scale. States not shown had no agency in the top 50.</p>
+      </div>
+    </section>
+
+    <section id="network-reach">
+      <div class="eyebrow">Interactive · 04</div>
+      <h2 class="section-title">Where one search traveled</h2>
+      <p class="section-sub">Flock's system doesn't route a search to one department. It routes it to every network that department has been given access to &mdash; and the median department searching Weber County's cameras reaches nearly 3,000 of them at once.</p>
+      <div class="card">
+        <div class="toggle-row">
+          <button class="toggle-btn active" data-mode="median">Median search (2,950 networks)</button>
+          <button class="toggle-btn" data-mode="max">Largest search (7,134 networks)</button>
+          <button class="toggle-btn" data-mode="weber">Weber County's own search (30 networks)</button>
+        </div>
+        <div class="network-wrap">
+          <svg id="network-svg" viewBox="0 0 560 320" width="560"></svg>
+          <div class="network-stats">
+            <div class="stat-card"><div class="num">2,950</div><div class="lbl">networks reached by the median search</div></div>
+            <div class="stat-card"><div class="num">7,134</div><div class="lbl">networks reached by the largest single search</div></div>
+            <div class="stat-card"><div class="num">30</div><div class="lbl">networks reached by Weber County's own median search</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="takeaway">
+      <div class="takeaway">
+        <div class="eyebrow">Primary Takeaway</div>
+        <p class="big">Weber County installed ten cameras. Access did not remain local.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--ink);">Sources &amp; methodology</strong>
+    <ul class="sources-list">
+      <li>Utah Civic Compact, "Ten cameras in one Utah county were searched 5.1 million times by police in 45 states" &mdash; full GRAMA production and archive: <a href="https://utahciviccompact.org/alpr" target="_blank" rel="noopener">utahciviccompact.org/alpr</a></li>
+      <li>KSL, "Group cites 'striking' Weber County data on Flock cameras as reason for lawmakers to act," Daniel Woodruff, Aug. 13, 2026</li>
+      <li>Standard-Examiner, "Most of this Utah county's license plate camera data is searched by out-of-state law enforcement," Aug. 14, 2026</li>
+      <li>Weber County Sheriff's Office written responses to records requests, Aug. 6, 2026 and following</li>
+    </ul>
+    <p style="margin-top:16px;">Figures for 2022 and 2023 carry more uncertainty than later years &mdash; those two years account for most of the 3,343-agency, 45-state totals, and the provenance of that early data has not been independently established. 2026's figures (245 agencies, 98.6% out-of-state) do not carry that uncertainty. This page makes no claim that any individual search was unlawful.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---------- DATA ----------
+  const yearData = [
+    {year:2022, searches:317209, agencies:1993, partial:true, note:"No January file; data begins mid-February"},
+    {year:2023, searches:1226196, agencies:3078, partial:false, note:"Full year on file"},
+    {year:2024, searches:527407, agencies:40, partial:false, note:"Full year on file"},
+    {year:2025, searches:1491447, agencies:227, partial:false, note:"Full year on file"},
+    {year:2026, searches:1608828, agencies:245, partial:true, note:"Jan\u2013Jul only \u2014 already the largest year on file"}
+  ];
+
+  const top50 = [
+    [1,"Houston TX PD","TX",423031,26.294],
+    [2,"Louisville Metro KY PD","KY",89375,5.555],
+    [3,"Harris County TX SO","TX",89308,5.551],
+    [4,"Hillsborough County FL SO","FL",83889,5.214],
+    [5,"Palm Beach County FL SO","FL",53017,3.295],
+    [6,"Missouri State Highway Patrol","MO",43449,2.701],
+    [7,"Indiana State Police IN PD","IN",40166,2.497],
+    [8,"Pennsylvania State PD","PA",31432,1.954],
+    [9,"Richland County SC SO","SC",25112,1.561],
+    [10,"[Federal] US Postal Inspection Service","US",23551,1.464],
+    [11,"Texas Department of Public Safety","TX",23416,1.455],
+    [12,"Fairfax County VA PD","VA",22137,1.376],
+    [13,"Lubbock TX PD","TX",22051,1.371],
+    [14,"Tulsa County OK SO","OK",21188,1.317],
+    [15,"Colorado State Patrol","CO",21156,1.315],
+    [16,"Bloomington IL PD","IL",19643,1.221],
+    [17,"Mississippi Department of Public Safety","MS",16856,1.048],
+    [18,"Salinas CA PD","CA",16586,1.031],
+    [19,"Sarasota FL PD","FL",16542,1.028],
+    [20,"Murfreesboro TN PD","TN",16083,1.000],
+    [21,"Raleigh NC PD","NC",16063,0.998],
+    [22,"O'Fallon MO PD","MO",15858,0.986],
+    [23,"Shelby County TN SO","TN",15207,0.945],
+    [24,"Amarillo TX PD","TX",14142,0.879],
+    [25,"St. Charles City MO PD","MO",13579,0.844],
+    [26,"Fishers IN PD","IN",13366,0.831],
+    [27,"Larimer County CO SO","CO",13002,0.808],
+    [28,"Richmond VA PD","VA",12527,0.779],
+    [29,"Peoria IL PD","IL",10635,0.661],
+    [30,"Springfield MO PD","MO",10134,0.630],
+    [31,"Jefferson County MO SO","MO",9560,0.594],
+    [32,"Alabama Department of Corrections","AL",8691,0.540],
+    [33,"Thornton CO PD","CO",8594,0.534],
+    [34,"Panama City FL PD","FL",8486,0.527],
+    [35,"Aurora CO PD","CO",8414,0.523],
+    [36,"Wichita Falls TX PD","TX",8164,0.507],
+    [37,"Sparks Police Department - NV","NV",8069,0.502],
+    [38,"Washington County WI SO","WI",7617,0.473],
+    [39,"Riverside County CA District Attorney","CA",7437,0.462],
+    [40,"Little Rock AR PD","AR",7209,0.448],
+    [41,"Jefferson County CO SO","CO",7090,0.441],
+    [42,"Dearborn MI PD","MI",6931,0.431],
+    [43,"Washoe County NV SO","NV",6828,0.424],
+    [44,"Iredell County NC SO","NC",6804,0.423],
+    [45,"Sterling Heights MI PD","MI",6585,0.409],
+    [46,"Germantown TN PD","TN",6322,0.393],
+    [47,"El Cajon CA PD","CA",5923,0.368],
+    [48,"Vestavia Hills AL PD","AL",5548,0.345],
+    [49,"Brighton CO PD","CO",5517,0.343],
+    [50,"Hempstead Village NY PD","NY",5512,0.343]
+  ];
+
+  // State grid positions (12 col x 8 row stylized cartogram, 1-indexed)
+  const stateGrid = {
+    AK:[1,1], ME:[1,11],
+    WA:[2,2], ID:[2,4], MT:[2,5], ND:[2,6], MN:[2,7], VT:[2,10], NH:[2,11],
+    OR:[3,2], NV:[3,3], WY:[3,4], SD:[3,5], WI:[3,7], MI:[3,8], NY:[3,9], MA:[3,10], RI:[3,11], CT:[3,12],
+    HI:[4,1], CA:[4,2], UT:[4,3], CO:[4,4], NE:[4,5], IA:[4,6], IL:[4,7], IN:[4,8], OH:[4,9], PA:[4,10], NJ:[4,11],
+    AZ:[5,3], NM:[5,4], KS:[5,5], MO:[5,6], KY:[5,7], WV:[5,8], VA:[5,9], MD:[5,10], DE:[5,11],
+    OK:[6,5], AR:[6,6], TN:[6,7], NC:[6,8], SC:[6,9],
+    TX:[7,5], LA:[7,6], MS:[7,7], AL:[7,8], GA:[7,9],
+    FL:[8,9],
+    US:[1,6]
+  };
+  const stateNames = {AK:"Alaska",ME:"Maine",WA:"Washington",ID:"Idaho",MT:"Montana",ND:"North Dakota",MN:"Minnesota",VT:"Vermont",NH:"New Hampshire",OR:"Oregon",NV:"Nevada",WY:"Wyoming",SD:"South Dakota",WI:"Wisconsin",MI:"Michigan",NY:"New York",MA:"Massachusetts",RI:"Rhode Island",CT:"Connecticut",HI:"Hawaii",CA:"California",UT:"Utah",CO:"Colorado",NE:"Nebraska",IA:"Iowa",IL:"Illinois",IN:"Indiana",OH:"Ohio",PA:"Pennsylvania",NJ:"New Jersey",AZ:"Arizona",NM:"New Mexico",KS:"Kansas",MO:"Missouri",KY:"Kentucky",WV:"West Virginia",VA:"Virginia",MD:"Maryland",DE:"Delaware",OK:"Oklahoma",AR:"Arkansas",TN:"Tennessee",NC:"North Carolina",SC:"South Carolina",TX:"Texas",LA:"Louisiana",MS:"Mississippi",AL:"Alabama",GA:"Georgia",FL:"Florida",US:"Federal"};
+
+  const stateTotals = {};
+  top50.forEach(([,,st,n]) => { stateTotals[st] = (stateTotals[st]||0) + n; });
+
+  // ---------- TIMELINE ----------
+  function drawTimeline(){
+    const svg = document.getElementById('timeline-chart');
+    const W=720,H=340, padL=54, padR=20, padT=20, padB=44;
+    const chartW = W-padL-padR, chartH = H-padT-padB;
+    const maxSearch = Math.max(...yearData.map(d=>d.searches));
+    const barW = chartW / yearData.length * 0.55;
+    const gap = chartW / yearData.length;
+    let svgHTML = '';
+    // axis line
+    svgHTML += `<line x1="${padL}" y1="${padT+chartH}" x2="${padL+chartW}" y2="${padT+chartH}" stroke="#dcd2b7" stroke-width="1"/>`;
+    // gridlines
+    for(let i=1;i<=4;i++){
+      const y = padT + chartH - (chartH*i/4);
+      svgHTML += `<line x1="${padL}" y1="${y}" x2="${padL+chartW}" y2="${y}" stroke="#e9e2cc" stroke-width="1"/>`;
+      svgHTML += `<text x="${padL-8}" y="${y+4}" text-anchor="end" font-family="IBM Plex Mono" font-size="10" fill="#8a8371">${Math.round(maxSearch*i/4/1000)}k</text>`;
+    }
+    yearData.forEach((d,i)=>{
+      const x = padL + gap*i + (gap-barW)/2;
+      const h = (d.searches/maxSearch)*chartH;
+      const y = padT + chartH - h;
+      const color = d.partial ? '#c9a852' : '#7c5f22';
+      svgHTML += `<rect class="ybar" data-idx="${i}" x="${x}" y="${y}" width="${barW}" height="${h}" rx="4" fill="${color}" style="cursor:pointer;"/>`;
+      svgHTML += `<text x="${x+barW/2}" y="${padT+chartH+22}" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600" fill="#211e19">${d.year}</text>`;
+      if(d.partial){
+        svgHTML += `<text x="${x+barW/2}" y="${padT+chartH+36}" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#a9812f">partial</text>`;
+      }
+      // agency dot scaled
+      const maxAg = Math.max(...yearData.map(x=>x.agencies));
+      const dotR = 4 + 8*(d.agencies/maxAg);
+      svgHTML += `<circle cx="${x+barW/2}" cy="${y-14}" r="${dotR}" fill="none" stroke="#7c5f22" stroke-width="1.5" opacity="0.7"/>`;
+    });
+    svg.innerHTML = svgHTML;
+
+    const tip = document.getElementById('year-tip');
+    svg.querySelectorAll('.ybar').forEach(bar=>{
+      bar.addEventListener('mousemove', (e)=>{
+        const d = yearData[bar.dataset.idx];
+        tip.innerHTML = `<strong>${d.year}</strong><br>${d.searches.toLocaleString()} searches<br>${d.agencies.toLocaleString()} agencies<br><span style="color:#c9c3ae;">${d.note}</span>`;
+        const rect = svg.getBoundingClientRect();
+        const wrapRect = svg.parentElement.getBoundingClientRect();
+        tip.style.left = (e.clientX - wrapRect.left + 12) + 'px';
+        tip.style.top = (e.clientY - wrapRect.top - 10) + 'px';
+        tip.style.opacity = '1';
+      });
+      bar.addEventListener('mouseleave', ()=>{ tip.style.opacity = '0'; });
+    });
+  }
+  drawTimeline();
+
+  // ---------- AGENCY TABLE ----------
+  let tableData = top50.map(([rank,agency,state,searches,pct])=>({rank,agency,state,searches,pct}));
+  let sortKey='rank', sortAsc=true;
+
+  function renderTable(){
+    const q = document.getElementById('agency-search').value.trim().toLowerCase();
+    let rows = tableData.filter(r => !q || r.agency.toLowerCase().includes(q) || r.state.toLowerCase().includes(q));
+    rows.sort((a,b)=>{
+      let v = a[sortKey] > b[sortKey] ? 1 : a[sortKey] < b[sortKey] ? -1 : 0;
+      return sortAsc ? v : -v;
+    });
+    const maxSearches = Math.max(...tableData.map(r=>r.searches));
+    const tbody = document.getElementById('agency-tbody');
+    tbody.innerHTML = rows.map(r => `
+      <tr>
+        <td class="num-col">${r.rank}</td>
+        <td>${r.agency}</td>
+        <td><span class="state-pill">${r.state}</span></td>
+        <td class="num-col">
+          <div class="bar-cell">
+            <div class="bar-track"><div class="bar-fill" style="width:${(r.searches/maxSearches*100).toFixed(1)}%"></div></div>
+            <span>${r.searches.toLocaleString()}</span>
+          </div>
+        </td>
+        <td class="num-col">${r.pct.toFixed(3)}%</td>
+      </tr>
+    `).join('');
+  }
+  document.getElementById('agency-search').addEventListener('input', renderTable);
+  document.querySelectorAll('#agency-table th[data-key]').forEach(th=>{
+    th.addEventListener('click', ()=>{
+      const key = th.dataset.key;
+      if(sortKey===key){ sortAsc = !sortAsc; } else { sortKey = key; sortAsc = true; }
+      renderTable();
+    });
+  });
+  renderTable();
+
+  // ---------- HEAT MAP ----------
+  function heatColor(v, max){
+    if(!v) return null;
+    const t = v/max;
+    if(t > 0.6) return 'var(--heat-4)';
+    if(t > 0.35) return 'var(--heat-3)';
+    if(t > 0.15) return 'var(--heat-2)';
+    if(t > 0.03) return 'var(--heat-1)';
+    return 'var(--heat-0)';
+  }
+  function drawHeatmap(){
+    const grid = document.getElementById('heatmap-grid');
+    const maxRow = 8, maxCol = 12;
+    const maxVal = Math.max(...Object.values(stateTotals));
+    let cells = [];
+    for(let r=1;r<=maxRow;r++){
+      for(let c=1;c<=maxCol;c++){
+        cells.push({r,c,code:null});
+      }
+    }
+    Object.entries(stateGrid).forEach(([code,[r,c]])=>{
+      const cell = cells.find(x=>x.r===r && x.c===c);
+      if(cell) cell.code = code;
+    });
+    grid.style.gridTemplateRows = `repeat(${maxRow}, minmax(0,1fr))`;
+    grid.innerHTML = cells.map(cell=>{
+      if(!cell.code) return `<div class="tile empty"></div>`;
+      const val = stateTotals[cell.code] || 0;
+      const bg = val ? heatColor(val,maxVal) : 'var(--heat-0)';
+      const label = cell.code==='US' ? 'US*' : cell.code;
+      const name = stateNames[cell.code] || cell.code;
+      const tip = val ? `${name}: ${val.toLocaleString()} searches` : `${name}: not in top 50`;
+      return `<div class="tile" style="background:${bg};" title="${tip}">${label}<span class="tile-tip">${tip}</span></div>`;
+    }).join('');
+  }
+  drawHeatmap();
+
+  // ---------- NETWORK REACH VISUAL ----------
+  const networkModes = {
+    median: {n:2950, label:"Median search", sub:"2,950 networks reached"},
+    max: {n:7134, label:"Largest single search", sub:"7,134 networks reached"},
+    weber: {n:30, label:"Weber County's own median search", sub:"30 networks reached"}
+  };
+  function drawNetwork(mode){
+    const svg = document.getElementById('network-svg');
+    const W=560,H=320,cx=120,cy=160;
+    const cfg = networkModes[mode];
+    // number of dots to draw scaled logarithmically for visual clarity, capped
+    const maxDots = 260;
+    const n = Math.min(maxDots, Math.max(18, Math.round(Math.log2(cfg.n+1)*22)));
+    let html = '';
+    html += `<circle cx="${cx}" cy="${cy}" r="14" fill="#7c5f22" />`;
+    html += `<text x="${cx}" y="${cy+4}" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#faf6ea">1</text>`;
+    html += `<text x="${cx}" y="${cy+34}" text-anchor="middle" font-family="IBM Plex Mono" font-size="10.5" fill="#5c574c">${cfg.label}</text>`;
+    for(let i=0;i<n;i++){
+      const angle = (i/n)*Math.PI*2 + (mode==='weber'?0.3:0);
+      const dist = 90 + (i%3)*38 + (mode==='max' ? (i%5)*10 : 0);
+      const x = cx + 210 + Math.cos(angle)*Math.min(dist, 200) * (mode==='weber'?0.55:1);
+      const y = cy + Math.sin(angle)*Math.min(dist,130);
+      const r = mode==='max' ? 2.4 : mode==='weber' ? 3.6 : 2.9;
+      html += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#d6b869" stroke-width="0.7" opacity="0.5"/>`;
+      html += `<circle cx="${x}" cy="${y}" r="${r}" fill="#a9812f" opacity="0.85"/>`;
+    }
+    html += `<text x="${W-30}" y="${H-16}" text-anchor="end" font-family="IBM Plex Mono" font-size="11" font-weight="700" fill="#7c5f22">${cfg.sub}</text>`;
+    svg.innerHTML = html;
+  }
+  drawNetwork('median');
+  document.querySelectorAll('.toggle-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      drawNetwork(btn.dataset.mode);
+    });
+  });
+
+  window.addEventListener('resize', ()=>{ drawTimeline(); });
+})();
+</script>
+</body>
+</html>
