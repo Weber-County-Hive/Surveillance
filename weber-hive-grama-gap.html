@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Utah's Required Records and the GRAMA Gap — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --pass:#3f5d45; --pass-bg:#e9efe7;
+    --fail:#8a3b2e; --fail-bg:#f3e5e0;
+    --warn:#8a6a1f; --warn-bg:#f4ecd6;
+    --unk:#4a4438; --unk-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:60px 0 44px;
+  }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(2rem, 4.6vw, 3.1rem); line-height:1.1; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.08rem; color:#c9c3ae; max-width:680px; margin:0; }
+
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:680px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+
+  .question-block{ border-left:4px solid var(--brass); background:var(--paper-card); padding:20px 24px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:32px 0; }
+  .question-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.2rem; margin:0; }
+
+  /* Three-source compare strip */
+  .compare-strip{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:8px; }
+  .compare-card{ background:var(--ink); color:#efe9d8; border-radius:10px; padding:16px 18px; }
+  .compare-card .label{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--brass-bright); margin-bottom:6px; }
+  .compare-card .desc{ font-size:13px; color:#c9c3ae; line-height:1.5; }
+  @media (max-width:720px){ .compare-strip{ grid-template-columns:1fr; } }
+
+  /* Crosswalk table */
+  .legend-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:18px; font-size:12px; }
+  .legend-row span{ display:inline-flex; align-items:center; gap:6px; }
+  .legend-chip{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; text-transform:uppercase; font-weight:700; padding:3px 7px; border-radius:10px; }
+  .legend-chip.pass{ background:var(--pass-bg); color:var(--pass); }
+  .legend-chip.warn{ background:var(--warn-bg); color:var(--warn); }
+  .legend-chip.fail{ background:var(--fail-bg); color:var(--fail); }
+  .legend-chip.unk{ background:var(--unk-bg); color:var(--unk); }
+
+  .crosswalk{ display:flex; flex-direction:column; gap:10px; }
+  .row-item{ background:var(--paper-card); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .row-head{ display:grid; grid-template-columns: 1.4fr 1fr 1fr 0.8fr auto; gap:10px; align-items:center; padding:14px 16px; cursor:pointer; }
+  .row-field{ font-family:"Fraunces",serif; font-weight:600; font-size:0.98rem; }
+  .row-cell-label{ font-family:"IBM Plex Mono",monospace; font-size:9px; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:2px; letter-spacing:0.04em; }
+  .row-cell-value{ font-size:13px; }
+  .cell-chip{ display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10px; text-transform:uppercase; font-weight:700; padding:3px 8px; border-radius:10px; }
+  .cell-chip.pass{ background:var(--pass-bg); color:var(--pass); }
+  .cell-chip.warn{ background:var(--warn-bg); color:var(--warn); }
+  .cell-chip.fail{ background:var(--fail-bg); color:var(--fail); }
+  .cell-chip.unk{ background:var(--unk-bg); color:var(--unk); }
+  .row-caret{ font-family:"IBM Plex Mono",monospace; color:var(--brass-dark); transition:transform .15s; justify-self:end; }
+  .row-item.open .row-caret{ transform:rotate(90deg); }
+  .row-detail{ max-height:0; overflow:hidden; transition:max-height .2s ease; font-size:14px; padding:0 16px; }
+  .row-item.open .row-detail{ max-height:500px; padding:0 16px 16px; border-top:1px dashed var(--line); margin-top:2px; padding-top:12px; }
+  .row-detail p{ margin:0 0 8px; }
+  .row-detail p:last-child{ margin-bottom:0; }
+  .unresolved-flag{ display:inline-block; margin-top:6px; font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--unk); background:var(--unk-bg); padding:4px 10px; border-radius:6px; }
+  @media (max-width:820px){
+    .row-head{ grid-template-columns:1fr; }
+    .row-caret{ justify-self:start; }
+  }
+
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:36px 30px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.2rem,2.8vw,1.55rem); max-width:700px; margin:0 auto; line-height:1.45; }
+  .takeaway .caveat{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:#a9a290; margin-top:16px; max-width:600px; margin-left:auto; margin-right:auto; }
+
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">The Weber County Hive · Surveillance Investigation · Data Sheet</div>
+    <h1>Utah's Required Records<br>and the GRAMA Gap</h1>
+    <p class="subhead">Utah law names exactly what an agency has to keep on file for every ALPR search. What Weber County actually released doesn't line up cell for cell with that list &mdash; and two of the biggest gaps can't be resolved from a summary. They require reading the production itself.</p>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <div class="question-block">
+      <p class="q">What does Utah law require agencies to preserve, and what can the public actually inspect?</p>
+    </div>
+
+    <section id="compare">
+      <div class="eyebrow">Three sources, one comparison</div>
+      <div class="compare-strip">
+        <div class="compare-card">
+          <div class="label">S.B. 250 (2023)</div>
+          <div class="desc">What Utah Code &sect; 41-6a-2005 says a law enforcement agency must preserve about every search &mdash; the legal floor.</div>
+        </div>
+        <div class="compare-card">
+          <div class="label">Weber County's GRAMA production</div>
+          <div class="desc">The 5,171,087-row dataset and companion documents the county actually released &mdash; what exists on paper today.</div>
+        </div>
+        <div class="compare-card">
+          <div class="label">Flock's exported fields</div>
+          <div class="desc">What the vendor's own platform captures and exposes to the agency in the first place &mdash; the technical ceiling on what any record could ever show.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="crosswalk">
+      <div class="eyebrow">Interactive · Statute-to-Record Crosswalk</div>
+      <h2 class="section-title">Where the requirement meets the record</h2>
+      <p class="section-sub">Tap any row for the sourcing behind it. Crime type and incident number are now resolved &mdash; not by opening Weber County's raw production file directly, but through Flock's own documented platform export schema, which sets a hard ceiling on what any agency's production could contain regardless of how the GRAMA request was worded.</p>
+      <div class="card">
+        <div class="legend-row">
+          <span><span class="legend-chip pass">Yes / Documented</span></span>
+          <span><span class="legend-chip warn">Partial</span></span>
+          <span><span class="legend-chip fail">No / Not shown</span></span>
+        </div>
+        <div class="crosswalk" id="crosswalk-container"></div>
+      </div>
+    </section>
+
+    <section id="oversight">
+      <div class="eyebrow">Who Oversees This</div>
+      <h2 class="section-title">The committees that could have closed this gap</h2>
+      <p class="section-sub">Every audit-findings row above reads "not established" or "no historical forms produced" for a reason: a bill that would have fixed exactly that gap already passed both committees with jurisdiction over it &mdash; and still died.</p>
+      <div class="card">
+        <div class="compare-strip" style="margin-bottom:20px;">
+          <div class="compare-card">
+            <div class="label">House Transportation Committee</div>
+            <div class="desc">Approved HB 468 (Automatic License Plate Reader Amendments) 10&ndash;0&ndash;2 on Feb. 18, 2025. Unanimous.</div>
+          </div>
+          <div class="compare-card">
+            <div class="label">House Floor</div>
+            <div class="desc">Passed HB 468 64&ndash;2 on Feb. 27, 2025. Overwhelming, bipartisan.</div>
+          </div>
+          <div class="compare-card">
+            <div class="label">Senate Transportation Committee</div>
+            <div class="desc">Approved HB 468 6&ndash;0&ndash;2 on Mar. 4, 2025. Also unanimous.</div>
+          </div>
+        </div>
+        <p style="margin-bottom:14px;">HB 468 would have required every agency running these systems to submit standardized annual audit reports to the State Commission on Criminal and Juvenile Justice &mdash; a central, external body actually reading the audits, instead of an agency's own unlogged internal review. It would have set a hard 150-day statewide purge cap, in place of the patchwork retention rules currently in force. Both committees with substantive jurisdiction over ALPR legislation reviewed it and let it through without a single "no" vote.</p>
+        <p style="margin-bottom:14px;">The bill never got a final recorded floor vote in the Senate. At 11:59 p.m. on March 7, 2025 &mdash; one minute before the constitutional session deadline &mdash; the Senate struck the bill's enacting clause, killing it procedurally. No open debate, no recorded up-or-down vote on the substance. Who specifically moved that strike is not yet established in the record reviewed for this piece; that remains an open question worth a formal records request to the Senate Secretary's office.</p>
+        <p style="margin-bottom:0;">This is not a one-off. A data-center transparency bill (S.B. 318, 2026) and an AI transparency bill (H.B. 286, 2026) were killed the same way, in the same window &mdash; sent to Senate Rules with days left in session, then struck at 11:59 p.m. on the final night, after committee approval. The lever that stops these bills isn't the committee that hears them on the merits. It's whatever happens after a bill leaves committee with support and reaches Senate Rules in the session's final days.</p>
+      </div>
+    </section>
+
+    <section id="takeaway">
+      <div class="takeaway">
+        <div class="eyebrow">Primary Takeaway</div>
+        <p class="big">Utah requires records connecting searches to crimes and incidents. The public production may not contain enough information to validate that those connections were ever made.</p>
+        <div class="caveat">Crime type has no field to occupy in Flock's own platform, and incident number exists only as an unvalidated free-text field &mdash; both confirmed against Flock's documented export schema, not assumed from a summary.</div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--ink);">Sources &amp; methodology</strong>
+    <ul class="sources-list">
+      <li>Utah Code &sect; 41-6a-2002 through -2006 (Automatic License Plate Reader System Act), as amended by S.B. 250 "Public Surveillance Amendments" (2023)</li>
+      <li>Utah Civic Compact's GRAMA production and methodology notes, utahciviccompact.org/alpr, including the year-by-year agency search-count files</li>
+      <li>Weber County Sheriff's Office written responses to public records requests, Aug. 6, 2026 and following</li>
+      <li>Utah DPS/SIAC statewide ALPR data-sharing MOU naming Weber County (5-year audit-trail provision)</li>
+      <li>UDOT ALPRS Special Use Permit program page, connect.udot.utah.gov</li>
+      <li>Flock Organization Audit Log field schema, documented via haveibeenflocked.com's independent review of law enforcement Flock CSV exports</li>
+      <li>Weber County Sheriff's Office Flock Safety contract (signed Aug. 23, 2021)</li>
+      <li>HB 468, Automatic License Plate Reader Amendments (2025 General Session) — committee and floor vote history, le.utah.gov; procedurally killed via enacting-clause strike, 11:59 p.m., Mar. 7, 2025</li>
+    </ul>
+    <p style="margin-top:16px;">This sheet does not conclude that Weber County or any agency failed to comply with state law. It documents what the statute requires, what Flock's own platform is technically capable of capturing, and what's been confirmed in Weber County's released records so far.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const rows = [
+    {
+      field:"Number of searches",
+      required:{text:"Yes", cls:"pass"},
+      production:{text:"Yes", cls:"pass"},
+      verifiable:{text:"Yes", cls:"pass"},
+      retention:"Five years",
+      detail:[
+        "Utah Code &sect; 41-6a-2005(6)(a)(i) requires a law enforcement agency to preserve a record of the number of times a search is conducted.",
+        "The released dataset is structured as one row per search, packaged into 54 monthly files spanning February 2022 through July 2026 &mdash; 5,171,087 rows total. This is the one field where the production directly matches the statutory requirement in both form and volume."
+      ],
+      unresolved:false
+    },
+    {
+      field:"Crime type",
+      required:{text:"Yes", cls:"pass"},
+      production:{text:"No \u2014 no such field exists", cls:"fail"},
+      verifiable:{text:"No", cls:"fail"},
+      retention:"Five years (statute) \u2014 moot; nothing to retain",
+      detail:[
+        "Utah Code &sect; 41-6a-2005(6)(a)(ii) names \u201ccrime type\u201d specifically, alongside incident number, as a required field for every search.",
+        "Flock's own platform does not export a discrete \u201ccrime type\u201d field at all. The full field set in Flock's Organization Audit Log, documented independently via haveibeenflocked.com's review of agencies' own Flock CSV exports, is: <span class=\"mono\">ID, User Name, Reason (free text), Case #, Search Type, Timestamp</span>. \u201cReason\u201d is the closest analog, and it is unstructured free text \u2014 not a defined crime-type category.",
+        "This is resolved through the vendor's own documented export schema, not by opening Weber County's specific raw file. But the conclusion holds regardless of which agency's export you're looking at: if the field doesn't exist in the platform, no Utah agency's production can contain it as a distinct column, no matter how the request was worded."
+      ],
+      unresolved:false
+    },
+    {
+      field:"Incident number",
+      required:{text:"Yes", cls:"pass"},
+      production:{text:"Yes \u2014 as Flock's \u201cCase #\u201d field", cls:"warn"},
+      verifiable:{text:"Partially", cls:"warn"},
+      retention:"Five years",
+      detail:[
+        "Same statutory subsection as crime type &mdash; &sect; 41-6a-2005(6)(a)(ii) &mdash; requires the incident number tied to each search.",
+        "This maps to Flock's own <span class=\"mono\">Case #</span> field, confirmed present in the platform's Organization Audit Log export. A case-number field is separately documented as first appearing in Weber County's released data in February 2025, consistent with this being the same field.",
+        "The gap isn't whether the field exists &mdash; it does &mdash; it's what's in it. Flock's <span class=\"mono\">Case #</span> field accepts any alphanumeric string with no live validation against a department's CAD or records-management system. Weber County's own Flock contract language confirms the same: the incident-number field takes unverified text input with no real-time check against an actual case docket. A field that satisfies the statute's letter can still be functionally meaningless."
+      ],
+      unresolved:false
+    },
+    {
+      field:"Search reason",
+      required:{text:"Not itself a statutory term", cls:"warn"},
+      production:{text:"Partially", cls:"warn"},
+      verifiable:{text:"Partially", cls:"warn"},
+      retention:"Vendor / agency rules",
+      detail:[
+        "Utah's statute requires crime type and incident number specifically &mdash; it does not name a separate \u201creason\u201d field. Agencies layer that requirement on themselves through policy: Milwaukee PD's own rules required a documented investigative purpose, and prosecutors say an officer there satisfied that requirement with the single word \u201cinvestigation,\u201d 179 times.",
+        "In Weber County's data, whatever reason field existed before the mid-2025 structured menu rollout was free text &mdash; a field that exists, but that nothing validates."
+      ],
+      unresolved:false
+    },
+    {
+      field:"Warrant number",
+      required:{text:"Not expressly required for every query", cls:"warn"},
+      production:{text:"Usually no", cls:"fail"},
+      verifiable:{text:"Usually no", cls:"fail"},
+      retention:"Varies",
+      detail:[
+        "Utah law authorizes ALPR searches under four categories &mdash; active criminal investigation, an outstanding warrant, a missing or endangered person, or a stolen vehicle. Only one of those four logically involves a warrant number, and the statute doesn't require entering one as a distinct field on every search regardless of category.",
+        "Nothing in the records reviewed so far shows a warrant-number field populated as a matter of course."
+      ],
+      unresolved:false
+    },
+    {
+      field:"Audit findings",
+      required:{text:"Not expressly specified", cls:"warn"},
+      production:{text:"No historical forms produced", cls:"fail"},
+      verifiable:{text:"Unclear", cls:"fail"},
+      retention:"Unclear",
+      detail:[
+        "The statute requires an agency to have a written policy covering the use, management, and auditing of its ALPR system &mdash; but it doesn't specify a record format for what an actual audit's findings have to look like or how long to keep them.",
+        "Asked in writing for any audit, compliance review, or self-assessment of the system, the Weber County Sheriff's Office initially responded that this was not a record it maintains. It later clarified that audits had happened but weren't logged, and created a form to log them going forward &mdash; which produces nothing for the roughly four and a half years already in the production."
+      ],
+      unresolved:false
+    },
+    {
+      field:"Result returned",
+      required:{text:"Not shown as a requirement", cls:"fail"},
+      production:{text:"Not shown", cls:"fail"},
+      verifiable:{text:"No", cls:"fail"},
+      retention:"Unclear",
+      detail:[
+        "The statute's recordkeeping requirement is about documenting that a search happened and why &mdash; not about preserving or disclosing what the search actually returned.",
+        "The released production is a log of searches: agency, date, and count. It is not the underlying vehicle-location data that each search surfaced to the requesting officer."
+      ],
+      unresolved:false
+    },
+    {
+      field:"Action taken",
+      required:{text:"Not shown as a requirement", cls:"fail"},
+      production:{text:"Not shown", cls:"fail"},
+      verifiable:{text:"Case-dependent", cls:"warn"},
+      retention:"Case-dependent",
+      detail:[
+        "Utah's ALPR statute doesn't require documenting what law-enforcement action, if any, followed a given search.",
+        "Whether a particular search led to an arrest, a citation, or nothing at all would only become publicly visible if that outcome generated its own separate court or incident record &mdash; governed by whatever retention rule applies to that downstream record type, not by the ALPR statute itself."
+      ],
+      unresolved:false
+    }
+  ];
+
+  function renderCell(cell){
+    return `<span class="cell-chip ${cell.cls}">${cell.text}</span>`;
+  }
+
+  function render(){
+    const container = document.getElementById('crosswalk-container');
+    container.innerHTML = rows.map((r,i) => `
+      <div class="row-item" data-idx="${i}">
+        <div class="row-head">
+          <div class="row-field">${r.field}</div>
+          <div>
+            <span class="row-cell-label">Required by S.B. 250</span>
+            <span class="row-cell-value">${renderCell(r.required)}</span>
+          </div>
+          <div>
+            <span class="row-cell-label">Present in production?</span>
+            <span class="row-cell-value">${renderCell(r.production)}</span>
+          </div>
+          <div>
+            <span class="row-cell-label">Retention</span>
+            <span class="row-cell-value">${r.retention}</span>
+          </div>
+          <div class="row-caret">&#9656;</div>
+        </div>
+        <div class="row-detail">
+          ${r.detail.map(p=>`<p>${p}</p>`).join('')}
+          <p><span class="row-cell-label" style="display:inline;">Publicly verifiable:</span> ${renderCell(r.verifiable)}</p>
+          ${r.unresolved ? `<span class="unresolved-flag">Unresolved &mdash; not yet checked against the raw GRAMA files</span>` : ''}
+        </div>
+      </div>
+    `).join('');
+    container.querySelectorAll('.row-item').forEach(el=>{
+      el.querySelector('.row-head').addEventListener('click', ()=> el.classList.toggle('open'));
+    });
+    // Open the two unresolved rows by default so the caveat is impossible to miss
+    container.querySelectorAll('.row-item').forEach((el,i)=>{
+      if(rows[i].unresolved) el.classList.add('open');
+    });
+  }
+  render();
+})();
+</script>
+</body>
+</html>
