@@ -111,6 +111,18 @@
   .critic-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:18px; }
   .critic-card .critic-name{ font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; color:var(--brass-dark); margin-bottom:8px; font-weight:700; }
   .critic-card blockquote{ font-family:"Fraunces",serif; font-style:italic; font-size:1.0rem; margin:0; color:var(--ink); line-height:1.5; }
+
+  /* Federal layer standout callout */
+  .standout{ background:var(--ink); color:#efe9d8; border-radius:16px; padding:32px 30px; margin:36px 0; box-shadow:0 16px 40px rgba(28,36,48,0.28); position:relative; }
+  .standout::before{ content:""; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, var(--brass), var(--brass-bright), var(--brass)); border-radius:16px 16px 0 0; }
+  .standout .standout-kicker{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:14px; }
+  .standout h3{ font-family:"Fraunces",serif; font-weight:700; font-size:1.35rem; color:#faf6ea; margin:0 0 18px; line-height:1.35; }
+  .standout-sub{ font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; font-weight:700; letter-spacing:0.06em; color:var(--brass-bright); margin:0 0 8px; }
+  .standout p.body{ font-size:15px; color:#d8d2bd; line-height:1.7; margin:0 0 18px; }
+  .standout p.body:last-of-type{ margin-bottom:0; }
+  .standout .divider{ border:none; border-top:1px solid rgba(214,184,105,0.3); margin:20px 0; }
+  .standout .hedge{ background:rgba(0,0,0,0.25); border-left:4px solid var(--brass-bright); border-radius:0 8px 8px 0; padding:14px 18px; font-size:13px; color:#c9c3ae; font-style:italic; }
+  @media (max-width:680px){ .standout{ padding:26px 20px; } }
 </style>
 </head>
 <body>
@@ -177,6 +189,7 @@
       </div>
       <div class="toggle-panel" id="optional">
         <div class="card">
+          <p style="margin-top:0; font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; color:var(--harm);">No opt-in, no change. That's the whole loophole in one sentence.</p>
           <ul class="check-list">
             <li><span class="check-icon opt">&#8320;</span><span><strong>7-day default retention</strong> — new customers get this as the default; <strong>existing customers keep their current, previously approved retention period unless they choose to switch</strong></span></li>
             <li><span class="check-icon opt">&#8320;</span><span><strong>Offense-type filtering for outside searches</strong> — a capability an agency can choose to configure, not something applied automatically</span></li>
@@ -211,6 +224,54 @@
       </div>
     </section>
 
+    <section id="state-disparity">
+      <div class="eyebrow">The Bigger Gap Behind The Opt-In</div>
+      <h2 class="section-title">Utah's rules stop applying the moment the data leaves Utah</h2>
+      <p class="section-sub">The opt-in question above is about what Flock recommends as a company default. It's a smaller question than this one: once Weber County's data is searched and pulled into another agency's own system, whose rules govern it from then on? For Weber County's single largest out-of-state searcher, the honest answer is: almost none.</p>
+
+      <div class="finding-block">
+        <p class="q">Utah has a real statutory floor. Texas doesn't have one at all.</p>
+        <p>Utah's SB 250 framework &mdash; documented in Article 4 of this series &mdash; caps Weber County's own retention at 9 months, requires a 5-year audit trail, and restricts permitted uses to specific categories. Texas has none of that. As of this writing, <em>The Texan</em> reported plainly that in Texas "there are no state or federal rules limiting how the data is used or how long the vendor may retain collected information." Two bills that would have changed that &mdash; HB 961 and HB 3999 &mdash; were introduced in the Texas Legislature and did not pass.</p>
+      </div>
+
+      <div class="finding-block quote">
+        <p class="q">Houston PD's own retention claims don't agree with each other</p>
+        <p>A Houston City Council member told KHOU in 2024 that Flock data "can only be kept for 30 days." But Houston Police Department's own written policy &mdash; General Order 400-29, issued August 2024 &mdash; says the opposite for exactly this kind of data: non-city-owned ALPR systems (which is what Flock is, from Houston's perspective) are to be purged "within one calendar year of entry unless a law enforcement agency requests a longer retention period for a specific case." A public statement promising 30 days and a written department policy allowing up to a year are not the same rule, and nothing found in this research resolves which one actually governs.</p>
+      </div>
+
+      <div class="finding-block">
+        <p class="q">This isn't just Houston. It's most of the network as it already exists.</p>
+        <p>Follow the opt-in structure to its actual conclusion: the new 7-day default applies automatically to new Flock customers. Every agency already running Flock before August 13, 2026 keeps its own previously approved retention period unless it takes affirmative action to switch. This series has already documented what those pre-existing periods commonly are &mdash; 30 days as Flock's own prior company default at agency after agency in independent state audits, Utah's separate 9-month statutory ceiling, and Houston's own written policy allowing up to a year. None of those change because of this announcement unless the specific agency holding that data chooses to act. The "30 days down to 7" headline describes what a brand-new customer signing up today gets. For the thousands of agencies &mdash; and the roughly 5,000+ communities Flock says it already operates in &mdash; already running the system, the retention window announced August 13 is not a change at all unless each one separately opts in.</p>
+      </div>
+
+      <div class="card">
+        <p style="margin-top:0; font-weight:600;">What this means for a Weber County resident's data, concretely:</p>
+        <ul style="font-size:14.5px; line-height:1.9; margin-bottom:0;">
+          <li>Utah law caps how long <strong>Weber County's own copy</strong> of a capture can be kept, and requires a 5-year record of who searched it and why</li>
+          <li>The moment Houston PD searches and pulls that data into <strong>its own system</strong>, Utah's cap and audit requirement no longer apply to that copy</li>
+          <li>What governs Houston's copy from that point is Houston's own internal policy &mdash; which Houston alone can write, interpret, or change, and which its own public statements and its own written order don't fully agree on</li>
+          <li>Texas's statewide ALPR-sharing network has grown from 122 to 206 partner agencies in five months as of August 2026, per the Texas Tribune, with no state law setting any floor under any of them</li>
+        </ul>
+      </div>
+
+      <div class="standout">
+        <div class="standout-kicker">One Layer Up</div>
+        <h3>Could an agency even be legally free to keep 7 days if it wanted to?</h3>
+
+        <p class="standout-sub">On the plate images themselves</p>
+        <p class="body">Yes. No federal statute sets any ALPR retention length at all &mdash; the Congressional Research Service's own review confirms there are "no federal laws that explicitly govern or limit the use of ALPR technology... by law enforcement agencies." Most state laws found in this research (Utah's 9-month cap, Colorado's 3-year cap, California's 60-day cap, New Jersey's 5-year allowance) set a <strong>maximum</strong>, not a minimum &mdash; a ceiling an agency can always choose to fall well under. Nothing in that layer blocks an agency from adopting 7 days if it chose to.</p>
+
+        <hr class="divider">
+
+        <p class="standout-sub">On the access logs &mdash; a separate federal layer entirely</p>
+        <p class="body">The FBI's <strong>CJIS Security Policy</strong> binds any agency with access to NCIC or other Criminal Justice Information &mdash; effectively every agency whose ALPR system checks plates against a hotlist. CJIS names "Audit Record Retention" as one of its required policy areas, and multiple secondary sources describing that policy cite a <strong>minimum one-year retention requirement</strong> for logs of who accessed CJI and when. That's a different record than the plate capture &mdash; it's the access log, not the image &mdash; but it means an agency could delete the raw plate photo after 7 days and still be separately required, by a federal security policy with nothing to do with Flock's announcement, to keep the record of who searched for it far longer.</p>
+
+        <div class="hedge">This series has not obtained the primary CJIS Security Policy text confirming the exact retention clause and version in force. Flagged here as a real, credibly-sourced possibility &mdash; not a confirmed requirement. Worth verifying directly against CJIS documentation before treating it as settled.</div>
+      </div>
+
+      <p style="font-size:13.5px; color:var(--muted); margin-top:16px;">This is the same shape as the opt-in retention question above, at a larger scale: a real rule exists somewhere in the chain, but it only covers part of the chain, and nothing requires the rest of the chain to match it.</p>
+    </section>
+
     <section id="critics">
       <div class="eyebrow">How Critics Read the Same Announcement</div>
       <h2 class="section-title">"Window dressing," or "a step in the right direction"?</h2>
@@ -235,7 +296,7 @@
 
     <div class="takeaway">
       <div class="eyebrow">The Throughline</div>
-      <p class="big">This is the same shape as every legislative reform this series has documented &mdash; real, mandatory pieces (case codes, audit tools, MFA) sitting next to an optional piece (the actual retention shortening) that gets described in headlines as if it applies to everyone. Whether Weber County has taken Path A or Path B isn't something this piece can answer. It's the next records request.</p>
+      <p class="big">This is the same shape as every legislative reform this series has documented &mdash; real, mandatory pieces (case codes, audit tools, MFA) sitting next to an optional piece (the actual retention shortening) that gets described in headlines as if it applies to everyone. It doesn't. It applies to agencies signing up today. Every agency already running Flock &mdash; including, as far as this piece can confirm, Weber County's own &mdash; keeps whatever it already had unless it separately chooses to change. Whether Weber County has taken that step isn't something this piece can answer. It's the next records request.</p>
     </div>
 
   </div>
@@ -252,6 +313,11 @@
       <li>Slashdot / Associated Press, Aug. 14, 2026</li>
       <li>Sen. Ron Wyden, letter to FTC Chair Andrew Ferguson regarding Flock cybersecurity practices, Nov. 3, 2025</li>
       <li>Minnesota Security Consortium independent ALPR audits (Woodbury, Hopkins, Robbinsdale, and others), 2025&ndash;2026 &mdash; cited elsewhere in this series showing 30-day default as the common baseline prior to this announcement</li>
+      <li>The Texan, "Automatic License Plate Readers' Use in Texas Prompt Privacy, Legal Concerns," 2024 &mdash; confirms no Texas state statute governs ALPR retention or use</li>
+      <li>Texas HB 961 and HB 3999, unpassed legislation that would have regulated ALPR use in Texas</li>
+      <li>Houston Police Department General Order 400-29, "Automated License Plate Recognition," issued Aug. 27, 2024</li>
+      <li>KHOU 11, "Automatic license plate reader cameras in Houston, Texas," 2024</li>
+      <li>The Texas Tribune, "Use of Flock license plate reader cameras surges in Texas," Aug. 3, 2026</li>
     </ul>
     <p style="margin-bottom:0; margin-top:16px;">Part of a seven-part series on ALPR and privacy oversight in Weber County. &larr; <a href="weber-hive-private-company-public-power.html">Article 6: Private Company, Public Power</a> &nbsp;|&nbsp; <a href="index.html">All articles &rarr;</a></p>
   </div>
