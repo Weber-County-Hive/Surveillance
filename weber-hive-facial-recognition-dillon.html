@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Safeguard Utah Killed, Playing Out in Florida — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.65; }
+  h1,h2,h3{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 24px; }
+  header.hero{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; padding:52px 0 40px; }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:16px; }
+  header.hero h1{ font-size:clamp(1.7rem, 4vw, 2.5rem); line-height:1.16; margin:0 0 16px; color:#faf6ea; }
+  .subhead{ font-size:1.05rem; color:#c9c3ae; }
+  .byline{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-top:20px; }
+  main{ padding:44px 0 60px; }
+  p{ margin:0 0 18px; font-size:1.02rem; }
+  h2{ font-size:1.4rem; margin:40px 0 14px; }
+  .lede{ font-size:1.15rem; color:var(--ink); }
+  .pull{ border-left:4px solid var(--brass); background:var(--paper-card); padding:18px 22px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:26px 0; font-size:1.02rem; }
+  .caution{ background:var(--harm-bg); border:1px solid rgba(138,59,46,0.3); border-radius:10px; padding:18px 22px; margin:26px 0; font-size:0.95rem; }
+  .caution .label{ font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--harm); margin-bottom:8px; display:block; font-weight:700; }
+  .callout{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); border-radius:14px; padding:28px 30px; margin:34px 0; color:#efe9d8; }
+  .callout .eyebrow{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:10px; }
+  .callout h3{ font-size:1.2rem; margin:0 0 10px; color:#faf6ea; }
+  .callout p{ color:#c9c3ae; margin:0 0 10px; font-size:0.98rem; }
+  .stat-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin:26px 0; }
+  .stat{ background:var(--paper-card); padding:16px 12px; text-align:center; }
+  .stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.5rem; color:var(--brass-dark); }
+  .stat .lbl{ font-size:11px; color:var(--muted); margin-top:4px; }
+  .timeline{ position:relative; padding-left:24px; margin:24px 0; }
+  .timeline::before{ content:""; position:absolute; left:8px; top:4px; bottom:4px; width:2px; background:var(--line); }
+  .tl-item{ position:relative; padding-bottom:18px; }
+  .tl-item::before{ content:""; position:absolute; left:-24px; top:3px; width:10px; height:10px; border-radius:50%; background:var(--brass); border:2px solid var(--paper); }
+  .tl-date{ font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--brass-dark); font-weight:700; text-transform:uppercase; }
+  .tl-desc{ font-size:0.96rem; margin-top:3px; }
+  footer{ border-top:1px solid var(--line); padding:26px 0 50px; font-size:12.5px; color:var(--muted); }
+  .sources-list{ margin-top:8px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  .cards-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(210px,1fr)); gap:16px; margin:26px 0; }
+  .flip-card{ perspective:1000px; height:250px; cursor:pointer; }
+  .flip-inner{ position:relative; width:100%; height:100%; transition:transform 0.5s; transform-style:preserve-3d; }
+  .flip-card.flipped .flip-inner{ transform:rotateY(180deg); }
+  .flip-front, .flip-back{ position:absolute; width:100%; height:100%; backface-visibility:hidden; border-radius:10px; padding:18px; display:flex; flex-direction:column; justify-content:center; overflow-y:auto; }
+  .flip-front{ background:var(--ink); color:#efe9d8; text-align:center; }
+  .flip-front .state{ font-family:"Fraunces",serif; font-weight:700; font-size:2rem; color:var(--brass-bright); }
+  .flip-front .year{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-top:6px; }
+  .flip-front .tap{ font-family:"IBM Plex Mono",monospace; font-size:10px; color:#7d7563; margin-top:14px; text-transform:uppercase; letter-spacing:0.06em; }
+  .flip-back{ background:var(--paper-card); border:1.5px solid var(--brass); transform:rotateY(180deg); justify-content:flex-start; }
+  .flip-back .name{ font-family:"Fraunces",serif; font-weight:700; font-size:1.15rem; color:var(--ink); margin-bottom:10px; line-height:1.25; }
+  .flip-back .field{ font-family:"IBM Plex Mono",monospace; font-size:10px; text-transform:uppercase; color:var(--brass-dark); letter-spacing:0.04em; margin-top:6px; }
+  .flip-back .val{ font-size:13px; color:var(--muted); line-height:1.4; }
+  .cards-note{ font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted); text-align:center; margin:-14px 0 20px; }
+</style>
+<script>
+  function flipCard(el){ el.classList.toggle('flipped'); }
+</script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="https://weber-county-hive.github.io/Surveillance/index.html">&larr; Surveillance series</a></div>
+    <div class="kicker">The Weber County Hive &middot; Surveillance Watch</div>
+    <h1>The Safeguard Utah Killed, Playing Out 2,000 Miles Away</h1>
+    <p class="subhead">A Fort Myers man spent a night in jail for a crime committed 300 miles from home, after a facial-recognition system called him a 93% match. Utah had a bill that would have banned exactly this kind of technology fusion. It died in Senate Rules.</p>
+    <div class="byline">The Weber County Hive</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p class="lede">In November 2023, someone tried to lure a child at a McDonald&rsquo;s in Jacksonville Beach, Florida. A Jacksonville Beach detective photographed a computer screen showing grainy surveillance footage with his own cellphone, then submitted those photos to FACES &mdash; the Face Analysis Comparison and Examination System, a facial-recognition tool operated by the Pinellas County Sheriff&rsquo;s Office and shared out to other Florida agencies. The system returned a candidate it scored as a 93 percent match on facial features: Robert Dillon, a 52-year-old Fort Myers commercial crabber who had never set foot in Jacksonville Beach. That score measured algorithmic similarity between two images &mdash; it did not mean a 93 percent probability that Dillon was the person in the footage. Investigators treated it as the latter anyway.</p>
+
+    <p>Nine months later, a Lee County deputy showed up at Dillon&rsquo;s home and arrested him. He spent a night in jail, had to pledge the title to his truck to post bond, and carried a public mugshot that outlasted the charges themselves. Prosecutors eventually dropped the case. No record of the arrest remains in Duval County&rsquo;s jail files or court system. On June 10, 2026, Dillon filed a federal civil-rights lawsuit &mdash; <em>Dillon v. City of Jacksonville Beach</em> &mdash; against the Jacksonville Beach Police Department and the Jacksonville and Pinellas County Sheriff&rsquo;s Offices, represented by the ACLU, the ACLU of Florida, and the law firm Hoguet Newman Regal &amp; Kenney.</p>
+
+    <div class="stat-row">
+      <div class="stat"><div class="num">93%</div><div class="lbl">algorithmic similarity score, not a probability of guilt</div></div>
+      <div class="stat"><div class="num">300+</div><div class="lbl">miles between Dillon's home and the crime</div></div>
+      <div class="stat"><div class="num">15th</div><div class="lbl">at least, per the ACLU's own chronology &mdash; the true count is contested</div></div>
+    </div>
+
+    <h2>What the warrant left out</h2>
+    <p>According to the lawsuit, the arrest warrant never mentioned two things investigators already knew: a license-plate-reader search had turned up no record of Dillon&rsquo;s vehicle anywhere near the restaurant in the days around the crime, and the McDonald&rsquo;s employee who identified him in a photo lineup had described the actual suspect as a &ldquo;regular&rdquo; &mdash; something Dillon, a man who lived five hours away, could not have been. The lineup itself was built entirely from the facial-recognition system&rsquo;s own output, which is precisely the failure mode researchers have flagged for years: when the algorithm gets a match wrong, it tends to get it wrong with someone who looks similar to the real suspect, so the lineup ends up testing whether a witness can tell two similar-looking strangers apart, not whether they recognize the person they actually saw.</p>
+
+    <p>Pinellas County&rsquo;s own position, stated publicly after the lawsuit was filed, is that FACES results are never delivered as identifications &mdash; that the tool is explicitly meant to generate investigative leads requiring independent corroboration, not probable cause on its own. Whether that standard was followed here is the entire dispute. What isn&rsquo;t disputed is the outcome: a man with no connection to the crime, its city, or its victim spent a night in jail and is still dealing with the fallout two years later.</p>
+
+    <h2>Dillon isn't an outlier</h2>
+    <p>Civil-liberties advocates say Dillon became at least the 15th publicly identified person wrongfully arrested after police relied on an incorrect facial-recognition result &mdash; that count reflects the ACLU's own April 2026 chronology, which listed Maryland grandmother Kimberlee Williams as the 14th known case shortly before Dillon's became public. The national total varies depending on whether a given count includes arrests, prolonged detentions, withdrawn warrants, and still-disputed cases; News4Jax separately reported attorneys' broader claim of more than two dozen people, which is their own figure, not an independently confirmed one. Nearly every case with full public reporting has involved a Black man or woman. Tap a card to see who, where, and what went wrong.</p>
+
+    <div class="cards-grid" id="casesGrid"></div>
+    <div class="cards-note">tap / click each card to flip it</div>
+
+    <div class="caution">
+      <span class="label">Worth being precise about</span>
+      This is a facial-recognition case, not an ALPR case in the sense this publication usually covers. Flock, the automated license-plate-reader system documented extensively elsewhere in this series, does not perform facial recognition &mdash; that correction is already on the record and stays true here. The automatic license-plate-reader search in Dillon&rsquo;s own case actually worked in his favor: it found no evidence his car had ever been near the crime scene, and police apparently left that fact out of the warrant application too.
+    </div>
+
+    <div class="callout">
+      <div class="eyebrow">Why This Belongs In Utah's File</div>
+      <h3>H.B. 468 would have banned exactly this fusion</h3>
+      <p>Utah&rsquo;s H.B. 468, Automatic License Plate Reader Amendments, passed House Transportation 10&ndash;0&ndash;2 and the House floor 64&ndash;2 in 2025. Among its provisions: an explicit ban on attaching facial recognition technology to ALPR hardware statewide. The bill cleared Senate Transportation 6&ndash;0&ndash;2 as well &mdash; every committee that heard it, in both chambers, voted for it. It never got a Senate floor vote. Its enacting clause was struck at 11:59 p.m. on March 7, 2025, the same night and the same mechanism that killed S.B. 138, a companion bill that never even got a hearing.</p>
+      <p>Nothing in Utah&rsquo;s current ALPR statute prohibits combining plate-reader networks with face-matching systems the way Florida&rsquo;s patchwork of shared facial-recognition databases now does. The safeguard existed, on paper, with unanimous committee support in both chambers. It didn&rsquo;t survive Rules.</p>
+    </div>
+
+    <h2>The sequence, side by side</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-date">Nov 2023</div><div class="tl-desc">Jacksonville Beach incident; grainy surveillance stills are the only lead</div></div>
+      <div class="tl-item"><div class="tl-date">Feb &ndash; Mar 2025</div><div class="tl-desc">H.B. 468 passes House Transportation 10-0-2, House floor 64-2, Senate Transportation 6-0-2 &mdash; then dies in Senate Rules, 11:59 p.m., March 7</div></div>
+      <div class="tl-item"><div class="tl-date">Aug 2024</div><div class="tl-desc">Robert Dillon arrested at his Fort Myers home, nine months after the incident</div></div>
+      <div class="tl-item"><div class="tl-date">June 10, 2026</div><div class="tl-desc"><em>Dillon v. City of Jacksonville Beach</em> filed in federal court, Middle District of Florida</div></div>
+    </div>
+
+    <p>The dates don&rsquo;t line up as cause and effect &mdash; Utah&rsquo;s bill couldn&rsquo;t have prevented an arrest in Florida. What lines up is the shape of the risk. A state legislature identified the specific technological fusion that makes cases like Dillon&rsquo;s possible, wrote a rule against it, and watched every committee that reviewed it vote in favor before it disappeared in the one room this series keeps finding at the end of every dead surveillance bill.</p>
+
+    <div class="pull">Every committee with jurisdiction voted for the safeguard. None of that mattered once the bill reached Rules with the session's final days closing in &mdash; the same sentence this series has now written about ALPR reform three times.</div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--ink);">Sources</strong>
+    <ul class="sources-list">
+      <li>Wired, investigation of Robert Dillon's case and the FACES/FACESNXT system &mdash; the strongest detailed independent account of the underlying facts</li>
+      <li>ACLU of Florida, "Florida Man Sues Police Over Wrongful Arrest Due to False Facial Recognition Match," press release, June 10, 2026, and the 66-page federal complaint in <em>Dillon v. City of Jacksonville Beach</em></li>
+      <li>First Coast News, News4Jax, CBS News, ABC News coverage of <em>Dillon v. City of Jacksonville Beach</em>, June 2026</li>
+      <li>Associated Press reporting on Randal Reid and Porcha Woodruff; WABC/ABC7NY on Trevis Williams; The Washington Post's national investigation into police use of facial recognition</li>
+      <li>ACLU, "More than a Dozen Wrongful Arrests Due to Police Reliance on Facial Recognition Technology" (April 2026 chronology)</li>
+      <li>ACLU, <em>Woodruff v. Oliver</em> case page and amicus brief, U.S. District Court, Eastern District of Michigan</li>
+      <li>Weber County Hive, "The Committees That Decide Whether ALPR Gets Oversight" (H.B. 468, S.B. 138 committee and floor history)</li>
+      <li>Weber County Hive correction file confirming Flock does not use facial recognition</li>
+    </ul>
+    <p style="margin-top:14px;">This piece reports the allegations in a filed federal lawsuit; the claims against the named agencies and officers are, as of this writing, unproven. The Pinellas County Sheriff's Office has publicly disputed characterizations of its training standards. The national wrongful-arrest count is contested and moving; this piece uses the ACLU's own April 2026 chronology rather than a higher unverified figure some attorneys have cited.</p>
+  </div>
+</footer>
+
+<script>
+const cases = [
+  {state:"NJ", year:"2019", name:"Nijeer Parks", crime:"Facial recognition connected him to a fraudulent license left at a crime scene; investigators disregarded contradictory fingerprints and DNA", outcome:"Jailed roughly 10 days; case dismissed"},
+  {state:"MI", year:"2019", name:"Michael Oliver", crime:"Matched despite visible differences from the suspect, including tattoos", outcome:"Arrested and charged; case dismissed"},
+  {state:"MI", year:"2020", name:"Robert Williams", crime:"Grainy store footage produced a false match, then placed in a photo lineup", outcome:"Detained ~30 hours; Detroit later paid $300,000 and adopted restrictions"},
+  {state:"MD", year:"2022", name:"Alonzo Sawyer", crime:"Linked to an assault on a bus driver; photo used to build a lineup", outcome:"Jailed ~9 days; charges dropped once the real suspect was found"},
+  {state:"LA/GA", year:"2022", name:"Randal Quran Reid", crime:"Identified in a Louisiana theft investigation; he had never been to the state", outcome:"Jailed nearly a week in Georgia; warrant withdrawn"},
+  {state:"MI", year:"2023", name:"Porcha Woodruff", crime:"Matched to a carjacking/robbery suspect while eight months pregnant", outcome:"Detained ~10 hours; charges dismissed"},
+  {state:"MO", year:"2023-24", name:"Christopher Gatlin", crime:"A low-quality surveillance image generated the lead; discrepancies went unverified", outcome:"Jailed more than 16 months before release"},
+  {state:"FL", year:"2024", name:"Robert Dillon", crime:"Phone photos of a computer screen were run through FACES, returning a 93% score treated as identification", outcome:"Arrested, prosecuted for months; charge dropped; federal suit filed June 2026"},
+  {state:"NY", year:"2025", name:"Trevis Williams", crime:"Matched despite being 8 inches taller and ~70 lbs heavier than the suspect; his own phone data placed him elsewhere", outcome:"Jailed 2 days; case dismissed"},
+  {state:"ND/TN", year:"2025", name:"Angela Lipps", crime:"Linked to North Dakota bank fraud; financial records supported her Tennessee alibi", outcome:"Incarcerated nearly 6 months including extradition; charges dismissed"},
+  {state:"MD/OK", year:"2025-26", name:"Kimberlee Williams", crime:"Maryland agencies relied on a false match in separate fraud cases without disclosing the technology's role in the warrants", outcome:"Jailed roughly 6 months; cases dropped"},
+];
+
+const grid = document.getElementById('casesGrid');
+cases.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'flip-card';
+  card.onclick = function(){ flipCard(this); };
+  card.innerHTML = `
+    <div class="flip-inner">
+      <div class="flip-front">
+        <div class="state">${c.state}</div>
+        <div class="year">${c.year}</div>
+        <div class="tap">tap to reveal</div>
+      </div>
+      <div class="flip-back">
+        <div class="name">${c.name}</div>
+        <div class="field">What went wrong</div>
+        <div class="val">${c.crime}</div>
+        <div class="field">Outcome</div>
+        <div class="val">${c.outcome}</div>
+      </div>
+    </div>`;
+  grid.appendChild(card);
+});
+</script>
+
+</body>
+</html>
