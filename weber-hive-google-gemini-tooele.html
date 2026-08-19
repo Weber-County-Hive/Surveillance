@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Contract Nobody Voted On — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.65; }
+  h1,h2,h3{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 24px; }
+  header.hero{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; padding:52px 0 40px; }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:16px; }
+  header.hero h1{ font-size:clamp(1.8rem, 4.2vw, 2.6rem); line-height:1.16; margin:0 0 16px; color:#faf6ea; }
+  .subhead{ font-size:1.05rem; color:#c9c3ae; }
+  .byline{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-top:20px; }
+  .stat-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(214,184,105,0.25); border:1px solid rgba(214,184,105,0.25); border-radius:10px; overflow:hidden; margin-top:28px; }
+  .stat{ background:rgba(20,26,36,0.65); padding:16px 12px; text-align:center; }
+  .stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.4rem; color:var(--brass-bright); }
+  .stat .lbl{ font-size:11px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .stat-row{ grid-template-columns:repeat(2,1fr); } }
+  main{ padding:44px 0 60px; }
+  p{ margin:0 0 18px; font-size:1.02rem; }
+  h2{ font-size:1.4rem; margin:44px 0 14px; }
+  .lede{ font-size:1.12rem; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .section-sub{ color:var(--muted); font-size:0.98rem; margin:0 0 22px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:22px 24px; }
+  .caution{ background:var(--harm-bg); border:1px solid rgba(138,59,46,0.3); border-radius:10px; padding:18px 22px; margin:26px 0; font-size:0.95rem; }
+  .caution .label{ font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--harm); margin-bottom:8px; display:block; font-weight:700; }
+  .callout{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); border-radius:14px; padding:28px 30px; margin:32px 0; color:#efe9d8; }
+  .callout .eyebrow{ color:var(--brass-bright); }
+  .callout h3{ font-size:1.2rem; margin:0 0 10px; color:#faf6ea; }
+  .callout p{ font-size:14.5px; color:#c9c3ae; margin:0 0 10px; }
+
+  /* Timeline */
+  .timeline{ position:relative; padding-left:26px; margin:24px 0; }
+  .timeline::before{ content:""; position:absolute; left:8px; top:4px; bottom:4px; width:2px; background:var(--line); }
+  .tl-item{ position:relative; padding-bottom:20px; }
+  .tl-item::before{ content:""; position:absolute; left:-26px; top:3px; width:11px; height:11px; border-radius:50%; background:var(--brass); border:2px solid var(--paper); }
+  .tl-item.flag::before{ background:var(--harm); }
+  .tl-date{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--brass-dark); font-weight:700; text-transform:uppercase; }
+  .tl-desc{ font-size:14.5px; margin-top:3px; }
+
+  /* Clause explorer */
+  .clause-tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:0; }
+  .clause-tab{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.03em; padding:9px 14px; background:var(--paper); border:1px solid var(--line); border-bottom:none; border-radius:8px 8px 0 0; cursor:pointer; color:var(--muted); }
+  .clause-tab.active{ background:var(--paper-card); color:var(--ink); border-color:var(--brass); font-weight:700; }
+  .clause-panel-wrap{ background:var(--paper-card); border:1px solid var(--brass); border-radius:0 10px 10px 10px; box-shadow:var(--shadow); }
+  .clause-panel{ display:none; padding:24px; }
+  .clause-panel.active{ display:block; }
+  .clause-quote{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; background:var(--paper); border-left:3px solid var(--brass); padding:14px 16px; margin:0 0 14px; color:var(--ink); line-height:1.6; white-space:pre-wrap; }
+  .clause-loc{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; color:var(--brass-dark); letter-spacing:0.06em; margin-bottom:6px; }
+  .clause-effect .field{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; color:var(--harm); letter-spacing:0.06em; margin-top:4px; display:block; }
+  .clause-effect p{ font-size:14.5px; margin:6px 0 0; }
+
+  .stat-mini-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin:24px 0; }
+  .stat-mini{ background:var(--paper-card); padding:14px 10px; text-align:center; }
+  .stat-mini .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.3rem; color:var(--brass-dark); }
+  .stat-mini .lbl{ font-size:10.5px; color:var(--muted); margin-top:3px; }
+
+  footer{ border-top:1px solid var(--line); padding:26px 0 50px; font-size:12.5px; color:var(--muted); }
+  .sources-list{ margin-top:8px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="https://weber-county-hive.github.io/Surveillance/index.html">&larr; Surveillance series</a></div>
+    <div class="kicker">The Weber County Hive &middot; Data Privacy Watch</div>
+    <h1>The Contract Nobody Voted On</h1>
+    <p class="subhead">USBE's Superintendent announced Google Gemini for 680,000 Utah students without a board vote, a privacy review, or a procurement process. The contract behind it lets Google expand its own reach by editing its own website.</p>
+    <div class="byline">The Weber County Hive</div>
+    <div class="stat-row">
+      <div class="stat"><div class="num">680,000</div><div class="lbl">Utah K-12 students covered by the rollout</div></div>
+      <div class="stat"><div class="num">0</div><div class="lbl">votes taken by the 15-member elected board</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">state privacy laws USBE admits it has no compliance record for</div></div>
+      <div class="stat"><div class="num">180</div><div class="lbl">days Google can now retain student data after a contract ends</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p class="lede">On June 3, 2026, Utah State Board of Education Superintendent Molly Hart and AI Specialist Matt Winters announced that Google Gemini for Education would be made available across the state's public schools &mdash; roughly 680,000 K-12 students. The elected 15-member State Board of Education never voted on it. There was no procurement process. There was no privacy review. Eight days later, on June 11, Tooele County School District signed the underlying Data Processing Agreement with Google.</p>
+
+    <p>This investigation was built independently &mdash; through direct review of the signed contract, Utah's own student-privacy statutes, and a GRAMA records request to USBE itself. USBE's own written responses to that request confirm no documentation exists for three separate legal requirements that were supposed to happen before a rollout like this could occur.</p>
+
+    <h2>Three requirements. Zero records.</h2>
+    <p class="section-sub">Each of these comes from Utah Code, not from advocacy. USBE's own GRAMA response is the source for each "no documentation" finding.</p>
+
+    <div class="card">
+      <div class="stat-mini-row">
+        <div class="stat-mini"><div class="num">&sect;53G-7-228(2)(a)</div><div class="lbl">evidence-based safety review before deployment</div></div>
+        <div class="stat-mini"><div class="num">&sect;53G-7-1402(2)(j)</div><div class="lbl">written parental notification before generative AI use</div></div>
+        <div class="stat-mini"><div class="num">&sect;53E-9-309(2)(a)</div><div class="lbl">specific audit &amp; termination terms in the vendor contract</div></div>
+      </div>
+      <p style="margin-bottom:0;">USBE's GRAMA response confirmed it holds no records showing any of the three steps above happened before, or at, the June 3 announcement. The third requirement &mdash; audit and termination provisions &mdash; is the exact statute the Legislature went on to strengthen later that same session with H.B. 55, discussed further down.</p>
+    </div>
+
+    <div class="caution">
+      <span class="label">Worth being precise about</span>
+      Two of these three requirements come from H.B. 273, which did not take legal effect until July 1, 2026 &mdash; nearly a month after the June 3 announcement and three weeks after Tooele signed. That timing doesn't make the rollout look better: USBE knew the law was coming and moved ahead of it anyway, and the requirements clearly apply to any actual classroom deployment happening after July 1. But the announcement itself, narrowly, predates the two AI-specific laws being legally binding. The third requirement, on contract audit/termination terms, is not new to this year and applied throughout.
+    </div>
+
+    <h2>The clauses that matter</h2>
+    <p class="section-sub">Every finding below comes from the signed Google DPA and its amendment exhibits. Click through each one.</p>
+
+    <div class="clause-tabs" id="clauseTabs"></div>
+    <div class="clause-panel-wrap" id="clausePanels"></div>
+
+    <div class="callout">
+      <div class="eyebrow">The Floor Amendment</div>
+      <h3>The bill's own sponsor loosened the exact standard that would have excluded Gemini</h3>
+      <p>H.B. 273 (Classroom Technology Amendments), the bill that eventually created the safety-review and parental-notification requirements above, was carried by Sen. Chris H. Wilson as Senate floor sponsor. The night before final Senate passage, Wilson introduced Floor Amendment 5, which changed the eligibility standard for classroom instructional technology from "designed specifically for instructional use" to "demonstrated to have significant educational value" &mdash; a broader, more subjective bar. The Utah Association of Public Charter Schools had separately warned that the original, narrower standard would exclude general-purpose tools like Google and Microsoft's products. Sen. Wilson received a contribution from Encode AI twelve days before H.B. 273 was introduced.</p>
+      <p style="margin-bottom:0;">The same amendment also struck the bill's parent-transparency provisions &mdash; a list of digital tools in use, on-request access to a student's device and browsing history, and an opt-in alert for flagged content. The final enrolled law still contains all three. Which floor action restored them, and when, is not yet resolved.</p>
+    </div>
+
+    <h2>The sequence</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-date">Mar 3, 2026</div><div class="tl-desc">Sen. Chris Wilson introduces Floor Amendment 5 to H.B. 273, the night before final Senate passage</div></div>
+      <div class="tl-item"><div class="tl-date">Mar 18, 2026</div><div class="tl-desc">Governor signs H.B. 273</div></div>
+      <div class="tl-item flag"><div class="tl-date">Jun 3, 2026</div><div class="tl-desc">USBE Superintendent Molly Hart and AI Specialist Matt Winters announce Google Gemini for Education statewide &mdash; no board vote, no privacy review, no procurement process</div></div>
+      <div class="tl-item flag"><div class="tl-date">Jun 11, 2026</div><div class="tl-desc">Tooele County School District signs the Google Data Processing Agreement</div></div>
+      <div class="tl-item"><div class="tl-date">Jul 1, 2026</div><div class="tl-desc">H.B. 273's safety-review and parental-notification requirements take legal effect</div></div>
+    </div>
+
+    <h2>Not the only AI infrastructure bill this session</h2>
+    <p>USBE's own January 7, 2026 board minutes show the board weighing a separate AI vendor, "School AI," whose own funding request described replacing "education tools with a unified, state-governed AI infrastructure that supports students, teachers, and families through insights, shared data, and coordinated student support statewide." The board directed staff to work with the bill's sponsor to address concerns rather than oppose it outright &mdash; a motion to oppose failed 3-11. The same meeting saw the board direct staff to coordinate with Sen. Kirk Cullimore on a separate bill, S.B. 267, Software in Education &mdash; one of three EdTech-privacy bills Cullimore or his frequent co-sponsor John D. Johnson touched in the same session, alongside H.B. 55 and S.B. 322.</p>
+
+    <div class="pull" style="border-left:4px solid var(--brass); background:var(--paper-card); padding:18px 22px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:26px 0; font-size:1.02rem;">The state's own privacy office confirms, in writing, that none of the three legally required steps happened. The contract that resulted lets a single vendor expand what it collects and who it shares it with by editing its own website.</div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--ink);">Sources</strong>
+    <ul class="sources-list">
+      <li>Google Data Processing Agreement, signed by Tooele County School District, June 11, 2026, including Exhibits A, B, G, and H</li>
+      <li>GRAMA request to the Utah State Board of Education and USBE's written responses</li>
+      <li>Utah Code &sect;53G-7-228, &sect;53G-7-1402, &sect;53E-9-309</li>
+      <li>H.B. 273, Classroom Technology Amendments (2026 General Session), enrolled text, floor amendment history, and committee vote record, le.utah.gov</li>
+      <li>Utah Association of Public Charter Schools legislative commentary on H.B. 273</li>
+      <li>Utah State Board of Education, January 7, 2026 board meeting minutes</li>
+      <li>Utah Code &sect;53E-9-309, as amended by H.B. 55 (2026 General Session)</li>
+    </ul>
+    <p style="margin-top:14px;">This piece reports on a signed contract, enacted statutes, and a state agency's own written records-request response. Questions about legal compliance ultimately rest with USBE, the Legislature, and the courts, not with this publication.</p>
+  </div>
+</footer>
+
+<script>
+const clauses = [
+  {
+    tab: "Exhibit A",
+    loc: "Covered Services",
+    quote: '"Any Google Workspace for Education Core product or service specifically identified at:\\nhttps://workspace.google.com/intl/en/terms/user_features/\\n(or a successor URL)."',
+    effect: "Google controls the scope of the contract by controlling its own website. If Google adds Gemini, an AI tutor, or any other feature to that page, it's automatically covered. No amendment. No board vote."
+  },
+  {
+    tab: "Exhibit G &sect;2",
+    loc: "Subprocessors",
+    quote: '"Names, locations, and activities [of subprocessors] are described at:\\nhttps://workspace.google.com/intl/en/terms/subprocessors.html\\n(or a successor URL)."',
+    effect: "The same mechanism applies to who has access to student data. Google can add a new subprocessor company simply by updating its own subprocessors page."
+  },
+  {
+    tab: "Exhibit H &sect;4.6",
+    loc: "Disposition of Data",
+    quote: "Google-authored amendment changes the data deletion timeline after a contract ends: 60 days &rarr; 180 days.",
+    effect: "Student data now sits on Google's systems roughly three times longer after a district's relationship with Google ends."
+  },
+  {
+    tab: "Exhibit H &sect;5.4",
+    loc: "Data Incident",
+    quote: 'The mandatory 72-hour breach notification window was removed. Replaced with: "promptly and without undue delay." Terminology changed from "Data Breach" to "Data Incident."',
+    effect: "No fixed clock on when a district has to be told about a breach \u2014 and the softer term \"Incident\" avoids the legal and reputational weight of \"Breach.\""
+  },
+  {
+    tab: "Exhibit H &sect;4.7",
+    loc: "Advertising Limits",
+    quote: '"LEA acknowledges and agrees that the terms of this provision are limited to Google Workspace for Education services and they do not apply to Additional Products or Third-Party Offerings."',
+    effect: "If Google adds a new product \u2014 Gemini tutoring, Gemini grading \u2014 the advertising restrictions simply don't apply to it. Combined with the successor-URL clause, Google can add such products unilaterally and outside the ad ban at the same time."
+  },
+  {
+    tab: "Exhibit G &sect;1",
+    loc: "Audit Rights",
+    quote: '"Provider may charge a fee...for any audit...Provider may object in writing to an auditor appointed by LEA...if the auditor is...a competitor of Provider, or otherwise manifestly unsuitable."',
+    effect: '"Manifestly unsuitable" is Google\u2019s own veto over who is allowed to audit it. Google can also charge the district for the privilege of being audited.'
+  },
+  {
+    tab: "Exhibit B",
+    loc: "Data Storage Location",
+    quote: '"Student Data may be processed in any country where Google or its Subprocessors maintain facilities..."',
+    effect: "No geographic limit. Student data collected in a Utah classroom can legally be processed anywhere Google or its subprocessors operate, worldwide."
+  }
+];
+
+const tabsEl = document.getElementById('clauseTabs');
+const panelsEl = document.getElementById('clausePanels');
+
+clauses.forEach((c, i) => {
+  const tab = document.createElement('div');
+  tab.className = 'clause-tab' + (i === 0 ? ' active' : '');
+  tab.textContent = c.tab;
+  tab.onclick = () => showClause(i);
+  tabsEl.appendChild(tab);
+
+  const panel = document.createElement('div');
+  panel.className = 'clause-panel' + (i === 0 ? ' active' : '');
+  panel.innerHTML = `
+    <div class="clause-loc">${c.loc}</div>
+    <div class="clause-quote">${c.quote}</div>
+    <div class="clause-effect">
+      <span class="field">Effect</span>
+      <p>${c.effect}</p>
+    </div>`;
+  panelsEl.appendChild(panel);
+});
+
+function showClause(idx){
+  document.querySelectorAll('.clause-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  document.querySelectorAll('.clause-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+}
+</script>
+
+</body>
+</html>
