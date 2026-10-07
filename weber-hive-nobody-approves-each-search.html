@@ -120,6 +120,14 @@
   .sources-list li{ margin-bottom:4px; }
   ::selection{ background:var(--brass-bright); color:var(--ink); }
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+  /* Phone-width fixes (Oct. 2026): keep wide tables and rows inside the screen */
+  @media (max-width:680px){
+    table.field-table, table.matrix{ display:block; overflow-x:auto; max-width:100%; }
+    .rubric-row{ grid-template-columns:repeat(2,1fr) !important; }
+    .calc-input-row{ flex-wrap:wrap; }
+    .flow-step .step-head{ flex-wrap:wrap; } .step-who{ white-space:normal; }
+  }
 </style>
 </head>
 <body>
@@ -208,6 +216,11 @@
       <li>Milwaukee County District Attorney's Office criminal complaints, Josue Ayala (Feb. 2026) and Tehrangi Chapman (Jul. 2026); Outagamie County complaint, Cristian Morales; ACLU of Wisconsin reporting on Frank McGrath</li>
       <li>Orange County (CA) District Attorney's Office press release, Robert Jay Josett guilty plea, Apr. 2026</li>
       <li>Georgia Bureau of Investigation, Albany PD officer arrests, Jul. 6, 2026; reporting on Savannah, DeKalb County, Fayetteville, Greene County, and Cherokee County cases</li>
+      <li>Georgia Bureau of Investigation press releases: Robert Keim, Sept. 1, 2026 (<a href="https://gbi.georgia.gov/press-releases/2026-09-01/gbi-arrests-gdc-special-agent-charge-misuse-license-plate-reader-system">gbi.georgia.gov</a>); Errol Farrell Jr., Sept. 2, 2026 (<a href="https://gbi.georgia.gov/node/33491">gbi.georgia.gov</a>)</li>
+      <li>Atlanta News First: Anthony Trapani, Sept. 14, 2026; Gwinnett County officers, Sept. 5, 2026</li>
+      <li>Indianapolis Recorder, IMPD officers charged, Sept. 30, 2026 (charges announced Sept. 23)</li>
+      <li>10News / court records, Asad Zahir, Aug. 2026</li>
+      <li>FOX 13 Tampa Bay, Cory Waiters, Aug. 19, 2026</li>
     </ul>
     <p style="margin-top:16px;">This page makes no claim that every search lacking a documented reason was unlawful, or that any named agency acted in bad faith. It documents what the process requires, what the records show was actually captured, and where the two diverge.</p>
     <p style="margin-bottom:0; margin-top:16px;">Part of a nine-part series on ALPR and privacy oversight in Weber County. &larr; <a href="weber-hive-5-million-searches.html">Article 1: Ten Cameras, Five Million Searches</a> &nbsp;|&nbsp; <a href="index.html">All articles</a> &nbsp;|&nbsp; <a href="weber-hive-camera-said-match.html">Article 3: The Camera Said &ldquo;Match.&rdquo; &rarr;</a></p>
@@ -330,18 +343,25 @@
     {state:"WI", name:"Tehrangi Chapman", dept:"Milwaukee PD (Internal Affairs)", desc:"A 22-year veteran detective who had been assigned to investigate the Ayala case was found to have run about 20 unauthorized Flock searches on two people over roughly six years, plus placed an unauthorized GPS tracker on one victim's vehicle. Caught by the wider audit Milwaukee launched after Ayala.", outcome:"Charged with felony misconduct in public office and misdemeanor misuse of a GPS device; case pending."},
     {state:"WI", name:"Cristian Morales", dept:"Menasha PD", desc:"Made five Flock searches for a woman's vehicle in one morning while off duty, on his personal phone, logging the reason as \u201cwelfare\u201d and entering no case number for any of them. A records search showed the queries reached networks spanning 15,000\u201392,000 cameras \u2014 indicating a state or nationwide search for a purely personal reason.", outcome:"Charged with misconduct in public office; ultimately sentenced on a felony misconduct count."},
     {state:"WI", name:"Frank McGrath", dept:"Kenosha County Sheriff's Office", desc:"A sheriff's deputy found by an internal investigation to have used Flock, alongside a squad-car tracking system, to surveil a fellow deputy he had been dating.", outcome:"Resigned following the internal investigation."},
-    {state:"CA", name:"Robert Jay Josett", dept:"Costa Mesa PD", desc:"Used the Flock system to locate the vehicle of a woman he was involved with and her romantic interests, then continued illegally accessing Flock data in June 2024 to find a new address \u2014 six months after he had already been placed on administrative leave for a related database misuse case.", outcome:"Pleaded guilty to three misdemeanors including unauthorized computer access; sentenced to 3 years probation; certification review pending before California POST."},
+    {state:"CA", name:"Robert Jay Josett", dept:"Costa Mesa PD", desc:"Used the Flock system to locate the vehicle of a woman he was involved with and her romantic interests, then accessed Flock data again in June 2024 to find a new address \u2014 six months after he had already been placed on administrative leave for a related database misuse case.", outcome:"Pleaded guilty to three misdemeanors including unauthorized computer access; sentenced to 3 years probation; certification review pending before California POST."},
     {state:"GA", name:"Five officers", dept:"Albany PD", desc:"The Georgia Bureau of Investigation arrested five former Albany officers on July 6, 2026 on charges of Misuse of License Plate Data and Violation of Oath of Office, following an internal audit that found repeated searches with no law-enforcement purpose.", outcome:"Arrested and fired."},
     {state:"GA", name:"Six officers", dept:"Savannah PD", desc:"Part of the broader Georgia pattern of Flock-access misuse identified across multiple departments over roughly a year.", outcome:"Fired."},
     {state:"GA", name:"Sgt. Kabiru Salawu", dept:"DeKalb County", desc:"Named in the same statewide pattern of Flock misuse across Georgia law enforcement.", outcome:"Arrested."},
     {state:"GA", name:"Three officers", dept:"Fayetteville PD", desc:"Part of the same statewide Georgia pattern of Flock-access misuse.", outcome:"Fired."},
-    {state:"GA", name:"Deputies", dept:"Greene &amp; Cherokee County Sheriff's Offices", desc:"Additional agencies named in Georgia's statewide Flock-misuse pattern, alongside Albany, Savannah, DeKalb, and Fayetteville.", outcome:"Disciplined or under investigation."}
+    {state:"GA", name:"Deputies", dept:"Greene &amp; Cherokee County Sheriff's Offices", desc:"Additional agencies named in Georgia's statewide Flock-misuse pattern, alongside Albany, Savannah, DeKalb, and Fayetteville.", outcome:"Disciplined or under investigation."},
+    {state:"GA", name:"Robert \u201cBobby\u201d Keim", dept:"Georgia Department of Corrections (Special Agent in Charge)", desc:"The GBI says Keim \u201cused the Flock Safety System for non-law enforcement purposes.\u201d Charged with Misuse of a License Plate Reader System (alleged).", outcome:"Arrested Sept. 1, 2026."},
+    {state:"GA", name:"Errol Farrell Jr.", dept:"Clayton County Sheriff's Office", desc:"The sheriff's office itself asked the GBI to investigate after finding the alleged misuse; the GBI says Farrell used the Flock system for non-law enforcement purposes. Charged with Misuse of a License Plate Reader System (alleged).", outcome:"Surrendered Sept. 1, 2026."},
+    {state:"GA", name:"Anthony Trapani", dept:"Acworth PD, then Emerson PD", desc:"Accused of using Flock for non-law enforcement purposes while at Acworth; the GBI says \u201cthat misuse continued\u201d after he transferred to Emerson in 2025. Two counts of misuse of a license plate reader system plus violation of oath of office (alleged).", outcome:"Turned himself in Sept. 14, 2026."},
+    {state:"GA", name:"Three officers", dept:"Gwinnett County PD", desc:"Derric Holmes (six counts of misuse of license plate data) and Matthew Lau (one count) were charged; Renee Downer was charged with simple battery and stalking after a May 2026 arrest. All three were fired. Chief J.D. McClure: \u201cmisuse of this technology will not be tolerated.\u201d (Charges are allegations.)", outcome:"Fired; charged."},
+    {state:"IN", name:"Five officers", dept:"Indianapolis Metropolitan PD", desc:"The Marion County Prosecutor charged four current (suspended) officers and one former officer \u2014 Matthew Binford, Abigail Cramer, Cassandra Crawley, Michael Rogers and Jonathan Schultz \u2014 with Official Misconduct and Fraud over Flock searches; Schultz also faces two stalking counts. IMPD found the alleged misuse itself and referred it. Chief Tanya Terry: the actions \u201ccrossed into criminal conduct.\u201d (Charges are allegations.)", outcome:"Charged Sept. 23, 2026."},
+    {state:"KY", name:"Asad Zahir", dept:"Shively PD", desc:"Court records say he ran 2,048 Flock searches on two vehicles registered to his ex-girlfriend from January to May 2026 \u2014 241 of them while a protection order was in effect \u2014 and listed them as a drug investigation. Flock's AI audit tool flagged the activity. Five counts of official misconduct and five of unlawful computer access (alleged).", outcome:"Arrested Aug. 2026."},
+    {state:"FL", name:"Cory Waiters", dept:"Sarasota PD", desc:"Accused of making 358 queries of the same license plate between May 14 and Oct. 4, 2025, using Flock and the state DAVID database. Charged with official misconduct, public records law violations and computer misuse (alleged).", outcome:"Arrested and fired Aug. 19, 2026."}
   ];
 
   let activeFilter = 'ALL';
   function renderFilters(){
     const states = ['ALL', ...new Set(cases.map(c=>c.state))];
-    const labels = {ALL:'All states', WI:'Wisconsin', CA:'California', GA:'Georgia'};
+    const labels = {ALL:'All states', WI:'Wisconsin', CA:'California', GA:'Georgia', IN:'Indiana', KY:'Kentucky', FL:'Florida'};
     document.getElementById('misuse-filters').innerHTML = states.map(s=>
       `<button class="filter-btn ${s===activeFilter?'active':''}" data-state="${s}">${labels[s]||s} (${s==='ALL'?cases.length:cases.filter(c=>c.state===s).length})</button>`
     ).join('');

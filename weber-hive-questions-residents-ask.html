@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Questions Residents Keep Asking — Weber County Hive</title>
+<meta name="description" content="The eight questions residents keep asking about Flock at council meetings, the answers they were given, and what the record shows.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --help:#3f5d45; --help-bg:#e9efe7;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --dead:#4a4438; --dead-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:56px 0 44px;
+  }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(1.9rem, 4.4vw, 2.9rem); line-height:1.12; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.06rem; color:#c9c3ae; max-width:700px; margin:0 0 30px; }
+  .hero-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(214,184,105,0.25); border:1px solid rgba(214,184,105,0.25); border-radius:10px; overflow:hidden; }
+  .hero-stat{ background:rgba(20,26,36,0.65); padding:16px 14px; }
+  .hero-stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.3rem; color:var(--brass-bright); }
+  .hero-stat .lbl{ font-size:11.5px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:700px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+
+  .finding-block{ border-left:4px solid var(--brass); background:var(--paper-card); padding:20px 24px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:32px 0; }
+  .finding-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.15rem; margin:0 0 8px; }
+  .finding-block p{ margin:0; font-size:14.5px; color:var(--muted); }
+  .finding-block.quote{ border-left-color:var(--harm); }
+  .finding-block blockquote{ font-family:"Fraunces",serif; font-style:italic; font-size:1.1rem; color:var(--ink); margin:0 0 8px; line-height:1.5; }
+  .finding-block cite{ font-family:"IBM Plex Mono",monospace; font-style:normal; font-size:12px; color:var(--muted); }
+
+  .unknown-banner{ background:var(--dead-bg); border:1px solid var(--dead); border-radius:10px; padding:16px 20px; margin-bottom:24px; display:flex; gap:14px; align-items:flex-start; }
+  .unknown-banner .icon{ font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:16px; color:var(--dead); flex-shrink:0; }
+  .unknown-banner p{ margin:0; font-size:14px; color:var(--dead); }
+
+  .rubric-row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:8px; margin-top:10px; }
+  .rubric-item{ font-size:12.5px; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:8px 10px; }
+  .rubric-item .dim{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:3px; }
+
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:36px 30px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.2rem,2.8vw,1.55rem); max-width:720px; margin:0 auto; line-height:1.45; }
+
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+
+  /* Shared additions for Articles 11-12 */
+  .timeline{ border-left:3px solid var(--line); margin-left:8px; padding-left:22px; }
+  .tl-item{ position:relative; margin-bottom:10px; }
+  .tl-item::before{ content:""; position:absolute; left:-30px; top:14px; width:13px; height:13px; border-radius:50%; background:var(--paper); border:3px solid var(--brass); }
+  .tl-btn{ width:100%; text-align:left; background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; cursor:pointer; font:inherit; color:var(--text); display:flex; gap:14px; align-items:baseline; flex-wrap:wrap; }
+  .tl-btn:hover, .tl-btn:focus-visible{ border-color:var(--brass); outline:none; }
+  .tl-date{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:700; color:var(--brass-dark); min-width:92px; }
+  .tl-title{ font-family:"Fraunces",serif; font-weight:600; font-size:1.05rem; flex:1; min-width:200px; }
+  .tl-tag{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:var(--mixed-bg); color:var(--mixed); }
+  .tl-tag.utah{ background:var(--help-bg); color:var(--help); }
+  .tl-tag.misuse{ background:var(--harm-bg); color:var(--harm); }
+  .tl-body{ display:none; background:var(--paper); border-left:4px solid var(--brass); border-radius:0 10px 10px 0; padding:14px 18px; margin:6px 0 4px; font-size:15px; color:var(--muted); }
+  .tl-body.open{ display:block; }
+  .tl-body .src{ font-family:"IBM Plex Mono",monospace; font-size:12px; margin-top:8px; display:block; }
+  .filter-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .filter-btn{ font-family:"IBM Plex Mono",monospace; font-size:13px; padding:9px 15px; border-radius:20px; border:1px solid var(--line); background:#fff; cursor:pointer; color:var(--muted); }
+  .filter-btn.active{ background:var(--ink); color:#faf6ea; border-color:var(--ink); }
+  #map{ height:460px; border-radius:12px; border:1px solid var(--line); box-shadow:var(--shadow); }
+  .map-note{ font-size:13px; color:var(--muted); margin-top:8px; }
+  .mermaid-wrap{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; padding:20px; overflow-x:auto; box-shadow:var(--shadow); }
+  .mermaid-wrap .mermaid{ font-size:20px; min-width:640px; }
+  .ask-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:16px; }
+  .ask-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; padding:20px; }
+  .ask-card .who{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.08em; color:var(--brass-dark); font-weight:700; margin-bottom:10px; }
+  .ask-card ul{ margin:0; padding-left:18px; font-size:15px; }
+  .ask-card li{ margin-bottom:8px; }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:680px){ .two-col{ grid-template-columns:1fr; } }
+  .col-card{ border-radius:12px; padding:20px; border:2px solid var(--line); background:var(--paper-card); }
+  .col-card h3{ margin:0 0 10px; font-size:1.1rem; }
+  .col-card.changed{ border-color:var(--help); }
+  .col-card.unchanged{ border-color:var(--harm); }
+  .col-card ul{ margin:0; padding-left:18px; font-size:15px; color:var(--text); }
+  .col-card li{ margin-bottom:8px; }
+  details.sources{ border-top:1px solid var(--line); padding-top:14px; }
+  details.sources summary{ cursor:pointer; font-family:"IBM Plex Mono",monospace; font-weight:700; color:var(--ink); font-size:14px; }
+  .qa{ border:1px solid var(--line); border-radius:12px; background:var(--paper-card); margin-bottom:14px; overflow:hidden; }
+  .qa-btn{ width:100%; text-align:left; background:none; border:none; padding:18px 20px; cursor:pointer; font:inherit; display:flex; gap:14px; align-items:flex-start; }
+  .qa-btn:focus-visible{ outline:3px solid var(--brass); }
+  .qa-num{ font-family:"IBM Plex Mono",monospace; font-weight:700; color:var(--brass-dark); font-size:14px; padding-top:3px; }
+  .qa-q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.18rem; color:var(--ink); flex:1; }
+  .qa-where{ display:block; font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--muted); font-weight:400; margin-top:4px; }
+  .qa-body{ display:none; padding:0 20px 20px; }
+  .qa-body.open{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:680px){ .qa-body.open{ grid-template-columns:1fr; } }
+  .qa-col{ border-radius:10px; padding:14px 16px; font-size:15px; }
+  .qa-col h4{ margin:0 0 8px; font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.08em; }
+  .qa-col.said{ background:var(--mixed-bg); } .qa-col.said h4{ color:var(--mixed); }
+  .qa-col.record{ background:var(--help-bg); } .qa-col.record h4{ color:var(--help); }
+  .qa-col p{ margin:0 0 8px; } .qa-col p:last-child{ margin-bottom:0; }
+  .pattern-tag{ display:inline-block; margin-top:8px; font-family:"IBM Plex Mono",monospace; font-size:11px; padding:3px 9px; border-radius:999px; background:var(--dead-bg); color:var(--dead); }
+  .camps{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+  .camp{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; padding:18px; }
+  .camp h3{ margin:0 0 6px; font-size:1.05rem; }
+  .camp p{ margin:0; font-size:15px; color:var(--muted); }
+
+
+  .chart-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; }
+  .chart-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; padding:18px; box-shadow:var(--shadow); min-width:0; }
+  .chart-card h3{ margin:0 0 4px; font-size:1.08rem; }
+  .chart-card .chart-sub{ font-size:13px; color:var(--muted); margin:0 0 12px; }
+  .chart-box{ position:relative; height:300px; }
+  .table-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--paper-card); box-shadow:var(--shadow); }
+  table.data{ width:100%; border-collapse:collapse; font-size:15px; min-width:560px; }
+  table.data th{ background:var(--ink); color:#faf6ea; text-align:left; padding:10px 12px; font-family:"IBM Plex Mono",monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.05em; cursor:pointer; }
+  table.data td{ padding:10px 12px; border-top:1px solid var(--line); vertical-align:top; }
+  table.data tr:nth-child(even) td{ background:var(--paper); }
+  .yes{ color:var(--help); font-weight:700; } .no{ color:var(--harm); font-weight:700; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">The Weber County Hive</a> &rsaquo; Surveillance Series &rsaquo; Article 12</div>
+    <div class="kicker">Article 12 &middot; October 2026</div>
+    <h1>The Questions Residents Keep Asking</h1>
+    <p class="subhead">From Ohio to Utah, people who have never met are standing up at council meetings and asking Flock and their police departments the same eight questions. This page lays out each question, the answer residents were given, and what the public record shows.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">8</div><div class="lbl">questions that come up again and again</div></div>
+      <div class="hero-stat"><div class="num">6</div><div class="lbl">states where this page cites a public hearing or council debate</div></div>
+      <div class="hero-stat"><div class="num">6 hrs</div><div class="lbl">length of Columbus, Ohio's Aug. 11 hearing</div></div>
+      <div class="hero-stat"><div class="num">0</div><div class="lbl">questions from residents Flock's representative stayed to answer in Columbus</div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <section id="how">
+      <div class="eyebrow">How Communities Are Thinking</div>
+      <h2 class="section-title">The same three groups show up in every town</h2>
+      <p class="section-sub">Comments on this series and coverage of hearings elsewhere sort into the same three positions. Councils tend to change course when the middle group moves.</p>
+      <div class="camps">
+        <div class="camp"><h3>Yes, with limits</h3><p>Fine with cameras if searches are audited, data is kept briefly, and misuse is punished.</p></div>
+        <div class="camp"><h3>Useful, but worried</h3><p>Sees the crime-solving value; worried about sharing with other agencies, stalking cases, and who can see the data.</p></div>
+        <div class="camp"><h3>No mass tracking</h3><p>Opposes recording every driver no matter what the policy says.</p></div>
+      </div>
+      <div class="finding-block">
+        <p class="q">What moves the middle group</p>
+        <p>In the cases on this page it was a local fact, not national news. In Oshkosh, Wis., the police chief said his staff found information that conflicted with what the council had been told. In Apex, N.C., police found two federal agencies had been "mistakenly" given access. In Sheboygan, Wis., a Flock salesperson offered to sell the city its own traffic data. In Washington Terrace, the mayor cited the governor's concerns.</p>
+      </div>
+    </section>
+
+    <section id="questions">
+      <div class="eyebrow">The Eight Questions</div>
+      <h2 class="section-title">Click a question to compare the answer with the record</h2>
+      <p class="section-sub">"What was said" quotes officials or Flock. "What the record shows" comes from documents, court filings, and news reports listed at the bottom of the page.</p>
+      <div id="qa-list"></div>
+    </section>
+
+    <section id="numbers">
+      <div class="eyebrow">Seeing The Pattern</div>
+      <h2 class="section-title">The questions, the places, and the answers</h2>
+      <p class="section-sub">Click a column heading to sort the table. Hover or tap a chart for numbers.</p>
+      <div class="table-wrap">
+        <table class="data" id="qtable">
+          <thead><tr><th data-k="n">#</th><th data-k="q">Question</th><th data-k="places">Places cited</th><th data-k="p">How the answer related to it</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="chart-grid" style="margin-top:18px;">
+        <div class="chart-card">
+          <h3>How the eight answers related to the questions</h3>
+          <p class="chart-sub">Each question counted once, by the pattern in the answer residents were given.</p>
+          <div class="chart-box"><canvas id="chartPatterns" aria-label="Pie chart of answer patterns"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Wisconsin: agencies that ended or paused Flock in 2026</h3>
+          <p class="chart-sub">Two waves, as listed by Wausau Pilot &amp; Review (Sept. 24, 2026). Hover a bar for the names.</p>
+          <div class="chart-box"><canvas id="chartWI" aria-label="Bar chart of Wisconsin agencies by wave"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="patterns">
+      <div class="eyebrow">Reading The Answers</div>
+      <h2 class="section-title">Six ways an answer can miss the question</h2>
+      <p class="section-sub">These patterns show up across the eight questions. They describe how an answer relates to the question asked, not anyone's intent.</p>
+      <div class="mermaid-wrap">
+<pre class="mermaid">
+flowchart TD
+  Q["A resident asks a question"] --> N["Narrow wording<br/>'no DIRECT access'"]
+  Q --> S["Shift to the customer<br/>'you own your data'"]
+  Q --> O["Outcomes instead of evidence<br/>'it solved cases'"]
+  Q --> F["A future fix<br/>'new feature coming'"]
+  Q --> M["A label<br/>'that's a misconception'"]
+  Q --> A["Not in the room<br/>left before public comment"]
+</pre>
+      </div>
+    </section>
+
+    <section id="map-section">
+      <div class="eyebrow">Where These Questions Were Asked</div>
+      <h2 class="section-title">Map of hearings and council debates cited here</h2>
+      <div id="map" role="region" aria-label="Map of hearings cited on this page"></div>
+      <p class="map-note">Pins mark the city, not the meeting room.</p>
+    </section>
+
+    <section id="ask">
+      <div class="eyebrow">Your Turn</div>
+      <h2 class="section-title">Bring these to a Weber County meeting</h2>
+      <p class="section-sub">Each question below is one residents elsewhere asked without getting a direct answer. Here is who in Weber County is positioned to answer it.</p>
+      <div class="ask-grid">
+        <div class="ask-card">
+          <div class="who">Weber County Sheriff's Office</div>
+          <ul>
+            <li>Which outside agencies searched our cameras last month, and how many searches did each run?</li>
+            <li>Is federal sharing switched off in our account?</li>
+            <li>What retention setting are we on today?</li>
+          </ul>
+        </div>
+        <div class="ask-card">
+          <div class="who">Weber County Commission</div>
+          <ul>
+            <li>Does our Flock contract give Flock a license to use our data in "aggregated" form, and for what?</li>
+            <li>Has the county been offered Flock's traffic analytics product?</li>
+            <li>What independent numbers show the cameras' results here?</li>
+          </ul>
+        </div>
+        <div class="ask-card">
+          <div class="who">Ogden, North Ogden, Plain City councils</div>
+          <ul>
+            <li>Does our city's data feed the Sheriff's network, and who can search it?</li>
+            <li>Will a Flock representative stay through public comment at our next hearing?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="takeaway">
+      <div class="eyebrow">The Throughline</div>
+      <p class="big">The questions are the same from Columbus to Washington Terrace because the answers haven't settled them. When a resident's question gets an answer to a different question, the original question is still open.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <details class="sources">
+      <summary>Sources (click to open)</summary>
+      <ul class="sources-list">
+        <li>ACLU, "Flock Safety Credibility Lost as It Repeatedly Lies to City Councils, Police Departments, and Public Across the Country," Chad Marlow and Jay Stanley, July 2, 2026 (<a href="https://www.aclu.org/news/privacy-technology/flock-safety-credibility-lost-as-it-repeatedly-lies-to-city-councils-police-departments-and-public-across-the-country">aclu.org</a>) &mdash; the ACLU's characterization, quoted as its own</li>
+        <li>WDIV ClickOnDetroit, "We asked Flock CEO these 16 questions," Aug. 18, 2026 (<a href="https://www.clickondetroit.com/news/local/2026/08/18/we-asked-flock-ceo-these-16-questions-heres-what-he-said/">clickondetroit.com</a>)</li>
+        <li>Flock, "Does Flock Share Data With ICE?" (<a href="https://www.flocksafety.com/blog/does-flock-share-data-with-ice">flocksafety.com</a>)</li>
+        <li>Flock Group Inc. letter to Sen. Josh Hawley, Sept. 8, 2026 (<a href="https://www.hawley.senate.gov/wp-content/uploads/2026/09/FILE_3387.pdf">hawley.senate.gov</a>)</li>
+        <li>Wausau Pilot &amp; Review, "Is Flock selling your data? What the contracts say&hellip;," Sept. 24, 2026 (<a href="https://wausaupilotandreview.com/2026/09/24/is-flock-selling-your-data-what-the-contracts-say-why-wisconsin-agencies-are-leaving-and-where-marathon-county-and-wausau-stand/">wausaupilotandreview.com</a>)</li>
+        <li>WOSU, Columbus City Council Flock hearing, Aug. 11, 2026 (<a href="https://www.wosu.org/politics-government/2026-08-11/columbus-city-council-public-hearing-on-flock-cameras-voices-concerns-with-technology">wosu.org</a>); Matter News, Flock representative leaves hearing (<a href="https://matternews.org/community/politics/local-politics-flock-representative-leaves-halfway-through-columbus-city-council-hearing/">matternews.org</a>)</li>
+        <li>Hoodline, Maplewood, Mo. council, Sept. 9, 2026 (<a href="https://hoodline.com/2026/09/maplewood-council-grills-police-over-flock-cameras-fears-ice-access/">hoodline.com</a>)</li>
+        <li>Hoodline, Apex, N.C. council, Aug. 20, 2026 (<a href="https://hoodline.com/2026/08/apex-residents-pack-council-meeting-over-flock-cameras-federal-data-sharing-fears/">hoodline.com</a>)</li>
+        <li>ALXnow, Alexandria, Va. council, Sept. 19&ndash;21, 2026 (<a href="https://www.alxnow.com/2026/09/21/alexandria-residents-demand-city-council-drop-flock-cameras-over-privacy-fears/">alxnow.com</a>)</li>
+        <li>WBAY, Oshkosh, Wis. council rescinds Flock contract, April 23, 2026</li>
+        <li>FOX 13, Washington Terrace, Sept. 2, 2026 (<a href="https://www.fox13now.com/news/local-news/weber-county/washington-terrace-reverses-decision-to-use-flock-cameras">fox13now.com</a>)</li>
+        <li>Fortune / The Conversation, Henry F. Fradella, Oct. 3, 2026, citing 404 Media (<a href="https://fortune.com/2026/10/03/flock-cameras-cbp-access-data-sharing/">fortune.com</a>)</li>
+        <li>WIRED / 404 Media hacked-camera analysis, Sept. 16, 2026, as reported by TechSpot (<a href="https://www.techspot.com/news/113887-hackers-stole-flock-camera-found-27321-video-clips.html">techspot.com</a>)</li>
+        <li>Indianapolis Recorder, Sept. 30, 2026; 10News (Asad Zahir, court records); Milwaukee County DA complaint (Josue Ayala) &mdash; see <a href="weber-hive-nobody-approves-each-search.html">Article 2</a></li>
+      </ul>
+    </details>
+    <p style="margin-bottom:0; margin-top:16px;">Part of the Weber County Hive surveillance series. &larr; <a href="weber-hive-what-changed.html">Article 11: What Changed Since September, and What Didn't</a> &nbsp;|&nbsp; <a href="index.html">All articles</a></p>
+  </div>
+</footer>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad:true, theme:'base', themeVariables:{ fontSize:'20px', primaryColor:'#fffdf8', primaryBorderColor:'#a9812f', primaryTextColor:'#1c2430', lineColor:'#7c5f22' } });
+</script>
+<script>
+const qas = [
+  { q:"Can ICE or other federal agencies get our data?", where:"Asked in Columbus, Ohio; Maplewood, Mo.; Alexandria, Va.; Apex, N.C.",
+    said:["Flock: “Flock does not work with U.S. Immigration and Customs Enforcement (ICE).” Federal agencies were removed from statewide and national lookups in August 2025, and agencies can turn off federal sharing with one switch (Flock blog; letter to Sen. Hawley).",
+          "Flock CEO Garrett Langley, asked what stops federal access: “There are policies. There are restrictions. There are internal rules for how task forces operate.” (WDIV, Aug. 18, 2026). No specific safeguard was named."],
+    rec:["The ACLU says Flock's wording about no “direct” ICE access left out access through local and state police customers, and that in Loveland, Colo., Flock said it had no federal contracts while it held contracts with Customs and Border Protection and Homeland Security; the CEO later said statements “inadvertently provided inaccurate information.” (ACLU, July 2, 2026)",
+         "Apex, N.C. police found two federal agencies had been “mistakenly” enabled for data sharing and revoked them (Aug. 2026). 404 Media reported Customs and Border Protection had access to more than 80,000 Flock cameras during a 2025 pilot."],
+    pattern:"Narrow wording" },
+  { q:"Once our data leaves the city, who controls it?", where:"Asked in Maplewood, Mo.; Alexandria, Va.",
+    said:["“Every piece of data collected by Flock license plate readers is owned and controlled by the customer.” (Flock blog)",
+          "Maplewood police: three officers hold administrative rights and searches are audited monthly (Sept. 9, 2026)."],
+    rec:["Maplewood's answer described its own officers. The council member's question was about what happens after other agencies use the data. A city's own audit can't see what another agency does with a record it already pulled.",
+         "Utah's law gives Weber County no way to check how an out-of-state recipient uses its data (see Article 2)."],
+    pattern:"Shift to the customer" },
+  { q:"Does Flock sell our data?", where:"Asked in Maplewood, Mo.; Wisconsin counties; Detroit-area coverage",
+    said:["Langley: the biggest misconception is “we own the data and sell it.” Customers own the data and Flock doesn't sell it (WDIV, Aug. 18, 2026)."],
+    rec:["A 2022 Flock contract with Marathon County, Wis. gives Flock a “non-exclusive, perpetual, irrevocable, worldwide, royalty-free” license to agency data as “Aggregated Data,” usable for “other Flock offerings.” The same contract says “Flock shall not sell Agency Data or Aggregated Data.” (Wausau Pilot &amp; Review, Sept. 24, 2026)",
+         "In Sheboygan, Wis., a Flock sales representative offered the city its own anonymized traffic data. The police chief said that was “inconsistent with the terms and expectations of the City's contract.” Both things can be true at once: plate records not sold, and data still used commercially."],
+    pattern:"A label (“misconception”)" },
+  { q:"How long is it kept?", where:"Asked in Alexandria, Va.; Maplewood, Mo.; Weber County comments on this series",
+    said:["Flock lowered its recommended default to 7 days on Aug. 13, 2026."],
+    rec:["Flock's own letter to Sen. Hawley says 7 days is the default for new police customers; existing customers “may keep their current retention period.” Weber County's Flock quote lists 30 days.",
+         "Aggregated traffic statistics can be kept up to five years (Wausau Pilot &amp; Review). A retention setting covers Flock's copy, not copies other agencies already made."],
+    pattern:"A future fix" },
+  { q:"What stops officers from misusing it?", where:"Asked in Columbus, Ohio; Alexandria, Va.",
+    said:["Audit logs, plus an AI “Audit Assistance” tool that flags unusual searches and can lock a user out (Langley, WDIV). Flock says it will be required for police customers by the end of 2026."],
+    rec:["The ACLU found officers got past a required search-reason box by typing “investigation” or “hehehe.” In Milwaukee, the misuse in the Ayala case was found by the person being tracked, not by an audit.",
+         "In Kentucky, Flock's audit tool did flag 2,048 searches that court records attribute to Officer Asad Zahir, and he was arrested the next day (10News). That is a case of the tool working, after the searches had already happened. The charges are allegations."],
+    pattern:"A future fix" },
+  { q:"Can it track where I go?", where:"Asked in Oshkosh, Wis.; Alexandria, Va.",
+    said:["Flock told the Oshkosh council its system did not create a heat map of an individual's movement, and later called the issue “one small misconception” (ACLU; WBAY)."],
+    rec:["Oshkosh's police chief said his staff found security information that conflicted with what Flock told the council. Flock then said its heat map shows where a vehicle's images were captured over 30 days. The council, which had approved the contract the day before, voted unanimously to rescind it (WBAY, April 23, 2026).",
+         "One camera's recovered files held about 1.6 million images of about 50,200 vehicles over about 21 days (404 Media / WIRED)."],
+    pattern:"A label (“misconception”)" },
+  { q:"Does it actually solve crime? Show us the numbers.", where:"Asked in Columbus, Ohio; Alexandria, Va.; Maplewood, Mo.",
+    said:["Columbus police: Flock helped solve 54% of the city's homicides that year and is “never used on its own.”",
+          "Langley: “53 missing people” found in Michigan in July and “over 2,000 stolen cars”; “I'm the father of three little kids.” (WDIV)"],
+    rec:["These figures come from the company and police departments. None of the hearings cited here presented an independent evaluation.",
+         "Maplewood reported 26 assisted investigations so far in 2026, and said the system helped 4 other agencies this year, down from 22 in 2024."],
+    pattern:"Outcomes instead of evidence" },
+  { q:"Who will stay and answer the public?", where:"Columbus, Ohio, Aug. 11, 2026",
+    said:["Flock's government relations director presented to the council earlier in the hearing."],
+    rec:["He left before public testimony. Resident Ella Bowman: “Where is Flock's own representative when it's time to hear from the people they surveil?” Councilmember Melissa Green: the representative “didn't stay to be able to respond to questions.” (Matter News)"],
+    pattern:"Not in the room" }
+];
+const list = document.getElementById('qa-list');
+qas.forEach((x,i) => {
+  const d = document.createElement('div'); d.className = 'qa';
+  const id = 'qa'+i;
+  d.innerHTML = '<button class="qa-btn" aria-expanded="false" aria-controls="'+id+'"><span class="qa-num">'+(i+1)+'</span><span class="qa-q">'+x.q+'<span class="qa-where">'+x.where+'</span><span class="pattern-tag">'+x.pattern+'</span></span></button>' +
+    '<div class="qa-body" id="'+id+'"><div class="qa-col said"><h4>What was said</h4>'+x.said.map(p=>'<p>'+p+'</p>').join('')+'</div><div class="qa-col record"><h4>What the record shows</h4>'+x.rec.map(p=>'<p>'+p+'</p>').join('')+'</div></div>';
+  const b = d.querySelector('button'), body = d.querySelector('.qa-body');
+  b.addEventListener('click', () => { const o = body.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
+  list.appendChild(d);
+});
+list.querySelector('.qa-body').classList.add('open');
+list.querySelector('.qa-btn').setAttribute('aria-expanded','true');
+
+const pins = [
+  [39.961,-82.999,"Columbus, Ohio","Aug. 11, 2026: six-hour council hearing; Flock's representative left before public comment."],
+  [38.613,-90.324,"Maplewood, Mo.","Sept. 9, 2026: council asked about control of shared data and ICE access."],
+  [38.805,-77.047,"Alexandria, Va.","Sept. 2026: residents asked the council to drop Flock."],
+  [35.733,-78.850,"Apex, N.C.","Aug. 20, 2026: two federal agencies found “mistakenly” enabled."],
+  [44.025,-88.543,"Oshkosh, Wis.","April 2026: contract rescinded after the heat-map answer was contradicted."],
+  [43.751,-87.714,"Sheboygan, Wis.","Flock offered the city its own anonymized traffic data."],
+  [40.398,-105.075,"Loveland, Colo.","Federal-access statements later called “inaccurate” by Flock's CEO (ACLU)."],
+  [41.178,-111.978,"Washington Terrace, Utah","Sept. 2, 2026: trial halted; mayor called for safeguards."]
+];
+if (window.L) {
+  const map = L.map('map', {scrollWheelZoom:false}).setView([39.5,-96],4);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18, attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+  pins.forEach(p => L.marker([p[0],p[1]]).addTo(map).bindPopup('<strong>'+p[2]+'</strong><br>'+p[3]));
+} else {
+  document.getElementById('map').innerHTML = '<ul style="padding:16px 32px;">' + pins.map(p=>'<li><strong>'+p[2]+'</strong>: '+p[3]+'</li>').join('') + '</ul>';
+}
+</script>
+
+
+<script>
+(function(){
+  const places = [4,2,3,3,2,2,3,1];
+  const tbody = document.querySelector('#qtable tbody');
+  let rows = qas.map((x,i)=>({n:i+1,q:x.q,places:places[i],p:x.pattern}));
+  function draw(){ tbody.innerHTML = rows.map(r=>'<tr><td>'+r.n+'</td><td>'+r.q+'</td><td>'+r.places+'</td><td>'+r.p+'</td></tr>').join(''); }
+  let dir = 1;
+  document.querySelectorAll('#qtable th').forEach(th=>th.addEventListener('click',()=>{ const k=th.dataset.k; dir=-dir; rows.sort((a,b)=> (a[k]>b[k]?1:a[k]<b[k]?-1:0)*dir); draw(); }));
+  draw();
+  if(!window.Chart){ document.querySelectorAll('.chart-box').forEach(b=>b.innerHTML='<p style="color:#5c574c">Chart could not load. The table above has the same information.</p>'); return; }
+  Chart.defaults.font.family = '"Source Serif 4", Georgia, serif'; Chart.defaults.font.size = 15; Chart.defaults.color = '#211e19';
+  const c = {}; qas.forEach(x=>c[x.pattern]=(c[x.pattern]||0)+1);
+  new Chart(document.getElementById('chartPatterns'), { type:'pie',
+    data:{ labels:Object.keys(c), datasets:[{ data:Object.values(c), backgroundColor:['#1c2430','#a9812f','#8a3b2e','#3f5d45','#5c574c','#d6b869'] }]},
+    options:{ maintainAspectRatio:false, plugins:{ legend:{ position:'bottom' } } } });
+  const wi = { 'Spring–summer 2026':['Dane County','Fitchburg','Monona','Sturgeon Bay','Oshkosh','Appleton','Verona','Stoughton','UW-Madison'],
+               'Late August onward':['Sheboygan','Racine County','De Pere','Fond du Lac County','Winnebago County','Stevens Point','Racine','Waukesha','Oconomowoc','UW-Milwaukee','Milwaukee County'] };
+  const labels = Object.keys(wi);
+  new Chart(document.getElementById('chartWI'), { type:'bar',
+    data:{ labels, datasets:[{ label:'Agencies', data:labels.map(l=>wi[l].length), backgroundColor:['#a9812f','#8a3b2e'] }]},
+    options:{ maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ afterLabel:(x)=> wi[labels[x.dataIndex]].join(', ') } } }, scales:{ y:{ beginAtZero:true, ticks:{ stepSize:2 } } } } });
+})();
+</script>
+</body>
+</html>

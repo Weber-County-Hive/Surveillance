@@ -136,6 +136,14 @@
   .clause-full .card{ border-left:4px solid var(--brass); }
   .clause-full .clause-text{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:14px; margin:12px 0; color:var(--ink); }
   .clause-close{ font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:700; background:none; border:1px solid var(--line); border-radius:6px; padding:6px 12px; cursor:pointer; color:var(--muted); float:right; }
+
+  /* Phone-width fixes (Oct. 2026): keep wide tables and rows inside the screen */
+  @media (max-width:680px){
+    table.field-table, table.matrix{ display:block; overflow-x:auto; max-width:100%; }
+    .rubric-row{ grid-template-columns:repeat(2,1fr) !important; }
+    .calc-input-row{ flex-wrap:wrap; }
+    .flow-step .step-head{ flex-wrap:wrap; } .step-who{ white-space:normal; }
+  }
 </style>
 </head>
 <body>
@@ -148,7 +156,7 @@
     <h1>Private Company, Public Power</h1>
     <p class="subhead">Flock is a private vendor. The cameras run on public power, watch public roads, and feed a network searched by public employees. When something goes wrong &mdash; a stale alert, a data breach, an unauthorized search &mdash; the honest answer to "whose fault is that" is often: it depends which link in the chain you ask.</p>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="num">30 days</div><div class="lbl">Flock's own stated retention</div></div>
+      <div class="hero-stat"><div class="num">30 days</div><div class="lbl">Flock's default retention when Weber signed on (still allowed for existing customers)</div></div>
       <div class="hero-stat"><div class="num">5 years</div><div class="lbl">Utah's required audit-log retention</div></div>
       <div class="hero-stat"><div class="num">2027</div><div class="lbl">new contractor-compliance deadline under H.B. 450</div></div>
       <div class="hero-stat"><div class="num">0</div><div class="lbl">single end-to-end auditor for the whole chain</div></div>
@@ -169,7 +177,7 @@
       </div>
       <div class="finding-block">
         <p class="q">H.B. 450's contractor requirements</p>
-        <p>A contractor that processes or has access to personal data under a contract with a governmental entity is subject to the Government Data Privacy Act "to the same extent as the governmental entity." But contracts entered into or renewed only have to contain that compliance language starting <strong>July 1, 2027</strong> &mdash; pushed back a year from the original bill's July 1, 2026 date. Weber County's Flock contract, signed in 2021, isn't required to include this language until its next renewal after that date.</p>
+        <p>A contractor that processes or has access to personal data under a contract with a governmental entity is subject to the Government Data Privacy Act "to the same extent as the governmental entity." But contracts entered into or renewed only have to contain that compliance language starting <strong>July 1, 2027</strong> &mdash; pushed back a year from the original bill's July 1, 2026 date. Weber County's Flock contract, signed in 2021, isn't required to include this language until its next renewal after that date. The County Commission approved an amendment to that contract on its Feb. 17, 2026 consent agenda (item F9, "access of Flock's software and hardware situational awareness solution"), more than a year before the 2027 date, so the amendment wasn't required to carry the language either. The minutes list no dollar amount.</p>
       </div>
     </section>
 
@@ -187,7 +195,7 @@
     <section id="retention-calc">
       <div class="eyebrow">The Numbers Don't Match</div>
       <h2 class="section-title">Retention comparison calculator</h2>
-      <p class="section-sub">Flock states it retains raw capture data for as little as 30 days by default. Utah requires five years of search-audit records. Slide to see how far apart those two clocks actually run.</p>
+      <p class="section-sub">Flock's default for raw capture data was 30 days. On Aug. 13, 2026, Flock lowered its recommended default to 7 days, but in its Sept. 8, 2026 letter to Sen. Josh Hawley the company said that applies to <strong>new</strong> law enforcement customers; existing customers "may keep their current retention period or transition to 7 days at their discretion." Weber County's Flock quote lists 30 days; whether that setting has changed is not public. Utah requires five years of search-audit records. Slide to see how far apart those two clocks run.</p>
 
       <div class="calc-wrap">
         <div class="calc-input-row">
@@ -203,7 +211,7 @@
           <div class="calc-label">Utah audit-log requirement</div>
           <div class="calc-track"><div class="calc-bar audit-bar" id="calc-audit-bar" style="width:100%;">5 years (1,825 days)</div></div>
         </div>
-        <p class="calc-note" id="calc-note">At 30 days, the raw vehicle-location capture is already gone under Flock's default retention &mdash; but the record that a search happened at all is required to survive for another 1,795 days after that.</p>
+        <p class="calc-note" id="calc-note">At 30 days, the raw vehicle-location capture is already gone under a 30-day setting &mdash; but the record that a search happened at all is required to survive for another 1,795 days after that.</p>
       </div>
     </section>
 
@@ -320,6 +328,10 @@
       <li>H.B. 450, Data Privacy Amendments (2026 General Session), § 63A-19-401.4 (contractor requirements), enrolled text and full redline</li>
       <li>H.B. 261, Electronic Information Privacy Act Amendments (2026 General Session), enacting § 77-23c-104.1, enrolled text</li>
       <li>Utah Code § 13-61-102(2)(a) (Utah Consumer Privacy Act, government-contractor exemption); S.B. 227 (2022 General Session) vote history, le.utah.gov</li>
+      <li>Weber County Commission minutes, Feb. 17, 2026, consent item F9 (<a href="https://webercountyutah.gov/commission/documents/minutes/min_02172026.pdf">webercountyutah.gov</a>)</li>
+      <li>Flock Group Inc. letter to Sen. Josh Hawley, signed by Chief Legal Officer Dan Haley, Sept. 8, 2026 (<a href="https://www.hawley.senate.gov/wp-content/uploads/2026/09/FILE_3387.pdf">hawley.senate.gov</a>)</li>
+      <li>Weber County Sheriff's Office Flock quote Q-185602 (retention period listed: 30 days)</li>
+      <li>Henry F. Fradella, "Customs and Border Protection tapped 80,000 Flock cameras," Fortune / The Conversation, Oct. 3, 2026, citing 404 Media reporting (<a href="https://fortune.com/2026/10/03/flock-cameras-cbp-access-data-sharing/">fortune.com</a>)</li>
     </ul>
     <p style="margin-bottom:0; margin-top:16px;">Part of a nine-part series on ALPR and privacy oversight in Weber County. &larr; <a href="weber-hive-privacy-report-hb450.html">Article 5: The Privacy Report You Cannot Read</a></p>
   </div>
@@ -331,11 +343,11 @@ const lcStages = [
   { label: "CAPTURE", who: [["vendor","Flock hardware"]], title: "A camera captures the plate",
     text: ["A Flock camera photographs a license plate, timestamp, and location as a vehicle passes. This is Flock's hardware, running on Flock's software, on a device Weber County pays a subscription fee to use."] },
   { label: "STORAGE", who: [["vendor","Flock infrastructure"]], title: "The image and data are stored on Flock's systems",
-    text: ["Raw capture data lives on Flock-controlled cloud infrastructure. Flock's own default retention for raw footage is as short as 30 days &mdash; short enough that the underlying image is often gone well before Utah's 5-year audit-log requirement would apply to anything."] },
+    text: ["Raw capture data lives on Flock-controlled cloud infrastructure. Flock's default retention for raw footage was 30 days (7 days for new law enforcement customers since August 2026; existing customers may keep their current period) &mdash; short enough that the underlying image is often gone well before Utah's 5-year audit-log requirement would apply to anything."] },
   { label: "SEARCH", who: [["county","Weber Co."], ["other","Any network agency"]], title: "An officer &mdash; anywhere on the network &mdash; searches it",
     text: ["Any agency connected to the same Flock network can search the data, not just Weber County. The search itself generates a log entry: who searched, when, and (in theory) why. That log entry is what Utah's 5-year retention requirement actually governs &mdash; not the underlying image."] },
   { label: "SHARING", who: [["vendor","Flock network"], ["other","Requesting agency"]], title: "The record can travel to another agency entirely",
-    text: ["Multi-agency network sharing means a Weber County capture can be searched by an agency thousands of miles away. Under H.B. 261's new exception, a Utah agency can also receive electronic information warrant-free from an out-of-state or federal agency that lawfully obtained it under that agency's own rules &mdash; effectively a second export pathway alongside the network search itself."] },
+    text: ["Multi-agency network sharing means a Weber County capture can be searched by an agency thousands of miles away. Under H.B. 261's new exception, a Utah agency can also receive electronic information warrant-free from an out-of-state or federal agency that lawfully obtained it under that agency's own rules &mdash; effectively a second export pathway alongside the network search itself.", "What Flock's 2025 and 2026 policy changes do not reach: searches already run and records already copied by other agencies. Flock says it removed federal agencies from its statewide and national lookup networks in August 2025 (Flock letter to Sen. Hawley, Sept. 8, 2026). Before that, 404 Media reported, U.S. Customs and Border Protection had access to more than 80,000 Flock cameras during a 2025 pilot, and Danville, Illinois records showed more than 4,000 federal searches although ICE had no contract with that city. Whatever was pulled then is held under the searching agency's rules, not Utah's or Flock's."] },
   { label: "AI TRAINING", who: [["vendor","Flock, contractually"]], title: "Aggregated data can train Flock's own models",
     text: ["Flock's Master Services Agreement (Section 4.4) grants Flock a perpetual, royalty-free license to use aggregated or anonymized data to train its own AI models and vehicle-recognition algorithms &mdash; a commercial use that continues independent of how long any single record is retained for law enforcement purposes."] },
   { label: "DELETION", who: [["vendor","Flock's process"], ["county","County's request"]], title: "Deletion happens on Flock's schedule, on Flock's systems",
@@ -388,9 +400,9 @@ function renderCalc(){
   calcAuditBar.style.width = auditPct + '%';
   calcAuditBar.textContent = (days >= AUDIT_DAYS ? '5 years (1,825 days) — requirement met' : (AUDIT_DAYS - days) + ' days remaining on the 5-year requirement');
   if (days < VENDOR_DAYS) {
-    calcNote.textContent = "At " + days + " days, Flock's default retention window for this capture hasn't closed yet — but the record is already required to exist for " + (AUDIT_DAYS - days) + " more days after that.";
+    calcNote.textContent = "At " + days + " days, a 30-day retention window for this capture hasn't closed yet — but the record is already required to exist for " + (AUDIT_DAYS - days) + " more days after that.";
   } else {
-    calcNote.textContent = "At " + days + " days, the raw vehicle-location capture is already gone under Flock's default 30-day retention — but the record that a search happened at all is still required to survive for " + Math.max(0, AUDIT_DAYS - days) + " more days.";
+    calcNote.textContent = "At " + days + " days, the raw vehicle-location capture is already gone under a 30-day setting — but the record that a search happened at all is still required to survive for " + Math.max(0, AUDIT_DAYS - days) + " more days.";
   }
 }
 calcSlider.addEventListener('input', renderCalc);
@@ -404,8 +416,8 @@ const clauses = [
     text: "Section 4.1 states that the contracting government agency owns the raw footage and search data it generates. In practice, that data lives entirely on Flock's infrastructure, is deleted according to Flock's process, and is searchable across a multi-agency network the county doesn't control — ownership on paper, without matching technical control." },
   { id: "clause-44", tag: "MSA § 4.4", title: "Aggregated Data & AI Training Rights", teaser: "Flock keeps a perpetual, royalty-free license to use aggregated data for its own commercial AI products.", 
     text: "Section 4.4 grants Flock a perpetual, royalty-free license to use aggregated or anonymized data — drawn from the same captures government agencies pay to generate — to train Flock's own AI models, vehicle-recognition ('Vehicle Fingerprint') algorithms, and other commercial products. This is not a data sale in the traditional sense; it's a standing commercial-use right built into the same contract that governs law enforcement's access." },
-  { id: "clause-retention", tag: "Vendor Policy", title: "Default 30-Day Retention", teaser: "Flock's stated default keeps raw capture data for as little as 30 days.",
-    text: "Flock's publicly stated default retention period for raw ALPR capture data is as short as 30 days, configurable by the contracting agency up to Utah's statutory ceiling. That default sits far inside the 5-year window Utah law requires for the search-audit record — the underlying image and the record that someone searched for it are governed by two entirely different clocks." }
+  { id: "clause-retention", tag: "Vendor Policy", title: "Default Retention: 30 Days, Now 7 for New Customers", teaser: "The default was 30 days. Since Aug. 2026 it is 7 days for new police customers only.",
+    text: "Flock's stated default retention period for raw ALPR capture data was 30 days, configurable by the contracting agency up to Utah's statutory ceiling. In its Sept. 8, 2026 letter to Sen. Josh Hawley, Flock said its new 7-day default is for new law enforcement customers, and existing customers may keep their current period. Either number covers only Flock's own copy: it does not reach records another agency has already searched, saved or copied under its own rules, including federal agencies. That default sits far inside the 5-year window Utah law requires for the search-audit record — the underlying image and the record that someone searched for it are governed by two entirely different clocks." }
 ];
 const clauseGrid = document.getElementById('clause-grid');
 const clauseFull = document.getElementById('clause-full');

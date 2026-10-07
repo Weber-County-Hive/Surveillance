@@ -104,7 +104,7 @@
 
     <section id="series">
       <div class="eyebrow">The Series</div>
-      <h2 class="section-title" id="series-heading">Nine pieces so far</h2>
+      <h2 class="section-title" id="series-heading">Thirteen pieces so far</h2>
       <p class="section-sub">Read in order, or jump to whichever piece answers your question. Filter by topic below.</p>
 
       <div class="filter-row" id="topic-filter"></div>
@@ -224,6 +224,22 @@ const articles = [
     href: "weber-hive-google-gemini-tooele.html",
     tags: ["Student data", "Contract analysis"],
     status: "live"
+  },
+  {
+    num: 11,
+    title: "What Changed Since September, and What Didn't",
+    desc: "Weber County's commission approved a Flock contract amendment, the governor ordered a privacy review, two senators demanded answers, officers in four states were charged, and Flock changed its defaults. None of it reaches the searches and copies other agencies already made.",
+    href: "weber-hive-what-changed.html",
+    tags: ["Update", "National pattern"],
+    status: "live"
+  },
+  {
+    num: 12,
+    title: "The Questions Residents Keep Asking",
+    desc: "From Ohio to Utah, residents ask the same eight questions about Flock at council meetings. Each question, the answer they got, and what the record shows.",
+    href: "weber-hive-questions-residents-ask.html",
+    tags: ["FAQ", "National pattern"],
+    status: "live"
   }
   // Next article goes here — copy the shape above, bump "num", set status.
 ];
@@ -235,7 +251,7 @@ const liveCount = articles.filter(a => a.status === "live").length;
 document.getElementById('series-heading').textContent =
   (liveCount === 1 ? "One piece so far" : numberWord(liveCount) + " pieces so far");
 function numberWord(n){
-  const words = ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve"];
+  const words = ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen","Twenty"];
   return words[n] || n;
 }
 const heroStats = document.getElementById('hero-stats');

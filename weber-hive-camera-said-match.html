@@ -134,6 +134,14 @@
   .check-icon{ flex-shrink:0; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; margin-top:2px; }
   .check-icon.yes{ background:var(--help-bg); color:var(--help); }
   .check-icon.no{ background:var(--harm-bg); color:var(--harm); }
+
+  /* Phone-width fixes (Oct. 2026): keep wide tables and rows inside the screen */
+  @media (max-width:680px){
+    table.field-table, table.matrix{ display:block; overflow-x:auto; max-width:100%; }
+    .rubric-row{ grid-template-columns:repeat(2,1fr) !important; }
+    .calc-input-row{ flex-wrap:wrap; }
+    .flow-step .step-head{ flex-wrap:wrap; } .step-who{ white-space:normal; }
+  }
 </style>
 </head>
 <body>
@@ -148,7 +156,7 @@
     <div class="hero-stats">
       <div class="hero-stat"><div class="num">2&times;</div><div class="lbl">gunpoint stops of the same innocent woman, one week apart</div></div>
       <div class="hero-stat"><div class="num">$25</div><div class="lbl">value of the package a Rivian owner was accused of stealing</div></div>
-      <div class="hero-stat"><div class="num">0</div><div class="lbl">times either camera actually misread a plate</div></div>
+      <div class="hero-stat"><div class="num">0</div><div class="lbl">times any camera in these cases actually misread a plate</div></div>
       <div class="hero-stat"><div class="num">After</div><div class="lbl">when audits happen relative to the stop</div></div>
     </div>
   </div>
@@ -160,7 +168,7 @@
     <section id="what-alert-proves">
       <div class="eyebrow">Start Here</div>
       <h2 class="section-title">What an alert actually establishes &mdash; and what it doesn't</h2>
-      <p class="section-sub">Before the two cases below, it's worth being precise about what a Flock match actually is.</p>
+      <p class="section-sub">Before the cases below, it's worth being precise about what a Flock match actually is.</p>
       <div class="card">
         <p style="margin-top:0; font-weight:600;">An alert can establish:</p>
         <ul style="font-size:14.5px; line-height:1.8;">
@@ -183,7 +191,7 @@
     <section id="failure-types">
       <div class="eyebrow">The Taxonomy</div>
       <h2 class="section-title">Not every failure is the same failure</h2>
-      <p class="section-sub">Filter by category. The two cases below map onto different rows in this table &mdash; which is the point.</p>
+      <p class="section-sub">Filter by category. The cases below map onto different rows in this table &mdash; which is the point.</p>
 
       <div class="filter-row" id="fail-filter">
         <button class="filter-btn active" data-filter="all">All types</button>
@@ -256,6 +264,24 @@
       </div>
     </section>
 
+    <section id="case-isaacs">
+      <div class="eyebrow">Case 3</div>
+      <h2 class="section-title">Lindsey Isaacs: 13 days in jail over a car that wasn't damaged</h2>
+      <p class="section-sub">Volusia County, Florida &mdash; crash Oct. 4, 2025; arrest April 17, 2026. Added Oct. 2026. Once again the camera recorded a real car. The conclusion drawn from it was wrong.</p>
+
+      <div class="case-header">
+        <div class="case-photo-placeholder">LI</div>
+        <div>
+          <p class="case-name">Lindsey Isaacs</p>
+          <p class="case-loc">Near DeLand, FL &mdash; Florida Highway Patrol investigation</p>
+        </div>
+      </div>
+
+      <div class="case-outcome">
+        <b>What happened, as reported by InvestigateTV/Gray Television (Sept. 14, 2026):</b> Florida Highway Patrol investigators looking into a fatal Oct. 4, 2025 crash that killed three people focused on Flock camera captures of Isaacs' black Dodge Durango, including one camera about three miles west of the crash site. She was arrested April 17, 2026 on three counts each of vehicular homicide and leaving the scene of a deadly crash, was initially denied bond, and spent 13 days in jail. Her Durango had no damage. Paint transfer on the victims' vehicle and witness descriptions pointed to a <strong>maroon</strong> Durango, with a partial plate matching a different vehicle. All charges against her were dismissed May 22, 2026, and the driver of a maroon Durango was arrested; he has pleaded not guilty. Isaacs has filed a civil action against the two investigating troopers; those claims are allegations, not findings.
+      </div>
+    </section>
+
     <section id="verify">
       <div class="eyebrow">What Officers Are Supposed To Do</div>
       <h2 class="section-title">The verification step that's supposed to sit between an alert and a stop</h2>
@@ -325,7 +351,7 @@
 
     <div class="takeaway">
       <div class="eyebrow">The Throughline</div>
-      <p class="big">Neither camera misread a plate. In Newell's case, an accurate camera fed a stale alert into a network with no automatic check on whether a cleared vehicle was still live. In Elser's case, an accurate location observation became a human conclusion nobody verified before a summons was issued. Different failures, same lesson: the technology can work exactly as designed and someone can still end up at gunpoint, or in court, over nothing.</p>
+      <p class="big">No camera in these cases misread a plate. In Newell's case, an accurate camera fed a stale alert into a network with no automatic check on whether a cleared vehicle was still live. In Elser's case, an accurate location observation became a human conclusion nobody verified before a summons was issued. Lindsey Isaacs' case repeats Elser's: an accurate capture of the wrong car, treated as an answer instead of a lead, while the physical evidence pointed elsewhere. Different failures, same lesson: the technology can work exactly as designed and someone can still end up at gunpoint, or in court, over nothing.</p>
     </div>
 
   </div>
@@ -335,6 +361,7 @@
   <div class="wrap">
     <p style="margin-top:0;"><strong>Sources</strong></p>
     <ul class="sources-list">
+      <li>InvestigateTV / Gray Television, "A Flock camera hit sent troopers to her door. They had the wrong car.," Sept. 14, 2026 (<a href="https://www.investigatetv.com/2026/09/14/flock-camera-hit-sent-troopers-her-door-they-had-wrong-car/">investigatetv.com</a>)</li>
       <li>FOX6 Milwaukee, Local 12, and CBS 58 reporting on Amber Newell, August 2026</li>
       <li>Milwaukee Journal Sentinel / Brookfield Police Chief Christopher Garcia statement, August 2026</li>
       <li>Denverite, "Police used 'Flock' cameras to implicate this Denver woman in a theft," Oct. 27, 2025</li>

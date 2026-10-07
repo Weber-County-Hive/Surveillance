@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Changed Since September, and What Didn't — Weber County Hive</title>
+<meta name="description" content="Weber County approved a Flock amendment, Utah opened a review, senators asked questions and officers were charged. What changed, and what stayed the same.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --help:#3f5d45; --help-bg:#e9efe7;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --dead:#4a4438; --dead-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:56px 0 44px;
+  }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(1.9rem, 4.4vw, 2.9rem); line-height:1.12; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.06rem; color:#c9c3ae; max-width:700px; margin:0 0 30px; }
+  .hero-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(214,184,105,0.25); border:1px solid rgba(214,184,105,0.25); border-radius:10px; overflow:hidden; }
+  .hero-stat{ background:rgba(20,26,36,0.65); padding:16px 14px; }
+  .hero-stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.3rem; color:var(--brass-bright); }
+  .hero-stat .lbl{ font-size:11.5px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:700px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+
+  .finding-block{ border-left:4px solid var(--brass); background:var(--paper-card); padding:20px 24px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:32px 0; }
+  .finding-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.15rem; margin:0 0 8px; }
+  .finding-block p{ margin:0; font-size:14.5px; color:var(--muted); }
+  .finding-block.quote{ border-left-color:var(--harm); }
+  .finding-block blockquote{ font-family:"Fraunces",serif; font-style:italic; font-size:1.1rem; color:var(--ink); margin:0 0 8px; line-height:1.5; }
+  .finding-block cite{ font-family:"IBM Plex Mono",monospace; font-style:normal; font-size:12px; color:var(--muted); }
+
+  .unknown-banner{ background:var(--dead-bg); border:1px solid var(--dead); border-radius:10px; padding:16px 20px; margin-bottom:24px; display:flex; gap:14px; align-items:flex-start; }
+  .unknown-banner .icon{ font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:16px; color:var(--dead); flex-shrink:0; }
+  .unknown-banner p{ margin:0; font-size:14px; color:var(--dead); }
+
+  .rubric-row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:8px; margin-top:10px; }
+  .rubric-item{ font-size:12.5px; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:8px 10px; }
+  .rubric-item .dim{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:3px; }
+
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:36px 30px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.2rem,2.8vw,1.55rem); max-width:720px; margin:0 auto; line-height:1.45; }
+
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+
+
+  /* Shared additions for Articles 11-12 */
+  .timeline{ border-left:3px solid var(--line); margin-left:8px; padding-left:22px; }
+  .tl-item{ position:relative; margin-bottom:10px; }
+  .tl-item::before{ content:""; position:absolute; left:-30px; top:14px; width:13px; height:13px; border-radius:50%; background:var(--paper); border:3px solid var(--brass); }
+  .tl-btn{ width:100%; text-align:left; background:var(--paper-card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; cursor:pointer; font:inherit; color:var(--text); display:flex; gap:14px; align-items:baseline; flex-wrap:wrap; }
+  .tl-btn:hover, .tl-btn:focus-visible{ border-color:var(--brass); outline:none; }
+  .tl-date{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:700; color:var(--brass-dark); min-width:92px; }
+  .tl-title{ font-family:"Fraunces",serif; font-weight:600; font-size:1.05rem; flex:1; min-width:200px; }
+  .tl-tag{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:var(--mixed-bg); color:var(--mixed); }
+  .tl-tag.utah{ background:var(--help-bg); color:var(--help); }
+  .tl-tag.misuse{ background:var(--harm-bg); color:var(--harm); }
+  .tl-body{ display:none; background:var(--paper); border-left:4px solid var(--brass); border-radius:0 10px 10px 0; padding:14px 18px; margin:6px 0 4px; font-size:15px; color:var(--muted); }
+  .tl-body.open{ display:block; }
+  .tl-body .src{ font-family:"IBM Plex Mono",monospace; font-size:12px; margin-top:8px; display:block; }
+  .filter-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .filter-btn{ font-family:"IBM Plex Mono",monospace; font-size:13px; padding:9px 15px; border-radius:20px; border:1px solid var(--line); background:#fff; cursor:pointer; color:var(--muted); }
+  .filter-btn.active{ background:var(--ink); color:#faf6ea; border-color:var(--ink); }
+  #map{ height:460px; border-radius:12px; border:1px solid var(--line); box-shadow:var(--shadow); }
+  .map-note{ font-size:13px; color:var(--muted); margin-top:8px; }
+  .mermaid-wrap{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; padding:20px; overflow-x:auto; box-shadow:var(--shadow); }
+  .mermaid-wrap .mermaid{ font-size:20px; min-width:640px; }
+  .ask-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:16px; }
+  .ask-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; padding:20px; }
+  .ask-card .who{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.08em; color:var(--brass-dark); font-weight:700; margin-bottom:10px; }
+  .ask-card ul{ margin:0; padding-left:18px; font-size:15px; }
+  .ask-card li{ margin-bottom:8px; }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:680px){ .two-col{ grid-template-columns:1fr; } }
+  .col-card{ border-radius:12px; padding:20px; border:2px solid var(--line); background:var(--paper-card); }
+  .col-card h3{ margin:0 0 10px; font-size:1.1rem; }
+  .col-card.changed{ border-color:var(--help); }
+  .col-card.unchanged{ border-color:var(--harm); }
+  .col-card ul{ margin:0; padding-left:18px; font-size:15px; color:var(--text); }
+  .col-card li{ margin-bottom:8px; }
+  details.sources{ border-top:1px solid var(--line); padding-top:14px; }
+  details.sources summary{ cursor:pointer; font-family:"IBM Plex Mono",monospace; font-weight:700; color:var(--ink); font-size:14px; }
+  .qa{ border:1px solid var(--line); border-radius:12px; background:var(--paper-card); margin-bottom:14px; overflow:hidden; }
+  .qa-btn{ width:100%; text-align:left; background:none; border:none; padding:18px 20px; cursor:pointer; font:inherit; display:flex; gap:14px; align-items:flex-start; }
+  .qa-btn:focus-visible{ outline:3px solid var(--brass); }
+  .qa-num{ font-family:"IBM Plex Mono",monospace; font-weight:700; color:var(--brass-dark); font-size:14px; padding-top:3px; }
+  .qa-q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.18rem; color:var(--ink); flex:1; }
+  .qa-where{ display:block; font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--muted); font-weight:400; margin-top:4px; }
+  .qa-body{ display:none; padding:0 20px 20px; }
+  .qa-body.open{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:680px){ .qa-body.open{ grid-template-columns:1fr; } }
+  .qa-col{ border-radius:10px; padding:14px 16px; font-size:15px; }
+  .qa-col h4{ margin:0 0 8px; font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.08em; }
+  .qa-col.said{ background:var(--mixed-bg); } .qa-col.said h4{ color:var(--mixed); }
+  .qa-col.record{ background:var(--help-bg); } .qa-col.record h4{ color:var(--help); }
+  .qa-col p{ margin:0 0 8px; } .qa-col p:last-child{ margin-bottom:0; }
+  .pattern-tag{ display:inline-block; margin-top:8px; font-family:"IBM Plex Mono",monospace; font-size:11px; padding:3px 9px; border-radius:999px; background:var(--dead-bg); color:var(--dead); }
+  .camps{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+  .camp{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; padding:18px; }
+  .camp h3{ margin:0 0 6px; font-size:1.05rem; }
+  .camp p{ margin:0; font-size:15px; color:var(--muted); }
+
+
+  .chart-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; }
+  .chart-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; padding:18px; box-shadow:var(--shadow); min-width:0; }
+  .chart-card h3{ margin:0 0 4px; font-size:1.08rem; }
+  .chart-card .chart-sub{ font-size:13px; color:var(--muted); margin:0 0 12px; }
+  .chart-box{ position:relative; height:300px; }
+  .table-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--paper-card); box-shadow:var(--shadow); }
+  table.data{ width:100%; border-collapse:collapse; font-size:15px; min-width:560px; }
+  table.data th{ background:var(--ink); color:#faf6ea; text-align:left; padding:10px 12px; font-family:"IBM Plex Mono",monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.05em; cursor:pointer; }
+  table.data td{ padding:10px 12px; border-top:1px solid var(--line); vertical-align:top; }
+  table.data tr:nth-child(even) td{ background:var(--paper); }
+  .yes{ color:var(--help); font-weight:700; } .no{ color:var(--harm); font-weight:700; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">The Weber County Hive</a> &rsaquo; Surveillance Series &rsaquo; Article 11</div>
+    <div class="kicker">Article 11 &middot; Update, October 2026</div>
+    <h1>What Changed Since September, and What Didn't</h1>
+    <p class="subhead">In the seven weeks after this series' last update, Weber County's commission approved a Flock contract amendment, a governor ordered a privacy review, two U.S. senators demanded answers, officers in four states were charged, and Flock changed its own defaults. None of those changes reaches the searches and copies other agencies have already made.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">Feb. 17</div><div class="lbl">2026 &mdash; Weber County Commission approved a Flock contract amendment on its consent agenda</div></div>
+      <div class="hero-stat"><div class="num">~90</div><div class="lbl">places ended Flock contracts in August 2026, per advocacy group Secure Justice's count</div></div>
+      <div class="hero-stat"><div class="num">7 days</div><div class="lbl">Flock's new default &mdash; for NEW police customers only</div></div>
+      <div class="hero-stat"><div class="num">Oct. 16</div><div class="lbl">2026 &mdash; deadline Sen. Schumer set for Flock's answers</div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <section id="weber">
+      <div class="eyebrow">Start At Home</div>
+      <h2 class="section-title">What changed in Weber County and Utah</h2>
+      <p class="section-sub">Four public records, in the order they happened.</p>
+
+      <div class="finding-block">
+        <p class="q">Feb. 17, 2026: the County Commission approved a Flock amendment</p>
+        <p>Consent item F9 on the Weber County Commission's Feb. 17, 2026 agenda: "Amend a contract with Flock Group Inc. for access of Flock's software and hardware situational awareness solution." The minutes record it approved with the rest of the consent items (Commissioner Bolos moved, Chair Froerer seconded). The minutes list no dollar amount, term, or quote number. They list Commissioner Harvey as excused, yet the consent vote line records "Commissioner Harvey &ndash; aye." The same meeting approved an Axon agreement for three Animal Control body cameras (item G5), a Securus inmate-phone amendment (F7) and a CALEA accreditation contract (G7).</p>
+      </div>
+      <div class="finding-block">
+        <p class="q">Aug. 20, 2026: Gov. Cox ordered a privacy review</p>
+        <p>After Utah Civic Compact released data showing Weber County's 10 cameras had been searched more than 5 million times, mostly by out-of-state agencies, Gov. Spencer Cox said he was "deeply troubled" and asked the Utah Privacy Governing Board and Utah Privacy Commission to "do a review of all of our rules and regulations." He said: "If there are some gaps, then yes, I would absolutely support legislation." (KSL, Aug. 20, 2026)</p>
+      </div>
+      <div class="finding-block">
+        <p class="q">Sept. 2, 2026: Washington Terrace paused its Flock trial</p>
+        <p>The city council voted unanimously to halt a planned trial. Mayor Mark Allen: "I believe they are a good tool for our law enforcement. But they do need to put some safeguards on those." Three cameras the Weber County Sheriff's Office runs inside the city remain in operation. (FOX 13, Sept. 2, 2026)</p>
+      </div>
+      <div class="finding-block">
+        <p class="q">Sept. 17, 2026: a 2027 bill file was requested</p>
+        <p>Sen. Calvin Musselman, chair of the Law Enforcement and Criminal Justice Interim Committee, discussed a proposal "to strengthen privacy guardrails on automated license plate readers." The report says "the bill file was requested"; it does not name a primary sponsor or the bill's contents yet. (Utah News Dispatch, Sept. 17, 2026)</p>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="eyebrow">Seven Weeks, In Order</div>
+      <h2 class="section-title">Timeline: click any date for the record</h2>
+      <p class="section-sub">Every charge listed here is an allegation, not a conviction. Filter by type, then open an entry to see the source.</p>
+      <div class="filter-row" id="tl-filter"></div>
+      <div class="timeline" id="tl"></div>
+    </section>
+
+    <section id="numbers">
+      <div class="eyebrow">By The Numbers</div>
+      <h2 class="section-title">This update in charts</h2>
+      <p class="section-sub">Hover or tap any bar or slice for its number. Every figure comes from a record listed in the sources at the bottom.</p>
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>People charged or fired, by state</h3>
+          <p class="chart-sub">Aug. 19 &ndash; Sept. 23, 2026, in this update only. Charges are allegations.</p>
+          <div class="chart-box"><canvas id="chartStates" aria-label="Bar chart of officers charged or fired by state"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>What kind of change was it?</h3>
+          <p class="chart-sub">The timeline's entries, grouped by type.</p>
+          <div class="chart-box"><canvas id="chartTypes" aria-label="Doughnut chart of timeline entries by type"></canvas></div>
+        </div>
+      </div>
+      <div class="chart-card" style="margin-top:18px;">
+        <h3>How long each rule keeps records</h3>
+        <p class="chart-sub">Days, on a stretched (log) scale so short and long periods both show. Flock's retention covers images; Utah's 5-year rule covers the record that a search happened.</p>
+        <div class="chart-box" style="height:320px;"><canvas id="chartRetention" aria-label="Bar chart comparing retention periods"></canvas></div>
+      </div>
+
+      <h3 style="margin:30px 0 10px;">Weber County Commission, Feb. 17, 2026: the four related items</h3>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th>Item</th><th>What the minutes say</th><th>Vote recorded</th><th>Dollar amount in minutes</th></tr></thead>
+          <tbody>
+            <tr><td>F7 (consent)</td><td>Fifth amendment to a master services agreement with Securus Technologies for inmate phone services</td><td class="yes">Approved: Froerer, Harvey*, Bolos aye</td><td>None listed</td></tr>
+            <tr><td>F9 (consent)</td><td>Amend a contract with Flock Group Inc. "for access of Flock's software and hardware situational awareness solution"</td><td class="yes">Approved: Froerer, Harvey*, Bolos aye</td><td>None listed</td></tr>
+            <tr><td>G5</td><td>Master services and purchasing agreement with Axon "for three body cameras for Weber County Animal Control officers"</td><td class="yes">Approved: Froerer, Bolos aye; Harvey excused</td><td>None listed</td></tr>
+            <tr><td>G7</td><td>Contract with CALEA for accreditations and standards use</td><td class="yes">Approved: Froerer, Bolos aye; Harvey excused</td><td>None listed</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="map-note">* The minutes list Commissioner Harvey as excused at the top, and record "Commissioner Harvey &ndash; aye" on the consent vote. The page reports both as written.</p>
+    </section>
+
+    <section id="didnt">
+      <div class="eyebrow">The Part That Matters Most</div>
+      <h2 class="section-title">What didn't change</h2>
+      <p class="section-sub">Flock's own changes cover Flock's own settings. Once another agency has searched or saved a record, that record follows the other agency's rules, not Utah's and not Flock's.</p>
+
+      <div class="mermaid-wrap">
+<pre class="mermaid">
+flowchart LR
+  A["A Weber County camera<br/>captures a plate"] --> B["Stored on<br/>Flock's servers"]
+  B --> C["Flock's settings<br/>(retention, search rules)"]
+  B --> D["Another agency<br/>searches or saves it"]
+  C --> E["CHANGED in 2026:<br/>7-day default for new customers,<br/>case codes, audit tool"]
+  D --> F["NOT CHANGED:<br/>the copy follows that agency's rules,<br/>not Utah's or Flock's"]
+</pre>
+      </div>
+
+      <div class="two-col" style="margin-top:24px;">
+        <div class="col-card changed">
+          <h3>Changed</h3>
+          <ul>
+            <li>Flock's recommended default retention is 7 days, down from 30, for <strong>new</strong> law enforcement customers (Flock letter to Sen. Hawley, Sept. 8, 2026).</li>
+            <li>Flock says it removed federal agencies from its statewide and national lookup networks (August 2025) and added a one-click switch to turn off federal sharing (January 2026).</li>
+            <li>Flock says its "Audit Assistance" tool will be required for all police customers by the end of 2026.</li>
+            <li>Florida revoked approvals for local police plate readers on state highway right-of-way (Aug. 31, 2026). That order does not cover private property or roads the state doesn't control.</li>
+          </ul>
+        </div>
+        <div class="col-card unchanged">
+          <h3>Didn't change</h3>
+          <ul>
+            <li>Existing customers "may keep their current retention period" (Flock, Sept. 8, 2026). Weber County's Flock quote lists 30 days; whether that setting has changed is not public.</li>
+            <li>Searches already run, and records already saved, by agencies outside Utah. 404 Media reported U.S. Customs and Border Protection had access to more than 80,000 Flock cameras during a 2025 pilot; Danville, Illinois records show more than 4,000 federal searches although ICE had no contract with that city.</li>
+            <li>Utah has no way to check what an out-of-state recipient does with Weber County data (see <a href="weber-hive-nobody-approves-each-search.html">Article 2</a>).</li>
+            <li>The commission's Feb. 17 amendment came before the July 1, 2027 date when new Utah privacy terms must be written into contractor agreements (see <a href="weber-hive-private-company-public-power.html">Article 6</a>).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="map-section">
+      <div class="eyebrow">Where It Happened</div>
+      <h2 class="section-title">Map of this update's records</h2>
+      <p class="section-sub">Each pin is one record cited on this page. Click a pin for what happened there.</p>
+      <div id="map" role="region" aria-label="Map of places named in this update"></div>
+      <p class="map-note">Pins mark the city or the court/agency location, not an exact address.</p>
+    </section>
+
+    <section id="ask">
+      <div class="eyebrow">Your Turn</div>
+      <h2 class="section-title">Questions to ask, and who can answer them</h2>
+      <p class="section-sub">These are public questions any resident can bring to a public meeting or public comment period.</p>
+      <div class="ask-grid">
+        <div class="ask-card">
+          <div class="who">Weber County Commission</div>
+          <ul>
+            <li>What did the Feb. 17, 2026 Flock amendment (item F9) change, and what does it cost?</li>
+            <li>Why do the minutes list Commissioner Harvey as excused and also record his vote?</li>
+            <li>Will the next Flock renewal include the privacy terms Utah will require from July 1, 2027?</li>
+          </ul>
+        </div>
+        <div class="ask-card">
+          <div class="who">Weber County Sheriff's Office</div>
+          <ul>
+            <li>What retention setting does our Flock account use today: 30 days, 7 days, or something else?</li>
+            <li>Is federal sharing switched off in our account settings?</li>
+            <li>Has Flock's Audit Assistance tool been turned on, and has it flagged anything?</li>
+          </ul>
+        </div>
+        <div class="ask-card">
+          <div class="who">Your state legislators</div>
+          <ul>
+            <li>Who is the primary sponsor of the 2027 ALPR bill file, and what will it contain?</li>
+            <li>Will it give Utah any way to check what out-of-state agencies do with Utah plate data?</li>
+            <li>What did the Privacy Governing Board's review, ordered Aug. 20, find?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="takeaway">
+      <div class="eyebrow">The Throughline</div>
+      <p class="big">A company can change its defaults overnight. It can't recall what has already left its servers. Every change in this update applies going forward, to the settings Flock and its customers control. The questions that remain are about the records that are already somewhere else.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <details class="sources">
+      <summary>Sources (click to open)</summary>
+      <ul class="sources-list">
+        <li>Weber County Commission minutes, Feb. 17, 2026, consent item F9 and items F7, G5, G7 (<a href="https://webercountyutah.gov/commission/documents/minutes/min_02172026.pdf">webercountyutah.gov</a>)</li>
+        <li>KSL, "Utah governor 'deeply troubled' by Flock camera concerns, orders privacy review," Aug. 20, 2026 (<a href="https://www.ksl.com/article/51611920">ksl.com</a>)</li>
+        <li>FOX 13, "Washington Terrace reverses decision to use Flock cameras," Sept. 2, 2026 (<a href="https://www.fox13now.com/news/local-news/weber-county/washington-terrace-reverses-decision-to-use-flock-cameras">fox13now.com</a>)</li>
+        <li>Utah News Dispatch, Sept. 17, 2026, on a 2027 ALPR bill file (<a href="https://utahnewsdispatch.com/2026/09/17/utah-lawmaker-new-flock-camera-regulations-license-plate-readers/">utahnewsdispatch.com</a>)</li>
+        <li>Flock Group Inc. letter to Sen. Josh Hawley, Chief Legal Officer Dan Haley, Sept. 8, 2026 (<a href="https://www.hawley.senate.gov/wp-content/uploads/2026/09/FILE_3387.pdf">hawley.senate.gov</a>)</li>
+        <li>Sen. Charles E. Schumer letter to Flock CEO Garrett Langley, Oct. 5, 2026 (<a href="https://www.democrats.senate.gov/imo/media/doc/20261005lettertoflockrepersonalinformation.pdf">democrats.senate.gov</a>)</li>
+        <li>Flock, "Does Flock Share Data With ICE?" (<a href="https://www.flocksafety.com/blog/does-flock-share-data-with-ice">flocksafety.com</a>)</li>
+        <li>The Capitolist, FDOT revokes license plate reader approvals on state highways, Aug. 31, 2026 (<a href="https://thecapitolist.com/fdot-revokes-permits-for-license-plate-readers-on-state-highways/">thecapitolist.com</a>)</li>
+        <li>Cybernews, Secure Justice's count of Flock cancellations (90 in August 2026, 214 since 2021), Aug. 31, 2026 (<a href="https://cybernews.com/privacy/flock-cameras-us-cities-record-terminations/">cybernews.com</a>)</li>
+        <li>Schulte v. Flock Group Inc., U.S. District Court, N.D. Ga., No. 1:26-cv-04843, filed Aug. 25, 2026 (<a href="https://dockets.justia.com/docket/georgia/gandce/1%3A2026cv04843/364163">Justia docket</a>)</li>
+        <li>Georgia Bureau of Investigation releases: Robert Keim, Sept. 1, 2026; Errol Farrell Jr., Sept. 2, 2026 (<a href="https://gbi.georgia.gov/press-releases/2026-09-01/gbi-arrests-gdc-special-agent-charge-misuse-license-plate-reader-system">gbi.georgia.gov</a>)</li>
+        <li>Atlanta News First: Gwinnett officers, Sept. 5, 2026; Anthony Trapani, Sept. 14, 2026</li>
+        <li>Indianapolis Recorder, IMPD officers charged, Sept. 30, 2026 (<a href="https://indianapolisrecorder.com/impd-officers-alpr-fraud-charges/">indianapolisrecorder.com</a>)</li>
+        <li>10News, Asad Zahir (court records), Aug. 2026 (<a href="https://www.10news.com/us-news/police-misconduct/kentucky-officer-accused-of-using-police-cameras-to-track-ex-over-2-000-times">10news.com</a>)</li>
+        <li>FOX 13 Tampa Bay, Cory Waiters, Aug. 19, 2026 (<a href="https://www.fox13news.com/news/sarasota-police-officer-terminated-following-illegal-misuse-flock-among-other-databases">fox13news.com</a>)</li>
+        <li>404 Media, "Hackers Stole Flock's Camera Software, Revealing How the Company Tracks Cars and People," Joseph Cox and Dhruv Mehrotra, Sept. 16, 2026, joint with WIRED (<a href="https://404media.co/hackers-stole-flocks-camera-software-revealing-how-the-company-tracks-cars-and-people-2">404media.co</a>); figures as reported by TechSpot (<a href="https://www.techspot.com/news/113887-hackers-stole-flock-camera-found-27321-video-clips.html">techspot.com</a>)</li>
+        <li>404 Media, "Flock City PD," Jason Koebler, Sept. 17, 2026 (<a href="https://www.404media.co/flock-city-pd-the-fake-flock-owned-police-department-that-searched-real-cameras-for-real-people/">404media.co</a>)</li>
+        <li>Henry F. Fradella, Fortune / The Conversation, Oct. 3, 2026, citing 404 Media on CBP access (<a href="https://fortune.com/2026/10/03/flock-cameras-cbp-access-data-sharing/">fortune.com</a>)</li>
+        <li>Retention chart: Flock letter to Sen. Hawley (7 and 30 days); Schmidt v. City of Norfolk order, Jan. 27, 2026 (21 days, <a href="https://law.justia.com/cases/federal/district-courts/virginia/vaedce/2%3A2024cv00621/562101/191/">Justia</a>); Utah Code &sect; 41-6a-2004 (nine-month limit) and &sect; 41-6a-2005 (five-year search records), as cited in Articles 2 and 6</li>
+        <li>InvestigateTV / Gray Television, Lindsey Isaacs case, Sept. 14, 2026 (<a href="https://www.investigatetv.com/2026/09/14/flock-camera-hit-sent-troopers-her-door-they-had-wrong-car/">investigatetv.com</a>)</li>
+      </ul>
+    </details>
+    <p style="margin-bottom:0; margin-top:16px;">Part of the Weber County Hive surveillance series. <a href="index.html">All articles</a> &nbsp;|&nbsp; <a href="weber-hive-questions-residents-ask.html">Article 12: The Questions Residents Keep Asking &rarr;</a></p>
+  </div>
+</footer>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad:true, theme:'base', themeVariables:{ fontSize:'20px', primaryColor:'#fffdf8', primaryBorderColor:'#a9812f', primaryTextColor:'#1c2430', lineColor:'#7c5f22' } });
+</script>
+<script>
+const events = [
+  {d:"Aug. 13", t:"Flock announces new defaults", tag:"flock", b:"Flock lowered its recommended retention default to 7 days, announced mandatory case codes and an “Audit Assistance” tool, and an “Evidence Mode” for longer holds. Its Sept. 8 letter to Sen. Hawley later said the 7-day default is for new law enforcement customers; existing customers may keep their current period.", s:"Flock letter to Sen. Hawley, Sept. 8, 2026"},
+  {d:"Aug. 19", t:"Sarasota officer arrested and fired", tag:"misuse", b:"Officer Cory Waiters is accused of 358 queries of the same plate between May and October 2025 using Flock and the state DAVID database. Allegations, not a conviction.", s:"FOX 13 Tampa Bay, Aug. 19, 2026"},
+  {d:"Aug. 20", t:"Gov. Cox orders a privacy review", tag:"utah", b:"Cox said he was “deeply troubled” after Weber County search data was released and asked the Privacy Governing Board and Privacy Commission to review the state's rules.", s:"KSL, Aug. 20, 2026"},
+  {d:"Aug. 25", t:"Class action filed against Flock", tag:"legal", b:"Schulte v. Flock Group Inc., N.D. Ga., No. 1:26-cv-04843. The complaint's claims are allegations; no ruling yet.", s:"Justia docket"},
+  {d:"Aug. 26", t:"Sen. Hawley questions Flock", tag:"legal", b:"Sen. Josh Hawley, chair of a Senate Judiciary subcommittee, asked Flock for documents. Flock answered in a letter dated Sept. 8, 2026.", s:"Flock letter to Sen. Hawley, Sept. 8, 2026"},
+  {d:"Aug. 27", t:"Kentucky officer arrested", tag:"misuse", b:"Shively Officer Asad Zahir is accused of 2,048 Flock searches on two vehicles of an ex-girlfriend, 241 of them while a protection order was in effect. Flock's audit tool flagged it. Allegations.", s:"10News, court records"},
+  {d:"Aug. 31", t:"Florida revokes approvals on state highways", tag:"legal", b:"FDOT revoked existing approvals for local law enforcement license plate readers on state highway right-of-way, gave 30 days to remove them, and stopped new approvals. Not a ban on private property or local roads.", s:"The Capitolist, Aug. 31, 2026"},
+  {d:"Aug. 31", t:"About 90 cancellations in August", tag:"flock", b:"Advocacy group Secure Justice counted 90 places ending Flock contracts in August 2026 and 214 since 2021. This is that group's count.", s:"Cybernews, Aug. 31, 2026"},
+  {d:"Sept. 1–2", t:"Two Georgia arrests by the GBI", tag:"misuse", b:"GDC Special Agent in Charge Robert Keim and Clayton County Deputy Errol Farrell Jr. were each charged with Misuse of a License Plate Reader System. Allegations.", s:"GBI press releases"},
+  {d:"Sept. 2", t:"Washington Terrace pauses its trial", tag:"utah", b:"Unanimous council vote to halt a planned Flock trial. Three WCSO cameras in the city stay on.", s:"FOX 13, Sept. 2, 2026"},
+  {d:"Sept. 5", t:"Three Gwinnett officers fired", tag:"misuse", b:"Derric Holmes (six counts) and Matthew Lau (one count) charged with misuse of license plate data; Renee Downer charged with simple battery and stalking. All fired. Allegations.", s:"Atlanta News First, Sept. 5, 2026"},
+  {d:"Sept. 14", t:"Officer whose misuse followed him to a new job", tag:"misuse", b:"Anthony Trapani is accused of misusing Flock at Acworth PD; the GBI says “that misuse continued” after he moved to Emerson PD. Allegations.", s:"Atlanta News First, Sept. 14, 2026"},
+  {d:"Sept. 14", t:"Wrongly jailed 13 days over the wrong car", tag:"misuse", b:"InvestigateTV reported that Lindsey Isaacs was jailed 13 days on vehicular homicide charges built around Flock captures of her black Durango; the evidence pointed to a maroon one. Charges were dismissed May 22, 2026. See Article 3.", s:"InvestigateTV, Sept. 14, 2026"},
+  {d:"Sept. 16", t:"A Flock camera's contents made public", tag:"flock", b:"Hackers removed a camera from above a roadway and gave its files to 404 Media and WIRED. Reported contents: about 1.6 million images over about 21 days, 27,321 clips, about 50,200 vehicles, people detected in 11 clips (all motorcyclists), and an encryption key stored on the device.", s:"404 Media / WIRED, Sept. 16, 2026"},
+  {d:"Sept. 17", t:"“Flock City PD” search logs", tag:"flock", b:"Audit logs showed a Flock-run test account searching real cameras. Searches for “crowd,” “large group with signs” and “person wearing a mask” were allowed to run; a “Star of David” person search was blocked. The logs don't show what the searches returned. Flock says they were tests of its safeguards.", s:"404 Media, Sept. 17, 2026"},
+  {d:"Sept. 17", t:"Utah bill file requested", tag:"utah", b:"Sen. Calvin Musselman discussed a 2027 proposal to strengthen ALPR privacy guardrails. No primary sponsor named yet.", s:"Utah News Dispatch, Sept. 17, 2026"},
+  {d:"Sept. 23", t:"Five Indianapolis officers charged", tag:"misuse", b:"Four current officers and one former officer charged with Official Misconduct and Fraud; one also faces stalking counts. IMPD found the alleged misuse itself and referred it. Allegations.", s:"Indianapolis Recorder, Sept. 30, 2026"},
+  {d:"Oct. 3", t:"Federal access, reported", tag:"flock", b:"A Fortune/The Conversation commentary, citing 404 Media, reported that Customs and Border Protection had access to more than 80,000 Flock cameras during a 2025 pilot.", s:"Fortune, Oct. 3, 2026"},
+  {d:"Oct. 5", t:"Sen. Schumer's 10 questions", tag:"legal", b:"Schumer asked Flock to answer 10 questions by Oct. 16 and wrote that “personal data not tied to a crime should be deleted from Flock's servers.”", s:"Schumer letter, Oct. 5, 2026"}
+];
+const tagLabels = {all:"All", utah:"Utah", misuse:"Misuse & errors", legal:"Courts & government", flock:"Flock & data"};
+let active = "all";
+function renderTL(){
+  const tl = document.getElementById('tl');
+  tl.innerHTML = "";
+  events.filter(e => active==="all" || e.tag===active).forEach((e,i) => {
+    const wrap = document.createElement('div'); wrap.className="tl-item";
+    const id = "tlb"+i+e.tag;
+    wrap.innerHTML = '<button class="tl-btn" aria-expanded="false" aria-controls="'+id+'"><span class="tl-date">'+e.d+'</span><span class="tl-title">'+e.t+'</span><span class="tl-tag '+e.tag+'">'+tagLabels[e.tag]+'</span></button>' +
+      '<div class="tl-body" id="'+id+'">'+e.b+'<span class="src">Source: '+e.s+'</span></div>';
+    const btn = wrap.querySelector('button'), body = wrap.querySelector('.tl-body');
+    btn.addEventListener('click', () => { const o = body.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
+    tl.appendChild(wrap);
+  });
+}
+const f = document.getElementById('tl-filter');
+Object.keys(tagLabels).forEach(k => {
+  const b = document.createElement('button'); b.className = 'filter-btn' + (k==="all"?" active":""); b.textContent = tagLabels[k];
+  b.addEventListener('click', () => { active=k; document.querySelectorAll('#tl-filter .filter-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); renderTL(); });
+  f.appendChild(b);
+});
+renderTL();
+
+const pins = [
+  [41.223,-111.974,"Weber County Commission, Ogden","Feb. 17, 2026: Flock contract amendment approved on the consent agenda."],
+  [41.178,-111.978,"Washington Terrace","Sept. 2, 2026: Flock trial halted; three WCSO cameras remain."],
+  [40.777,-111.888,"Utah State Capitol","Aug. 20: Gov. Cox orders privacy review. Sept. 17: 2027 bill file requested."],
+  [39.768,-86.158,"Indianapolis","Sept. 23: five officers charged (allegations)."],
+  [38.200,-85.823,"Shively, Ky.","Aug. 2026: officer accused of 2,048 searches (allegations)."],
+  [27.336,-82.531,"Sarasota, Fla.","Aug. 19: officer arrested and fired (allegations)."],
+  [30.438,-84.281,"Tallahassee (FDOT)","Aug. 31: approvals revoked on state highway right-of-way."],
+  [29.028,-81.303,"DeLand / Volusia County, Fla.","Lindsey Isaacs jailed 13 days; charges dismissed May 22, 2026."],
+  [33.749,-84.388,"Atlanta","Aug. 25: Schulte class action filed (N.D. Ga.). Sept. 1: GBI arrests GDC agent."],
+  [33.956,-83.988,"Gwinnett County, Ga.","Sept. 5: three officers fired and charged (allegations)."],
+  [33.521,-84.354,"Clayton County, Ga.","Sept. 1: deputy surrenders on GBI charge (allegation)."],
+  [34.066,-84.677,"Acworth / Emerson, Ga.","Sept. 14: officer charged; misuse alleged to continue after job change."],
+  [33.946,-84.334,"Dunwoody, Ga.","“Flock City PD” test searches hit cameras here (404 Media, Sept. 17)."],
+  [30.674,-96.370,"Bryan, Texas","“Flock City PD” test searches also hit cameras here."],
+  [40.124,-87.630,"Danville, Ill.","Records show 4,000+ federal searches; ICE had no contract with the city."],
+  [38.898,-77.036,"Washington, D.C.","Letters from Sen. Hawley (Aug. 26) and Sen. Schumer (Oct. 5)."]
+];
+if (window.L) {
+  const map = L.map('map', {scrollWheelZoom:false}).setView([37.5,-95],4);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18, attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+  pins.forEach(p => L.marker([p[0],p[1]]).addTo(map).bindPopup('<strong>'+p[2]+'</strong><br>'+p[3]));
+} else {
+  document.getElementById('map').innerHTML = '<ul style="padding:16px 32px;">' + pins.map(p=>'<li><strong>'+p[2]+'</strong>: '+p[3]+'</li>').join('') + '</ul>';
+}
+</script>
+
+
+<script>
+(function(){
+  if(!window.Chart) { const fb={chartStates:'Georgia 6, Indiana 5, Kentucky 1, Florida 1 people charged or fired.',chartTypes:'See the timeline above for each entry.',chartRetention:'Flock new default 7 days; Norfolk 21; Flock earlier default 30; Utah plate-data maximum about 270 (nine months); Utah search records 1,825 (five years).'}; Object.keys(fb).forEach(id=>{const c=document.getElementById(id); if(c) c.parentNode.innerHTML='<p style="color:#5c574c">Chart could not load. '+fb[id]+'</p>';}); return; }
+  Chart.defaults.font.family = '"Source Serif 4", Georgia, serif'; Chart.defaults.font.size = 15; Chart.defaults.color = '#211e19';
+  new Chart(document.getElementById('chartStates'), { type:'bar',
+    data:{ labels:['Georgia','Indiana','Kentucky','Florida'], datasets:[{ label:'People charged or fired', data:[6,5,1,1], backgroundColor:['#8a3b2e','#a9812f','#3f5d45','#1c2430'] }]},
+    options:{ maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ afterLabel:(c)=>({0:'Keim, Farrell, Trapani, 3 Gwinnett officers',1:'4 current + 1 former IMPD officers',2:'Asad Zahir',3:'Cory Waiters'})[c.dataIndex] } } }, scales:{ y:{ beginAtZero:true, ticks:{ stepSize:1 } } } } });
+  const counts = {}; events.forEach(e => counts[e.tag]=(counts[e.tag]||0)+1);
+  const keys = Object.keys(counts);
+  new Chart(document.getElementById('chartTypes'), { type:'doughnut',
+    data:{ labels: keys.map(k=>tagLabels[k]), datasets:[{ data: keys.map(k=>counts[k]), backgroundColor: keys.map(k=>({utah:'#3f5d45',misuse:'#8a3b2e',legal:'#1c2430',flock:'#a9812f'})[k]) }]},
+    options:{ maintainAspectRatio:false, plugins:{ legend:{ position:'bottom' } } } });
+  new Chart(document.getElementById('chartRetention'), { type:'bar',
+    data:{ labels:['Flock new default (new customers)','Norfolk, Va. system (per court order)','Flock earlier default / Weber quote','Utah maximum for plate data (9 months)','Utah: record that a search happened (5 years)'],
+      datasets:[{ label:'Days', data:[7,21,30,270,1825], backgroundColor:['#a9812f','#5c574c','#a9812f','#3f5d45','#1c2430'] }]},
+    options:{ indexAxis:'y', maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:(c)=> c.raw + ' days' } } },
+      scales:{ x:{ type:'logarithmic', min:1, max:2500, afterBuildTicks:(ax)=>{ ax.ticks=[1,7,30,270,1825].map(v=>({value:v})); }, ticks:{ callback:(v)=>v.toLocaleString() }, title:{ display:true, text:'Days (log scale)' } }, y:{ ticks:{ font:{ size:13 } } } } } });
+})();
+</script>
+</body>
+</html>
